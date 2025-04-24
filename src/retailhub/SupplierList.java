@@ -6,19 +6,24 @@ public class SupplierList {
 	
 	private ArrayList<Supplier> suppliers;
 	
-	//Constructor για την λιστα προμηθευτων...
+	/**
+	 * Constructor για την λιστα προμηθευτων...
+	 */
 	public SupplierList() {
 		this.suppliers = new ArrayList<Supplier>();
 	}
 	
-	//μεθοδος προσθηκης supplier στη λιστα (προαιρετικο)
+	/**
+	 * Μέθοδος προσθηκης supplier στη λιστα (προαιρετικο)...
+	 * @param s
+	 */
 	public void addSupplier(Supplier s) {
 		suppliers.add(s);
 		
 	}
 	
 	/**
-	 * Δημιουργια supplier και καταχωριση του στη λιστα σε μια μεθοδο (με αποθηκευση και ελεγχο)
+	 * Δημιουργια supplier και καταχωριση του στη λιστα σε μια μεθοδο (με αποθηκευση και ελεγχο)...
 	 * @param taxId
 	 * @param brandName
 	 * @param phone
@@ -39,7 +44,7 @@ public class SupplierList {
 	
 		
 	/**
-	 * αφαιρεση supplier εφοσον το ΑΦΜ του υπαρχει...
+	 * Αφαίρεση supplier εφοσον το ΑΦΜ του υπαρχει...
 	 * @param taxId
 	 */
 	public void removeSupplier(String taxId) {
@@ -54,7 +59,15 @@ public class SupplierList {
 	   
 	}
 	
-	//Ψαχνουμε εναν supplier βασει του ΑΦΜ του. Αν τον βρει, καλουμε μεθοδους set για να αλλαξουμε στοιχεια...
+	/**
+	 *  Αναζήτηση supplier βασει του ΑΦΜ του. Αν τον βρει, καλουμε μεθοδους set για να αλλαξουμε στοιχεια...
+	 * @param taxId
+	 * @param brandName
+	 * @param phone
+	 * @param address
+	 * @param email
+	 * @return
+	 */
 	public boolean updateSupplier(String taxId, String brandName, String phone, String address, String email) {
 	    for (Supplier s : suppliers) {
 	        if (s.getTaxId().equals(taxId)) {
@@ -71,13 +84,19 @@ public class SupplierList {
 
 
 
-	//εκτυπωση ολων των Suppliers στη λιστα...
+	/**
+	 * Εκτύπωση ολων των Suppliers στη λιστα...
+	 */
 	public void printList() {
 		for(Supplier i: suppliers) {
 			i.printSupplier();
 		}
 	}
-	//ελεγχος αν υπαρχει ενα ΑΦΜ ηδη στη λιστα Suppliers...
+	/**
+	 * Ελεγχος αν υπαρχει ενα ΑΦΜ ηδη στη λιστα Suppliers...
+	 * @param taxId
+	 * @return
+	 */
 	public boolean vatExists(String taxId) {
 	    for (Supplier s : suppliers) {
 	        if (s.getTaxId().equals(taxId)) {                   
@@ -88,7 +107,11 @@ public class SupplierList {
 	}
 	
 	
-	//ελεγχος και επιστροφη supplier βασει του ΑΦΜ του...
+	/**
+	 * ελεγχος και επιστροφη supplier βασει του ΑΦΜ του...
+	 * @param taxId
+	 * @return
+	 */
 	public Supplier getSupplierByVat(String taxId) {
 	    for (Supplier s : suppliers) {
 	        if (s.getTaxId().equals(taxId)) {

@@ -9,7 +9,14 @@ public class Supplier {
 	private String email;
 	private boolean isActive;
 	
-	//Constructor για Suppliers
+	/**
+	 * Constructor για Suppliers
+	 * @param taxId
+	 * @param brandName
+	 * @param address
+	 * @param phone
+	 * @param email
+	 */
 	public Supplier(String taxId, String brandName, String address, String phone, String email) {
 		this.taxId = taxId;
 		this.brandName = brandName;
