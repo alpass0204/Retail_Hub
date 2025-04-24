@@ -7,14 +7,14 @@ public class SupplierList {
 	private ArrayList<Supplier> suppliers;
 	
 	/**
-	 * Constructor για την λιστα προμηθευτων...
+	 * Constructor για την λιστα προμηθευτων
 	 */
 	public SupplierList() {
 		this.suppliers = new ArrayList<Supplier>();
 	}
 	
 	/**
-	 * Μέθοδος προσθηκης supplier στη λιστα (προαιρετικο)...
+	 * Μέθοδος προσθηκης supplier στη λιστα (προαιρετικο)
 	 * @param s
 	 */
 	public void addSupplier(Supplier s) {
@@ -23,7 +23,7 @@ public class SupplierList {
 	}
 	
 	/**
-	 * Δημιουργια supplier και καταχωριση του στη λιστα σε μια μεθοδο (με αποθηκευση και ελεγχο)...
+	 * Δημιουργια supplier και καταχωριση του στη λιστα σε μια μεθοδο (με αποθηκευση και ελεγχο)
 	 * @param taxId
 	 * @param brandName
 	 * @param phone
@@ -44,7 +44,7 @@ public class SupplierList {
 	
 		
 	/**
-	 * Αφαίρεση supplier εφοσον το ΑΦΜ του υπαρχει...
+	 * Αφαίρεση supplier εφοσον το ΑΦΜ του υπαρχει
 	 * @param taxId
 	 */
 	public void removeSupplier(String taxId) {
@@ -60,7 +60,7 @@ public class SupplierList {
 	}
 	
 	/**
-	 *  Αναζήτηση supplier βασει του ΑΦΜ του. Αν τον βρει, καλουμε μεθοδους set για να αλλαξουμε στοιχεια...
+	 *  Αναζήτηση supplier βαση του ΑΦΜ του. Αν τον βρει, καλουμε μεθοδους set για να αλλαξουμε στοιχεια
 	 * @param taxId
 	 * @param brandName
 	 * @param phone
@@ -79,13 +79,13 @@ public class SupplierList {
 	        }
 	    }
 	    System.out.println("This supplier does not exist. Please enter a valid VAT!");
-	    return false;
+	    return false; //we need to create an exception error ( try-catch-final )
 	}
 
 
 
 	/**
-	 * Εκτύπωση ολων των Suppliers στη λιστα...
+	 * Εκτύπωση ολων των Suppliers στη λιστα
 	 */
 	public void printList() {
 		for(Supplier i: suppliers) {
@@ -93,7 +93,7 @@ public class SupplierList {
 		}
 	}
 	/**
-	 * Ελεγχος αν υπαρχει ενα ΑΦΜ ηδη στη λιστα Suppliers...
+	 * Ελεγχος αν υπαρχει ενα ΑΦΜ ηδη στη λιστα Suppliers
 	 * @param taxId
 	 * @return
 	 */
@@ -108,7 +108,7 @@ public class SupplierList {
 	
 	
 	/**
-	 * ελεγχος και επιστροφη supplier βασει του ΑΦΜ του...
+	 * ελεγχος και επιστροφη supplier βαση του ΑΦΜ του
 	 * @param taxId
 	 * @return
 	 */
