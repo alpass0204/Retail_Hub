@@ -2,6 +2,7 @@ package retailhub;
 
 import java.util.ArrayList;
 
+
 public class SupplierList {
 	
 	private ArrayList<Supplier> suppliers;
@@ -31,7 +32,7 @@ public class SupplierList {
 	 * @param email
 	 * @return
 	 */
-	public boolean createAndAddSupplier(String taxId, String brandName, String phone, String address, String email) {
+	public boolean createSupplier(String taxId, String brandName, String phone, String address, String email) {
 		if(getSupplierByVat(taxId) != null) {
 			 System.out.println("A supplier with this VAT already exists.");
 		     return false;
