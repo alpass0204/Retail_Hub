@@ -103,13 +103,12 @@ public class ProductList {
         for (Product product : products) {
             if (product.getProductId() == productId) {
                 System.out.println("Product id " + productId + " is already used. Please enter a valid productId.");
+                return;
             }
-            else{
-                Product newProduct = new Product(productId, name, category, price, stock);
-                products.add(newProduct);
-                System.out.println("The product has been added Successfully.");
-            }
-
         }
+        Product newProduct = new Product(productId, name, category, price, stock);
+        products.add(newProduct);
+        System.out.println("The product has been added Successfully.");
+
     }
 }
