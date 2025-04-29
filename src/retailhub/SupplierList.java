@@ -38,7 +38,7 @@ public class SupplierList {
 		     return false;
 		}
 		
-		Supplier s = new Supplier(taxId, brandName, address, phone, email);
+		Supplier s = new Supplier(taxId, brandName, address, phone, email,true);
 		suppliers.add(s);
 		return true;
 	}

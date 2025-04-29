@@ -1,6 +1,9 @@
 package retailhub;
 
-public class Product {
+
+
+
+public class Product{
     // Product's ID
     private int productId;
     // Product's Name
@@ -12,11 +15,8 @@ public class Product {
     // Product's Stock.
     private int stock;
     // Supplier
-    /*
-    Mas menei na kanoume amfidromh susxetish me Supplier
-     */
+    private Supplier supplier;
 
-   
     /**
      * Constructor for the Product class.
      * @param productId
@@ -25,20 +25,27 @@ public class Product {
      * @param price
      * @param stock
      */
-    public Product(int productId, String name, String category, double price, int stock) {
+    public Product(int productId, String name, String category, double price, int stock,Supplier supplier) {
         this.productId = productId;
         this.name = name;
         this.category = category;
         this.price = price;
         this.stock = stock;
+        this.supplier = null;
     }
     /**
      * Unknown products Constructor
      */
     public Product() {
-        this(000,"unknown-name","None",0.0,0);
+        this(000,"unknown-name","None",0.0,0,null);
     }
 
+    /**
+     * Constructor χωρίς supplier
+     */
+    public Product(int productId, String name, String category, double price, int stock) {
+        this(productId, name, category, price, stock, null);
+    }
     /**
      * 3rd Constructor for Product Class with 3 inputs
      * @param productId
@@ -50,21 +57,26 @@ public class Product {
         this.name = name;
         this.category = category;
     }
+    /*
+     *
+     */
+    public void setSupplier(Supplier s){
+        this.supplier = s;
+    }
+    /*
+     *
+     */
+    public Supplier getSupplier(){
+        return supplier;
+    }
+
 
     /**
      * Prints out information about specified product.
      */
     public void printProduct() {
-      /*
-        System.out.println("Product ID: " + product_id);
-
-        System.out.println("Name: " + name);
-        System.out.println("Category: " + category);
-        System.out.println("Price: " + price);
-        System.out.println("In stock: " + stock);
-*/
         System.out.println("Product ID: "+productId+" Name: "+name+
-                " Category: "+category+" Price: "+price+" (€)"+" In Stock: "+stock);
+                " Category: "+category+" Price: "+price+" (€)"+" In Stock: "+stock+ (supplier != null ? " Supplier: "+ supplier.getBrandName() : ""));
     }
 
     /**

@@ -106,7 +106,7 @@ public class ProductList {
                 return;
             }
         }
-        Product newProduct = new Product(productId, name, category, price, stock);
+        Product newProduct = new Product(productId, name, category, price, stock, null);
         products.add(newProduct);
         System.out.println("The product has been added Successfully.");
 

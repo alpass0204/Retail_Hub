@@ -5,13 +5,22 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		ProductList productList1 = new ProductList();
-		Product product1 = new Product(123,"adas","electronics");
-		Product product2 = new Product(1, "2", "cosmetics", 123231, 1321 );
-		Product product3 = new Product();
 
-		//product1.productPrint();
+		SupplierList suppliersTechnology = new SupplierList();
+		SupplierList SuppliersCOsmetcis = new SupplierList(Supplier.getProduct(Cosmoste).getBrandName);
+		Supplier Cosmote = new Supplier("25021","Cosmote","Enwtikwn11","698400","asodiaosi",null);
+		Supplier Vodafone = new Supplier("32232","Vodafone","Xaroupolh 22","69849584","ilias@iois",null);
+
+		ProductList productList1 = new ProductList();
+		Product product1 = new Product(123,"cola","electronics");
+		Product product2 = new Product(1, "fanta", "cosmetics", 123231, 1321, null  );
+		Product product3 = new Product();
+		Product product4 = new Product(2, "sprite", "cosmetics", 123231, 1321,null );
+		Product product5 = new Product(3, "sprite", "cosmetics", 123231, 1321,null);
+		suppliersTechnology.addSupplier(Cosmote);
+		suppliersTechnology.addSupplier(Vodafone);
+		suppliersTechnology.printList();
+		product1.printProduct();
 		//product2.productPrint();
 		//product3.productPrint();
 
@@ -26,7 +35,9 @@ public class Main {
 		//productList1.printList();
 
 		productList1.createProduct(121,"sdq", "21412", 2131, 2131);
-		productList1.printList();
+		//productList1.printList();
+		suppliersTechnology.printList();
+		//Cosmote.printSupplier();
 
 
 
@@ -35,17 +46,17 @@ public class Main {
 
 
 
-
-		/* κατασκευή και δοκιμη supplier και supplierList
-		SupplierList suppliers = new SupplierList();
+		// κατασκευή και δοκιμη supplier και supplierList
+		//SupplierList suppliers = new SupplierList();
+		//Supplier supplier1 = new Supplier;
+		//suppliers.createAndAddSupplier("1", "2321", "32", "23f", "1rr");
+		//suppliers.createAndAddSupplier("2", "231", "321", "23", "1r");
+		//suppliers.printList();
 		
-		suppliers.createAndAddSupplier("1", "2321", "32", "23f", "1rr");
-		suppliers.createAndAddSupplier("2", "231", "321", "23", "1r");
-		suppliers.printList();
-		
-		suppliers.updateSupplier(null, "mmm", "145", "13254","1431");
-		suppliers.printList();
-		*/
+		//suppliers.updateSupplier(null, "mmm", "145", "13254","1431", );
+		//suppliers.printList();
+
+
 
 
 		
