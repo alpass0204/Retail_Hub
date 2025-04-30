@@ -43,9 +43,6 @@ public class Supplier {
 			product.setSupplier(null);
 		}
 	}
-	public Product getProduct(Product products){
-		return products;
-	}
 
 
 	public String getTaxId() {

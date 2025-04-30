@@ -7,7 +7,6 @@ public class Main {
 	public static void main(String[] args) {
 
 		SupplierList suppliersTechnology = new SupplierList();
-		SupplierList SuppliersCOsmetcis = new SupplierList(Supplier.getProduct(Cosmoste).getBrandName);
 		Supplier Cosmote = new Supplier("25021","Cosmote","Enwtikwn11","698400","asodiaosi",null);
 		Supplier Vodafone = new Supplier("32232","Vodafone","Xaroupolh 22","69849584","ilias@iois",null);
 
