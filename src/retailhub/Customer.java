@@ -1,3 +1,4 @@
+package retailhub;
 
 public class Customer {
 	private String name;
