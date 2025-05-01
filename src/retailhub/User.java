@@ -4,15 +4,23 @@ public abstract class User {
 
     private String username;
     private String password;
-    protected SecurityLevel securityLevel;
+    private SecurityLevel securityLevel;
 
-    public User(String username){
+    public User(String username, String password){
         this.username = username;
+        this.password = password;
     }
 
-    public String getUsername(){
-        return username;
+
+
+    public void createUser(String username, String password,
+                           SecurityLevel securityLevel){
+        System.out.println("You Username should be your Last Name followed by youd Id");
+
     }
+
+    public abstract String getUsername();
+
     public void setPassword(String newPassword){
         this.password = newPassword;
     }

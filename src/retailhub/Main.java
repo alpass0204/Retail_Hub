@@ -5,10 +5,16 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-
+		//Κατασκευή Suplliers και Supplierslist
 		SupplierList suppliersTechnology = new SupplierList();
 		Supplier Cosmote = new Supplier("25021","Cosmote","Enwtikwn11","698400","asodiaosi",null);
 		Supplier Vodafone = new Supplier("32232","Vodafone","Xaroupolh 22","69849584","ilias@iois",null);
+
+
+
+
+
+
 
 		ProductList productList1 = new ProductList();
 		Product product1 = new Product(123,"cola","electronics");
