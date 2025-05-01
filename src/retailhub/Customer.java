@@ -92,7 +92,7 @@ public class Customer {
 		if (!gender.equals(null)) {
 			System.out.print("Gender: " + gender);
 		}
-		if (age != null) {
+		if (age != 0) {
 			System.out.print("Age: " + age);
 		}
 		System.out.println("Loyalty points: " + loyaltyPoints);
