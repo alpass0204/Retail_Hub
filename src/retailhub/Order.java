@@ -24,7 +24,7 @@ public class Order {
 	/*
 	 * CONSTRUCTOR
 	 */
-	public Order(Supplier s,String paymentMethod,double total) {
+	public Order(Supplier s,PaymentMethod paymentMethod,double total) {
 		this.idOrder = idOrder;
 		this.paymentMethod = paymentMethod;
 		this.total = 0;

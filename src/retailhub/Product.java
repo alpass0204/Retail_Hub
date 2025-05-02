@@ -82,9 +82,9 @@ public class Product{
     }
 
     /**
-    * Methods for returning product_id.
-    * @return
-    */
+     * Methods for returning product_id.
+     * @return
+     */
     public int getProductId() {
         return productId;
     }
@@ -144,7 +144,7 @@ public class Product{
     public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
-    
+
     /**
      * Method for returning product's sell price.
      * @return
@@ -160,7 +160,7 @@ public class Product{
     public void setSellPrice(double sellPrice) {
         this.sellPrice = sellPrice;
     }
-    
+
 
     /**
      * Method for returning product's stock.
