@@ -5,25 +5,22 @@ import java.util.ArrayList;
 public class Sales {
 	private String sales_id;
 	private String date;
-	private Employee employee;
 	private double totalamount;
 	private ArrayList<SaleItem> items;
 	private PaymentMethod paymentMethod;
 	
-	public enum PaymentMethod{
+	public enum PaymentMethod {
 		CASH,
 		CREDIT_CARD,
 		DEBIT_CARD,
 		TRANSFER,
 		MOBILE_PAY
-		
 	}
 	
-	public Sales(String sales_id, String date, Employee employee, ArrayList<SaleItem> items, PaymentMethod paymentMethod) {
+	public Sales(String sales_id, String date, ArrayList<SaleItem> items, PaymentMethod paymentMethod) {
 		
 		this.sales_id = sales_id;
 		this.date = date;
-		this.employee = employee;
 		this.items = new ArrayList<SaleItem>(items);
 		this.paymentMethod = paymentMethod;
 		sumTotal();
@@ -42,14 +39,6 @@ public class Sales {
 		this.date = date;
 	}
 
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
 	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
 	}
@@ -61,7 +50,6 @@ public class Sales {
 	public double getTotalamount() {
 		return totalamount;
 	}
-
 
 	public ArrayList<SaleItem> getItemsSold() {
 		return items;
@@ -78,7 +66,6 @@ public class Sales {
 			sum = sum + i.getLineTotal();
 		}
 		this.totalamount = sum;
-		
 	}
 	
 	public void addItem(SaleItem i) {	
@@ -100,7 +87,6 @@ public class Sales {
 	          "=== RECEIPT ===\n"
 	        + "Sale ID: " + sales_id + "\n"
 	        + "Date   : " + date + "\n"
-	        + "Employee   : " + employee.getName() + " " + employee.getSurname() + "\n"
 	        + "Items  :\n";
 	    
 	    // 2) Add each product to the receipt
@@ -120,8 +106,7 @@ public class Sales {
 	public String toString() {
 		return "Sale{" +
 	               "idSale='" + sales_id + '\'' +
-	               ", date=" + date +
-	               ", employee=" + employee +
+	               ", date=" + date +	               
 	               ", products=" + items +
 	               ", paymentMethod='" + paymentMethod + '\'' +
 	               ", total=" + totalamount +

@@ -5,6 +5,9 @@ public class SaleItem {
 		private Product product;
 		private int quantity;
 		
+		/*
+		 * Constructor
+		 */
 		public SaleItem(Product product, int quantity) {
 			this.product = product;
 			this.quantity = quantity;
