@@ -10,8 +10,10 @@ public class Product{
     private String name;
     // Product's Categories
     private String category;
-    // Product's Price
-    private double price;
+    // Product's Purchase Price
+    private double purchasePrice;
+    // Product's Sell Price
+    private double sellPrice;
     // Product's Stock.
     private int stock;
     // Supplier
@@ -25,11 +27,11 @@ public class Product{
      * @param price
      * @param stock
      */
-    public Product(int productId, String name, String category, double price, int stock,Supplier supplier) {
+    public Product(int productId, String name, String category, double purchasePrice, double sellPrice, int stock,Supplier supplier) {
         this.productId = productId;
         this.name = name;
         this.category = category;
-        this.price = price;
+        this.purchasePrice = purchasePrice;
         this.stock = stock;
         this.supplier = null;
     }
@@ -37,14 +39,14 @@ public class Product{
      * Unknown products Constructor
      */
     public Product() {
-        this(000,"unknown-name","None",0.0,0,null);
+        this(000,"unknown-name","None",0.0,0.0,0,null);
     }
 
     /**
      * Constructor χωρίς supplier
      */
-    public Product(int productId, String name, String category, double price, int stock) {
-        this(productId, name, category, price, stock, null);
+    public Product(int productId, String name, String category, double purchasePrice, double sellPrice, int stock) {
+        this(productId, name, category, purchasePrice, sellPrice, stock, null);
     }
     /**
      * 3rd Constructor for Product Class with 3 inputs
@@ -76,7 +78,7 @@ public class Product{
      */
     public void printProduct() {
         System.out.println("Product ID: "+productId+" Name: "+name+
-                " Category: "+category+" Price: "+price+" (€)"+" In Stock: "+stock+ (supplier != null ? " Supplier: "+ supplier.getBrandName() : ""));
+                " Category: "+category+" Purchase Price: "+purchasePrice+" Sell Price: "+sellPrice+" (€)"+" In Stock: "+stock+ (supplier != null ? " Supplier: "+ supplier.getBrandName() : ""));
     }
 
     /**
@@ -128,20 +130,37 @@ public class Product{
     }
 
     /**
-     * Method for returning product's price.
+     * Method for returning product's purchase price.
      * @return
      */
-    public double getPrice() {
-        return price;
+    public double getPurchasePrice() {
+        return purchasePrice;
     }
 
     /**
-     * Method for setting the product's price.
+     * Method for setting the product's purchase price.
      * @param price
      */
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPurchasePrice(double purchasePrice) {
+        this.purchasePrice = purchasePrice;
     }
+    
+    /**
+     * Method for returning product's sell price.
+     * @return
+     */
+    public double getSellPrice() {
+        return sellPrice;
+    }
+
+    /**
+     * Method for setting the product's sell price.
+     * @param price
+     */
+    public void setSellPrice(double sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+    
 
     /**
      * Method for returning product's stock.

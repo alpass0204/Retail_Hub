@@ -1,31 +1,35 @@
 package retailhub;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import retailhub.Employee.Role;
+import retailhub.Sales.PaymentMethod;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		SupplierList suppliersTechnology = new SupplierList();
-		Supplier Cosmote = new Supplier("25021","Cosmote","Enwtikwn11","698400","asodiaosi",null);
-		Supplier Vodafone = new Supplier("32232","Vodafone","Xaroupolh 22","69849584","ilias@iois",null);
+		//SupplierList suppliersTechnology = new SupplierList();
+		//Supplier Cosmote = new Supplier("25021","Cosmote","Enwtikwn11","698400","asodiaosi",null);
+		//Supplier Vodafone = new Supplier("32232","Vodafone","Xaroupolh 22","69849584","ilias@iois",null);
 
-		ProductList productList1 = new ProductList();
-		Product product1 = new Product(123,"cola","electronics");
-		Product product2 = new Product(1, "fanta", "cosmetics", 123231, 1321, null  );
-		Product product3 = new Product();
-		Product product4 = new Product(2, "sprite", "cosmetics", 123231, 1321,null );
-		Product product5 = new Product(3, "sprite", "cosmetics", 123231, 1321,null);
-		suppliersTechnology.addSupplier(Cosmote);
-		suppliersTechnology.addSupplier(Vodafone);
-		suppliersTechnology.printList();
-		product1.printProduct();
+		//ProductList productList1 = new ProductList();
+		//Product product1 = new Product(123,"cola","electronics");
+		//Product product2 = new Product(1, "fanta", "cosmetics", 123231, 1321, null  );
+		//Product product3 = new Product();
+		//Product product4 = new Product(2, "sprite", "cosmetics", 123231, 1321,null );
+		//Product product5 = new Product(3, "sprite", "cosmetics", 123231, 1321,null);
+		//suppliersTechnology.addSupplier(Cosmote);
+		//suppliersTechnology.addSupplier(Vodafone);
+		//suppliersTechnology.printList();
+		//product1.printProduct();
 		//product2.productPrint();
 		//product3.productPrint();
 
-		productList1.addProduct(product1);
-		productList1.addProduct(product2);
-		productList1.addProduct(product3);
+		//productList1.addProduct(product1);
+		//productList1.addProduct(product2);
+		//productList1.addProduct(product3);
 
 		//productList1.searchProducts(121);
 		//productList1.searchProducts(123);
@@ -33,10 +37,35 @@ public class Main {
 
 		//productList1.printList();
 
-		productList1.createProduct(121,"sdq", "21412", 2131, 2131);
+		//productList1.createProduct(121,"sdq", "21412", 2131, 2131);
 		//productList1.printList();
-		suppliersTechnology.printList();
+		//suppliersTechnology.printList();
 		//Cosmote.printSupplier();
+		
+		/**
+		Supplier s1 = new Supplier("12","Coc","d2","1324902","femk",true);
+		Product p1 = new Product(1,"Shampoo","Hair",1.85,219,s1);
+		Product p2 = new Product(2,"Cannabis","Hair",1.85,219,s1);
+		SaleItem item1 = new SaleItem(p1,2);
+		SaleItem item2 = new SaleItem(p2,2);                                                                      SALEITEM + SALES CLASSES-METHODS TESTED <3
+		
+		System.out.println(item1.getName());
+		System.out.println(item1.getLineTotal());
+		Employee e1 = new Employee("34513","14432", 1,2254, "34124", "3i24kj","1431","14", Role.MANAGER);
+		ArrayList<SaleItem> items = new ArrayList<SaleItem>();
+		items.add(item1);
+		items.add(item2);
+		
+		
+		Sales sale1 = new Sales("14324","34125", e1,items,PaymentMethod.DEBIT_CARD);
+		
+		sale1.sumTotal();
+		System.out.println(sale1.getTotalamount());
+		System.out.println(sale1.receipt());
+		**/
+
+
+		
 
 
 

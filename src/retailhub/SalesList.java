@@ -16,14 +16,6 @@ public class SalesList {
         System.out.println("Sale added successfully.");
     }
 
-    // Υπολογισμός συνολικών εσόδων
-    public double calculateTotalRevenue() {
-        double total = 0;
-        for (Sales sale : sales) {
-            total += sale.getTotalPrice();
-        }
-        return total;
-    }
 
     // Εκτύπωση όλων των πωλήσεων
     public void printAllSales() {
@@ -31,10 +23,44 @@ public class SalesList {
             System.out.println("No sales have been made yet.");
         } else {
             for (Sales sale : sales) {
-                sale.printSale();
+                System.out.println(sale.toString());
             }
         }
     }
+    
+    public void removeSale(String salesId) {
+        Sales saleToRemove = null;
+        for (Sales sale : sales) {
+            if (sale.getSales_id().equals(salesId)) {
+                saleToRemove = sale; // Found the sale with the matching sales_id
+                break;
+            }
+        }
+
+        if (saleToRemove != null) {
+            sales.remove(saleToRemove);  // Remove the sale from the list
+            System.out.println("Sale with ID " + salesId + " has been removed.");
+        } else {
+            System.out.println("No sale found with ID " + salesId + ".");
+        }
+    }
+    
+    public void updateSale(String salesId, String newDate, Sales.PaymentMethod newPaymentMethod) {
+        for (Sales sale : sales) {
+            if (sale.getSales_id().equals(salesId)) {
+                // Update the sale's date and payment method
+                sale.setDate(newDate);
+                sale.setPaymentMethod(newPaymentMethod);
+                System.out.println("Sale with ID " + salesId + " has been updated.");
+                return;  // Exit the method after updating the sale
+            }
+        }
+        
+        // If no sale is found with the given sales_id
+        System.out.println("No sale found with ID " + salesId + ".");
+    }
+
+
 
     // Πόσες πωλήσεις έχουν γίνει
     public int totalSalesCount() {
