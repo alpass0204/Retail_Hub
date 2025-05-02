@@ -5,7 +5,7 @@ package retailhub;
  * Security levels are hierarchical , with higher levels have all
  */
 
-public class SecurityLevel{
+public class    SecurityLevel{
 
     // FIELDS
 
