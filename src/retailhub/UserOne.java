@@ -16,9 +16,14 @@ public class UserOne extends User {
         salesPerson
     }
 
-    public UserOne(String username,String name,String lastName,int userId,double salary,String email,
+    @Override
+    public String getUsername(){
+        return this.lastName+this.userId;
+    }
+
+    public UserOne(String username,String password ,String name,String lastName,int userId,double salary,String email,
                    String address,Role role, SecurityLevel layer1){
-    super(username);
+    super(username, password);
     this.name = name;
     this.lastName = lastName;
     this.userId = userId;

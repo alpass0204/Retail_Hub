@@ -2,7 +2,7 @@ package retailhub;
 
 public class UserTwo extends User{
     private String name;
-    private String lastname;
+    private String lastName;
     private int userId;
     private double salary;
     private String email;
@@ -14,11 +14,16 @@ public class UserTwo extends User{
         consultant;
     }
 
-    public UserTwo(String username, String name, String lastname, int userId, double salary, String email,
+    @Override
+    public String getUsername(){
+        return this.lastName+this.userId;
+    }
+
+    public UserTwo(String username,String password, String name, String lastName, int userId, double salary, String email,
                    String address, Role role, SecurityLevel layer2) {
-        super(username);
+        super(username,password);
         this.name = name;
-        this.lastname = lastname;
+        this.lastName = lastName;
         this.userId = userId;
         this.salary = salary;
         this.email = email;
@@ -39,12 +44,12 @@ public class UserTwo extends User{
 
     // METHODS FOR @lastName
 
-    public void setLastname(String newLastname) {
-        this.lastname = newLastname;
+    public void setLastName(String newLastName) {
+        this.lastName = newLastName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
     // METHODS FOR @userId with no setter method, 1 unique ID per User

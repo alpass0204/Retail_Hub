@@ -76,7 +76,7 @@ public class ProductList {
      * @param Price
      * @param newStock
      */
-    public void updateList(int id, String newName, String newCategory, double Price, int newStock){
+    public void updateProduct(int id, String newName, String newCategory, double Price, int newStock){
         for(Product product : products){
             if(product.getProductId() == id){
                 product.setName(newName);
