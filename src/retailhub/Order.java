@@ -25,6 +25,7 @@ public class Order {
 	/*
 	 * CONSTRUCTOR
 	 */
+
 	public Order(int idOrder, Supplier supplier, ArrayList<OrderItem> items, PaymentMethod paymentMethod) {
 		this.idOrder = idOrder;
 		this.items = new ArrayList<OrderItem>(items);
