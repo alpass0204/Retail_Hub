@@ -117,13 +117,9 @@ public class Order {
 	}
 	
 	public String toString() {
-		return "Order{" +
-	               "idOrder='" + idOrder + '\'' +
-	               ", date=" + date +	               
-	               ", products=" + items.toString() +
-	               ", paymentMethod='" + paymentMethod + '\'' +
-	               ", total=" + total +
-	               '}';
+		this.total = totalOrderValue();
+		this.date =LocalDate.now();
+		return "Order: " + + idOrder + "\n" +" Date: " + date +"\n Products: " + items.toString() +"\n Payment method: " + paymentMethod +"\n total: " + total  + "€";
 	}
 	
 	/*

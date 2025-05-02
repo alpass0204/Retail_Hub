@@ -26,6 +26,6 @@ public class OrderItem {
     }
     
 	public String toString() {
-		return "Order Item {" + p.getName() + "\n Quantity: " + this.quantity;
-	} 
+		return " " + p.getName() + " : " + this.quantity +" pieces  * "+  p.getPurchasePrice() + " €";
+	}
 }

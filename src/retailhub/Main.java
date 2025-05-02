@@ -3,7 +3,6 @@ package retailhub;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import retailhub.Employee.Role;
 import retailhub.Sales.PaymentMethod;
 
 public class Main {
@@ -75,14 +74,16 @@ public class Main {
 		
 		Order order1 = new Order(1, s1, items, Order.PaymentMethod.cash);
 		order1.totalOrderValue();
-		System.out.println(order1.toString());
+		//System.out.println(order1.toString());
 //		order1.printOrder();
 		System.out.println("");
 		order1.addOrderItem(orderitem1);
 		order1.addOrderItem(orderitem2);
 		
-		System.out.println(order1.toString());
-		
+		//System.out.println(order1.toString());
+		OrderList orderlist1 = new OrderList();
+		orderlist1.addOrder(order1);
+		orderlist1.printAllOrders();
 
 
 
