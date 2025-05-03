@@ -10,7 +10,20 @@ public class OrderList {
 		this.orderlist = new ArrayList<>();
 	}
 	
-	public void addOrder(Order ) {
-		
+	public void addOrder(Order order) {
+		orderlist.add(order);
 	}
+
+
+	
+	public void printAllOrders() {
+        if (orderlist.isEmpty()) {
+            System.out.println("No sales have been made yet.");
+        } 
+        else {
+            for (Order order : orderlist) {
+                System.out.println(order.toString());
+            }
+        }
+    }
 }

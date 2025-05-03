@@ -24,7 +24,7 @@ public class Product{
      * @param productId
      * @param name
      * @param category
-     * @param price
+     * @param sellPrice
      * @param stock
      */
     public Product(int productId, String name, String category, double purchasePrice, double sellPrice, int stock,Supplier supplier) {
@@ -139,7 +139,7 @@ public class Product{
 
     /**
      * Method for setting the product's purchase price.
-     * @param price
+     * @param purchasePrice
      */
     public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
@@ -155,7 +155,7 @@ public class Product{
 
     /**
      * Method for setting the product's sell price.
-     * @param price
+     * @param sellPrice
      */
     public void setSellPrice(double sellPrice) {
         this.sellPrice = sellPrice;
@@ -178,4 +178,6 @@ public class Product{
     public void setStock(int stock) {
         this.stock = stock;
     }
+    
+    //METHODO EPISTROFI SOS************
 }

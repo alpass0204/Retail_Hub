@@ -3,7 +3,6 @@ package retailhub;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import retailhub.Employee.Role;
 import retailhub.Sales.PaymentMethod;
 
 public class Main {
@@ -42,14 +41,14 @@ public class Main {
 		//suppliersTechnology.printList();
 		//Cosmote.printSupplier();
 		
-		/**
-		Supplier s1 = new Supplier("12","Coc","d2","1324902","femk",true);
-		Product p1 = new Product(1,"Shampoo","Hair",1.85,219,s1);
-		Product p2 = new Product(2,"Cannabis","Hair",1.85,219,s1);
-		SaleItem item1 = new SaleItem(p1,2);
-		SaleItem item2 = new SaleItem(p2,2);                                                                      SALEITEM + SALES CLASSES-METHODS TESTED <3
-		
-		System.out.println(item1.getName());
+	/*  ------- SALEITEM + SALES CLASSES-METHODS TESTED <3---------*/
+		Supplier s1 = new Supplier("12", "Coc", "d2", "1324902", "femk", true);
+		Product p1 = new Product(1, "Shampoo", "Hair", 2, 1.85, 5, s1);
+		Product p2 = new Product(2, "Cannabis", "Hair", 5, 1.85, 5, s1);
+//		SaleItem item1 = new SaleItem(p1,2);
+//		SaleItem item2 = new SaleItem(p2,2);                                                                   //   SALEITEM + SALES CLASSES-METHODS TESTED <3
+	
+/*		System.out.println(item1.getName());
 		System.out.println(item1.getLineTotal());
 		Employee e1 = new Employee("34513","14432", 1,2254, "34124", "3i24kj","1431","14", Role.MANAGER);
 		ArrayList<SaleItem> items = new ArrayList<SaleItem>();
@@ -57,16 +56,34 @@ public class Main {
 		items.add(item2);
 		
 		
-		Sales sale1 = new Sales("14324","34125", e1,items,PaymentMethod.DEBIT_CARD);
+		Sales sale1 = new Sales("14324","34125", e1, items, PaymentMethod.DEBIT_CARD);
 		
 		sale1.sumTotal();
 		System.out.println(sale1.getTotalamount());
 		System.out.println(sale1.receipt());
-		**/
+*/		
 
-
+		//Testing Order, OrderItem, OrderList classes
+		//Create a supplier, a product or two and test if the classes works
+		ArrayList<OrderItem> items = new ArrayList<OrderItem>();
+		OrderItem orderitem1 = new OrderItem(p1, 5);
+		OrderItem orderitem2 = new OrderItem(p2, 10);
+//		items.add(orderitem1);
+//		items.add(orderitem2);
 		
-
+		
+		Order order1 = new Order(1, s1, items, Order.PaymentMethod.cash);
+		order1.totalOrderValue();
+		//System.out.println(order1.toString());
+//		order1.printOrder();
+		System.out.println("");
+		order1.addOrderItem(orderitem1);
+		order1.addOrderItem(orderitem2);
+		
+		//System.out.println(order1.toString());
+		OrderList orderlist1 = new OrderList();
+		orderlist1.addOrder(order1);
+		orderlist1.printAllOrders();
 
 
 

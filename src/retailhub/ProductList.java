@@ -81,7 +81,7 @@ public class ProductList {
             if(product.getProductId() == id){
                 product.setName(newName);
                 product.setCategory(newCategory);
-                product.setPrice(Price); //πρεπει να αλλάζει εδώ? αποφυγή λάθους τυπογράφησης.
+                product.setPurchasePrice(Price); //πρεπει να αλλάζει εδώ? αποφυγή λάθους τυπογράφησης.
                 product.setStock(newStock); //πρεπει να αλλάζει εδώ? αποφυγή λάθους τυπογράφησης.
                 System.out.println("The Product has been Updated Successfully!");
             }
@@ -106,7 +106,7 @@ public class ProductList {
                 return;
             }
         }
-        Product newProduct = new Product(productId, name, category, price, stock, null);
+        Product newProduct = new Product(productId, name, category, price, stock, 0);
         products.add(newProduct);
         System.out.println("The product has been added Successfully.");
 

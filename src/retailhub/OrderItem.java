@@ -1,7 +1,8 @@
+package retailhub;
 
 public class OrderItem {
 	private Product p;
-	int quantity;
+	private int quantity;
 	
 	public OrderItem(Product p, int quantity) {
 		this.quantity = quantity;
@@ -19,8 +20,12 @@ public class OrderItem {
     public int getQuantity() {
         return quantity;
     }
-
+    
     public double getPurchaseOrderLineTotal() {
-        return p.getProductPurchasePrice() * quantity;
+        return p.getPurchasePrice() * quantity;
     }
+    
+	public String toString() {
+		return " " + p.getName() + " : " + this.quantity +" pieces  * "+  p.getPurchasePrice() + " €";
+	}
 }
