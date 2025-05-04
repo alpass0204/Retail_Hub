@@ -18,7 +18,7 @@ public class Order {
 		cash,
 		creditCard,
 		debitCard,
-		trasfer,
+		transfer,
 		mobilePay
 	}
 	
@@ -36,10 +36,11 @@ public class Order {
 	 * ypologizei kai kanei return to total****
 	 */
 	public double totalOrderValue() {
+		double sum = 0;
 		for (OrderItem i: items) {
-			this.total += i.getPurchaseOrderLineTotal();	
+			sum += i.getPurchaseOrderLineTotal();	
 		}
-		return this.total;
+		return sum;
 	}
 	
 	/*
