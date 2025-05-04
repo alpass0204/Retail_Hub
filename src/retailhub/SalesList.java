@@ -4,15 +4,32 @@ import java.util.ArrayList;
 
 public class SalesList {
     private ArrayList<Sales> sales;
-
+    private ProductList productList;
     // Constructor
     public SalesList() {
         this.sales = new ArrayList<>();
+        this.productList = new ProductList();
     }
 
     // Προσθήκη νέας πώλησης
     public void addSale(Sales sale) {
-        sales.add(sale);
+        boolean productStock = true;
+        for (SaleItem item : sale.getItemsSold()) {
+            Product p = item.getProduct();
+            int soldQuantity = item.getQuantity();
+            if (p.getStock() < soldQuantity) {
+                System.out.println("Insufficient Stock for product: "+ p.getProductId() +
+                        " Name: " + p.getName()+"\n Required: " + soldQuantity+
+                        "\n Available: " + p.getStock() + "\n Sale aborted.");
+                productStock = false;
+                break;
+            }
+            if (productStock) {
+                for (SaleItem item : sale.getItemsSold()) {
+
+                }
+            }
+        }
         System.out.println("Sale added successfully.");
     }
 

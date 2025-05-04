@@ -30,6 +30,18 @@ public class Supplier {
 		this.products = new ArrayList<>();
 	}
 
+	/**
+	 * GETTER FOR PRODUCTS STORED IN SUPPLIER'S PRODUCT LIST
+	 * @return
+	 */
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+
+	/**
+	 * METHOD FOR ADDING PRODUCT FROM SUPPLIER'S PRODUCT LIST
+	 * @param product
+	 */
 	public void addProduct(Product product){
 		if (!products.contains(product)) {
 			this.products.add(product);
@@ -37,6 +49,10 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * METHOD FOR REMOVING SUPPLIER'S PRODUCT LIST
+	 * @param product
+	 */
 	public void removeProduct(Product product){
 		if (products.contains(product)) {
 			this.products.remove(product);
@@ -44,6 +60,7 @@ public class Supplier {
 		}
 	}
 
+	//SETTER AND GETTERS FOR SUPPLIERS FIELDS
 
 	public String getTaxId() {
 		return taxId;
@@ -93,12 +110,13 @@ public class Supplier {
 		this.isActive = isActive;
 	}
 
+	/**
+	 * METHOD FOR PRINTING SUPPLIER INFO
+	 */
 	public void printSupplier() {
 		System.out.println("TaxID: "+taxId+" BrandName: "+brandName+" Address: "+address+" E-mail: "+email+
 				phone+" Status:"+isActive);
 	}
 
-	public ArrayList<Product> getProducts() {
-		return products;
-	}
+
 }

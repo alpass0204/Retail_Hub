@@ -46,16 +46,16 @@ public class ProductList {
      */
     public Product searchProducts(int id){
         if(id<=0){
-            System.out.println("Give a valid ID number");
+            //System.out.println("Give a valid ID number");
             return null;
         }
         for(Product product : products){
             if(product.getProductId() == id){
-                product.printProduct();
+                //product.printProduct();
                 return product;
             }
         }
-        System.out.println("Product not found");
+        //System.out.println("Product not found");
         return null;
     }
 

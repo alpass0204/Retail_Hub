@@ -8,8 +8,12 @@ import retailhub.Sales.PaymentMethod;
 public class Main {
 
 	public static void main(String[] args) {
+		//TESTING CRUD FOR SUPPLIER AND SUPPLIERLIST
 
+		//CREATION OF SUPPLIER LIST FOR STORAGE OF SUPPLIERS
 		//SupplierList suppliersTechnology = new SupplierList();
+
+		//CREATION OF SUPPLIERS
 		//Supplier Cosmote = new Supplier("25021","Cosmote","Enwtikwn11","698400","asodiaosi",null);
 		//Supplier Vodafone = new Supplier("32232","Vodafone","Xaroupolh 22","69849584","ilias@iois",null);
 

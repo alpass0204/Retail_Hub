@@ -29,4 +29,5 @@ public class SaleItem {
 	        return product.getSellPrice() * quantity;
 	    }
 
+		public Product getProduct() {return this.product; }
 	}
