@@ -172,6 +172,126 @@ public class Main {
 		pavlos19.printUser();
 		karamf29.printUser();
 
-	}
+ /*Customer Testing
+		Customer c5 = new Customer("C1001", "Maria", "maria@gmail.com", "6912345678", 25);
+		c5.printCustomer();
+		c5.addPoints(150);
+		c5.redeemAllPoints();
+		c5.printLoyaltyPoints();
+		c5.setPhone("6988888888");
+		System.out.println("Updated phone: " + c5.getPhone()); */
+		//CustomerList Testing
+        //CustomerList list = new CustomerList();
+        //Δημιουργία πελατών
+		/*list.createCustomer("001", "Maria", "maria@mail.com", "6912345678", 30, 150);
+		list.createCustomer("002", "Nikos", "nikos@mail.com", "6923456789, 40, 200);
+		 */
+		//Εκτύπωση όλων
+        //list.printList();
+		// Προσθήκη πελάτη
+		/* Customer Giannis= newCustomer("003","Giannis", "Giannis@gmail.com,"6945678912","Male",35,90);
+        list.addCustomerToList(Giannis);
 
-}
+        // Αναζήτηση πελάτη
+       Customer found = list.getCustomerById("002");
+       if (found != null) {
+       found.printCustomer();} */
+
+       // Ενημέρωση πελάτη
+		/*list.updateCustomer("001", "Maria Papadopoulou", "newmaria@mail.com", "6900000001", "Female", 31, 300);
+
+       // Διαγραφή
+       list.removeCustomer("003");
+
+      // Εκτύπωση τελικής λίστας
+      ist.printList(); }*/
+
+	  /*Testing Order Item
+		Supplier s1 = new Supplier("12", "Coc", "d2", "1324902", "femk", true);
+		Product p1 = new Product(1, "Shampoo", "Hair", 10, 1.50, 0, s1);
+
+		OrderItem item1 = new OrderItem(p1, 3);
+		items.add(item1);
+
+
+		System.out.println("Όνομα προϊόντος: " + item1.getPurchaseProductName());
+		System.out.println("Τιμή αγοράς: " + item1.getProductPurchasePrice());
+		System.out.println("Ποσότητα: " + item1.getQuantity());
+		System.out.println("Γραμμή συνόλου: " + item1.getPurchaseOrderLineTotal() + " €");
+
+		System.out.println("toString(): " + item1);  */
+
+ /*Testing OrderList
+		// Δημιουργία προϊόντων και supplier
+		Supplier s1 = new Supplier("SUP01", "PapCorp", "Athens", "2101234567", "info@papcorp.com", true);
+		Product p1 = new Product(1, "Printer", "Office", 5, 150.0, 2, s1);
+		OrderItem item1 = new OrderItem(p1, 1);
+		ArrayList<OrderItem> items = new ArrayList<>();
+		items.add(item1);
+
+        // Δημιουργία παραγγελίας
+		Order order1 = new Order(1001, s1, items, Order.PaymentMethod.cash);
+		order1.setSupplier(s1);  // Μην ξεχνάς να το αρχικοποιήσεις
+
+        // Δημιουργία λίστας παραγγελιών
+		OrderList orderList = new OrderList();
+		orderList.addOrderToList(order1);
+
+        // Εκτύπωση
+		orderList.printAllOrders();
+
+        // Ενημέρωση πληρωμής
+		orderList.updateOrder(1001, Order.PaymentMethod.mobilePay);
+
+        // Υπολογισμός συνολικού κόστους
+		System.out.println("Total value of all orders: " + orderList.totalOrderListValue() + "€");
+
+        // Διαγραφή παραγγελίας
+		orderList.removeOrderFromList(1001);
+
+
+		//Testing Order,OrderItem,OrderList
+		/* ΔΗΜΙΟΥΡΓΙΑ SUPPLIER & PRODUCT
+        Supplier s1 = new Supplier("SUP01", "PapCorp", "Athens", "2101234567", "info@papcorp.com", true);
+        Product p1 = new Product(1, "Printer", "Office", 5, 150.0, 2, s1);*/
+
+       /*Testing Order Item
+       OrderItem item1 = new OrderItem(p1, 3);
+
+       System.out.println("Order Item");
+       System.out.println("Όνομα προϊόντος: " + item1.getPurchaseProductName());
+       System.out.println("Τιμή αγοράς: " + item1.getProductPurchasePrice() + " €");
+       System.out.println("Ποσότητα: " + item1.getQuantity());
+       System.out.println("Γραμμή συνόλου: " + item1.getPurchaseOrderLineTotal() + " €");
+       System.out.println("toString(): " + item1);
+
+       //Προσθήκη σε ProductList
+       ArrayList<OrderItem> items = new ArrayList<>();
+       items.add(item1);
+
+       //Δημηουργία ORDER
+       Order order1 = new Order(1001, s1, items, Order.PaymentMethod.cash);
+       order1.setSupplier(s1);
+       order1.totalOrderValue();
+
+       OrderList orderList = new OrderList();
+       orderList.addOrderToList(order1);
+
+
+       System.out.println("\n=== All Orders ===");
+       orderList.printAllOrders();
+
+       // Ενημέρωση τρόπου πληρωμής
+       orderList.updateOrder(1001, Order.PaymentMethod.mobilePay);
+
+       // Συνολικό κόστος Παραγγελιών
+       System.out.println("\nTotal value of all orders: " + orderList.totalOrderListValue() + " €");
+
+       //Διαγραφή Παραγγελίας
+       orderList.removeOrderFromList(1001);
+      System.out.println("\n=== Final Order List ===");
+      orderList.printAllOrders();  */
+
+
+
+	}
