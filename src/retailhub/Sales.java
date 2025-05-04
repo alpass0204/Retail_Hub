@@ -1,12 +1,14 @@
 package retailhub;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Sales {
-	private String sales_id;
-	private String date;
+	private int salesId;
+	private LocalDate date = LocalDate.now();
+	private LocalTime time = LocalTime.now();
 	private double totalamount;
-	private ArrayList<SaleItem> items;
+	private ArrayList<SaleItem> items; //the list of sold products per sale
 	private PaymentMethod paymentMethod;
 	
 	public enum PaymentMethod {
@@ -17,26 +19,25 @@ public class Sales {
 		MOBILE_PAY
 	}
 	
-	public Sales(String sales_id, String date, ArrayList<SaleItem> items, PaymentMethod paymentMethod) {
+	public Sales(int salesId, ArrayList<SaleItem> items, PaymentMethod paymentMethod) {
 		
-		this.sales_id = sales_id;
-		this.date = date;
+		this.salesId = salesId;
 		this.items = new ArrayList<SaleItem>(items);
 		this.paymentMethod = paymentMethod;
 		sumTotal();
 	}
 
-	public String getSales_id() {
-		return sales_id;
+	public int getSalesId() {
+		return salesId;
 	}
 
 
 	public String getDate() {
-		return date;
+		return LocalDate.now().toString();
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public String getTime() {
+		return LocalTime.now().toString();
 	}
 
 	public PaymentMethod getPaymentMethod() {
@@ -67,27 +68,30 @@ public class Sales {
 		}
 		this.totalamount = sum;
 	}
-	
+
+	//add sold product and call method sumtotal in order to add the amount in the totalamount
 	public void addItem(SaleItem i) {	
 		items.add(i);
 		sumTotal();
+		i.getProduct().decreaseStock(i.getQuantity()); //decrease stock when we make a sale
+		i.getProduct().notificationForLowStock();
 	}
 	
 	//remove product only when this products exists
-	public void removeItem(SaleItem item) {
+	public void removeItem(SaleItem item) {  //The if statement ensures that sumTotal() is only called if the  SaleItem was actually removed from the items collection.
 	    if (items.remove(item)) {
-	        sumTotal(); 
+	        sumTotal();
 	    }
-	    
 	}
 	
 	public String receipt() {
 	    // At first we have the header
 	    String receipt = 
 	          "=== RECEIPT ===\n"
-	        + "Sale ID: " + sales_id + "\n"
+	        + "Sale ID: " + salesId + "\n"
 	        + "Date   : " + date + "\n"
-	        + "Items  :\n";
+			+ "Time   : " + time + "\n"
+	        + "Items  : " + items;
 	    
 	    // 2) Add each product to the receipt
 	    for (SaleItem i : items) {
@@ -105,11 +109,22 @@ public class Sales {
 	
 	public String toString() {
 		return "Sale{" +
-	               "idSale='" + sales_id + '\'' +
+	               "idSale='" + salesId + '\'' +
 	               ", date=" + date +	               
 	               ", products=" + items +
 	               ", paymentMethod='" + paymentMethod + '\'' +
 	               ", total=" + totalamount +
 	               '}';
+	}
+	// The returnItem method
+	public void returnItem(SaleItem item) {
+		if (items.contains(item)) {
+			items.remove(item); // Remove the item from the sale
+			totalamount -= item.getLineTotal(); // Subtract the item's price from the total
+			item.getProduct().increaseStock(item.getQuantity()); // Return the product to stock
+			System.out.println("Product returned: " + item.getProduct().getName());
+		} else {
+			System.out.println("Item not found in this sale.");
+		}
 	}
 }

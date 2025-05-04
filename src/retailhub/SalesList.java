@@ -4,15 +4,14 @@ import java.util.ArrayList;
 
 public class SalesList {
     private ArrayList<Sales> sales;
-    private ProductList productList;
+
     // Constructor
     public SalesList() {
         this.sales = new ArrayList<>();
-        this.productList = new ProductList();
     }
 
-    // Προσθήκη νέας πώλησης
-    public void addSale(Sales sale) {
+    // Προσθήκη νέας πώλησης στην λιστα
+    public void addSaleToList(Sales sale) {
         boolean productStock = true;
         for (SaleItem item : sale.getItemsSold()) {
             Product p = item.getProduct();
@@ -24,15 +23,11 @@ public class SalesList {
                 productStock = false;
                 break;
             }
-            if (productStock) {
-                for (SaleItem item : sale.getItemsSold()) {
-
-                }
-            }
         }
-        System.out.println("Sale added successfully.");
+        if (productStock) {
+            System.out.println("Sale added successfully.");
+        }
     }
-
 
     // Εκτύπωση όλων των πωλήσεων
     public void printAllSales() {
@@ -44,11 +39,12 @@ public class SalesList {
             }
         }
     }
-    
-    public void removeSale(String salesId) {
+
+    //Removes a sale from the list
+    public void removeSaleFromTheList(int salesId) {
         Sales saleToRemove = null;
         for (Sales sale : sales) {
-            if (sale.getSales_id().equals(salesId)) {
+            if (sale.getSalesId() == salesId) {
                 saleToRemove = sale; // Found the sale with the matching sales_id
                 break;
             }
@@ -62,11 +58,13 @@ public class SalesList {
         }
     }
     
-    public void updateSale(String salesId, String newDate, Sales.PaymentMethod newPaymentMethod) {
+    public void updateSale(int salesId, Sales.PaymentMethod newPaymentMethod) {
         for (Sales sale : sales) {
-            if (sale.getSales_id().equals(salesId)) {
+            if (sale.getSalesId() == salesId) {
                 // Update the sale's date and payment method
-                sale.setDate(newDate);
+                sale.getDate();
+                sale.getTime();
+                System.out.println("New payment method: " + newPaymentMethod.toString());
                 sale.setPaymentMethod(newPaymentMethod);
                 System.out.println("Sale with ID " + salesId + " has been updated.");
                 return;  // Exit the method after updating the sale
@@ -77,7 +75,10 @@ public class SalesList {
         System.out.println("No sale found with ID " + salesId + ".");
     }
 
-
+    //
+    public void returnSaleItem(Sales sale, SaleItem item) {
+        sale.returnItem(item);
+    }
 
     // Πόσες πωλήσεις έχουν γίνει
     public int totalSalesCount() {

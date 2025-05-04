@@ -28,4 +28,8 @@ public class OrderItem {
 	public String toString() {
 		return " " + p.getName() + " : " + this.quantity +" pieces  * "+  p.getPurchasePrice() + " €";
 	}
+
+	public Product getProduct() {
+		return this.p;
+	}
 }

@@ -25,9 +25,12 @@ public class SaleItem {
 	        return quantity;
 	    }
 
+		//calculate total amount of price*quantity
 	    public double getLineTotal() {
 	        return product.getSellPrice() * quantity;
 	    }
 
-		public Product getProduct() {return this.product; }
+		public Product getProduct() {
+			return this.product;
+		}
 	}

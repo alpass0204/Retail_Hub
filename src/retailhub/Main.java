@@ -85,9 +85,9 @@ public class Main {
 		order1.addOrderItem(orderitem2);
 		
 		//System.out.println(order1.toString());
-		OrderList orderlist1 = new OrderList();
-		orderlist1.addOrder(order1);
-		orderlist1.printAllOrders();
+		//OrderList orderlist1 = new OrderList();
+//		orderlist1.addOrder(order1);
+		//orderlist1.printAllOrders();
 
 
 

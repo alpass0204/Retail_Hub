@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class Order {
 	private ArrayList<OrderItem> items;
-	private int idOrder;
-	private LocalDate date;
-    private LocalTime time;
+	private int orderId;
+	private LocalDate date = LocalDate.now();
+	private LocalTime time = LocalTime.now();
 	private PaymentMethod paymentMethod;
 	private double total;
 	private Supplier supplier;
@@ -26,8 +26,8 @@ public class Order {
 	 * CONSTRUCTOR
 	 */
 
-	public Order(int idOrder, Supplier supplier, ArrayList<OrderItem> items, PaymentMethod paymentMethod) {
-		this.idOrder = idOrder;
+	public Order(int orderId, Supplier supplier, ArrayList<OrderItem> items, PaymentMethod paymentMethod) {
+		this.orderId = orderId;
 		this.items = new ArrayList<OrderItem>(items);
 		this.paymentMethod = paymentMethod;
 		this.total = 0;
@@ -40,7 +40,8 @@ public class Order {
 		for (OrderItem i: items) {
 			sum += i.getPurchaseOrderLineTotal();	
 		}
-		return sum;
+		this.total = sum;
+		return this.total;
 	}
 	
 	/*
@@ -49,13 +50,14 @@ public class Order {
 	
 	public void addOrderItem(OrderItem i) {
 		items.add(i);
+		i.getProduct().increaseStock(i.getQuantity());
 	}
 		
 	/*
 	 * PRINT METHOD FOR EACH ORDER
 	 
 	public void printOrder() {
-		System.out.println("Order ID: " + idOrder + "\n" + "Date: " + date + "Time: " + time + "Payment method: " + paymentMethod);
+		System.out.println("Order ID: " + orderId + "\n" + "Date: " + date + "Time: " + time + "Payment method: " + paymentMethod);
 		System.out.println(items);
 		System.out.println("Total: " + total);
 	}
@@ -69,28 +71,20 @@ public class Order {
 		this.items = items;
 	}
 
-	public int getIdOrder() {
-		return idOrder;
+	public int getOrderId() {
+		return orderId;
 	}
 
-	public void setIdOrder(int idOrder) {
-		this.idOrder = idOrder;
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public String getDate() {
+		return LocalDate.now().toString();
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-
-	public LocalTime getTime() {
-		return time;
-	}
-
-	public void setTime(LocalTime time) {
-		this.time = time;
+	public String getTime() {
+		return LocalTime.now().toString();
 	}
 
 	public PaymentMethod getPaymentMethod() {
@@ -119,11 +113,7 @@ public class Order {
 	
 	public String toString() {
 		this.total = totalOrderValue();
-		this.date =LocalDate.now();
-		return "Order: " + + idOrder + "\n" +" Date: " + date +"\n Products: " + items.toString() +"\n Payment method: " + paymentMethod +"\n total: " + total  + "€";
+		this.date = LocalDate.now();
+		return "Order: " + + orderId + "\n" +" Date: " + date +"\n Products: " + items.toString() +"\n Payment method: " + paymentMethod +"\n total: " + total  + "€";
 	}
-	
-	/*
-	 * --------PREPEI NA GINEI ENIMEROSI TOU STOCK MESA STIN ORDER----------
-	 */
 }
