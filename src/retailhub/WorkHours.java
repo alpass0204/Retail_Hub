@@ -11,6 +11,7 @@ public class WorkHours {
     private LocalTime arrivalTime;
     private LocalTime departureTime;
 
+
     //constructor
     public WorkHours(LocalDate date,LocalTime arrivalTime,LocalTime departureTime) {
         this.date = date;
@@ -26,32 +27,32 @@ public class WorkHours {
 
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.date = LocalDate.now();
     }
 
 
     public LocalTime getArrivalTime() {
-        return arrivalTime;
+        return this.arrivalTime;
     }
 
 
     public void setArrivalTime(LocalTime arrivalTime) {
-        this.arrivalTime = arrivalTime;
+        this.arrivalTime = LocalTime.now();
     }
 
 
     public LocalTime getDepartureTime() {
-        return departureTime;
+        return this.departureTime;
     }
 
 
     public void setDepartureTime(LocalTime departureTime) {
-        this.departureTime = departureTime;
+        this.departureTime =  LocalTime.now();
     }
 
     //duration between arrival and departure
     public Duration getDuration() {
-        return Duration.between(arrivalTime,departureTime);
+        return Duration.between(getArrivalTime(),getDepartureTime());
     }
 
 

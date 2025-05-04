@@ -1,5 +1,8 @@
 package retailhub;
 
+import retailhub.Role;
+import retailhub.SecurityLayer;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -47,8 +50,8 @@ public class Main {
 		
 	/*  ------- SALEITEM + SALES CLASSES-METHODS TESTED <3---------*/
 		Supplier s1 = new Supplier("12", "Coc", "d2", "1324902", "femk", true);
-		Product p1 = new Product(1, "Shampoo", "Hair", 2, 1.85, 5, s1);
-		Product p2 = new Product(2, "Cannabis", "Hair", 5, 1.85, 5, s1);
+		//Product p1 = new Product(1, "Shampoo", "Hair", 2, 1.85, 5, s1);
+		//Product p2 = new Product(2, "Cannabis", "Hair", 5, 1.85, 5, s1);
 //		SaleItem item1 = new SaleItem(p1,2);
 //		SaleItem item2 = new SaleItem(p2,2);                                                                   //   SALEITEM + SALES CLASSES-METHODS TESTED <3
 	
@@ -70,12 +73,12 @@ public class Main {
 		//Testing Order, OrderItem, OrderList classes
 		//Create a supplier, a product or two and test if the classes works
 		ArrayList<OrderItem> items = new ArrayList<OrderItem>();
-		OrderItem orderitem1 = new OrderItem(p1, 5);
-		OrderItem orderitem2 = new OrderItem(p2, 10);
+		//OrderItem orderitem1 = new OrderItem(p1, 5);
+		//OrderItem orderitem2 = new OrderItem(p2, 10);
 //		items.add(orderitem1);
 //		items.add(orderitem2);
 		
-		
+		/**
 		Order order1 = new Order(1, s1, items, Order.PaymentMethod.cash);
 		order1.totalOrderValue();
 		//System.out.println(order1.toString());
@@ -83,10 +86,14 @@ public class Main {
 		System.out.println("");
 		order1.addOrderItem(orderitem1);
 		order1.addOrderItem(orderitem2);
-		
+		*/
+
 		//System.out.println(order1.toString());
-		//OrderList orderlist1 = new OrderList();
+		OrderList orderlist1 = new OrderList();
 //		orderlist1.addOrder(order1);
+		//orderlist1.printAllOrders();
+		//OrderList orderlist1 = new OrderList();
+		//orderlist1.addOrder(order1);
 		//orderlist1.printAllOrders();
 
 
@@ -119,12 +126,51 @@ public class Main {
 		sc.close();
 		suppliers.printList();
 		*/
-		
-		
-		
 
 
-		
+		//Creation of Userlist
+		UserList userlist = new UserList();
+
+		//Creation of users and SecurityLevel TESTING
+		User karamf29 = new UserOne("karamf29", "xaris", "xaris" ,"karamf",29,50000,"xaris@yahoo.gr",
+				"bp 39", Role.analyst  );
+		User maz25 = new UserOne("maz25", "ilias0984398", "ilias" ,"maz",25,50000,"xaris@yahoo.gr",
+				"bp 39", Role.analyst  );
+		User kostas28 = new UserTwo("kostas28","kostas","kostas","kotsaris",28,55000,
+				"kostas@uom.cz","Armenopoulou 12", Role.accountant);
+		User alex21 = new UserThree("alex21","alex","alexandros","alexakis",21,550000,
+				"alex@xela.com","Karaoli 12", Role.manager);
+		User pavlos19 = new UserFour("pavlos19","pavlos","pavlaras","Prof",19,150000,
+				"pavlosprof@igetis.com","Dodekanisou 99", Role.sysadmin);
+
+		//Testing of userList methods
+
+		//AddUser to the userList
+		userlist.addUser(karamf29);
+		userlist.addUser(maz25);
+		userlist.addUser(kostas28);
+		userlist.addUser(alex21);
+		userlist.addUser(pavlos19);
+		//userlist.printList();
+
+		//Search User
+		//userlist.searchUser(karamf29,29 );
+		//userlist.searchUser(maz25,25);
+		//userlist.searchUser(Dora,11);
+
+
+		//Remove User
+		//userlist.removeUser("karamf29",29);
+		//userlist.printList();
+
+		//Update user
+
+		userlist.updateUser(pavlos19, "karamf29", "1234", "xaroulis", 11, 5, "a@a.net",
+				"giannitswn 23", Role.sysadmin, new SecurityLevel(SecurityLayer.layer4));
+		//userlist.printList();
+
+		pavlos19.printUser();
+		karamf29.printUser();
 
 	}
 

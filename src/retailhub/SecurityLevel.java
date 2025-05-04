@@ -11,13 +11,6 @@ public class    SecurityLevel{
 
     private SecurityLayer layer;  // The Security Layer (1,2,3 or 4)
 
-    public enum SecurityLayer{
-        layer1,
-        layer2,
-        layer3,
-        layer4
-    }
-
     /**
      * CONSTRUCTOR for Security Level with Validation.
      * @param layer The security layer to assign.
