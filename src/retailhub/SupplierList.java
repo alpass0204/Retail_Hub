@@ -1,3 +1,4 @@
+
 package retailhub;
 
 import java.util.ArrayList;
@@ -32,8 +33,8 @@ public class SupplierList {
 	 * @param email
 	 * @return
 	 */
-	public boolean createSupplier(String taxId, String brandName, String phone, String address, String email) {
-		if(getSupplierByVat(taxId) != null) {
+	/*public boolean createSupplier(int taxId, String brandName, String phone, String address, String email) {
+		if(getSupplierByVat(taxId) != 0) {
 			 System.out.println("A supplier with this VAT already exists.");
 		     return false;
 		}
@@ -42,13 +43,13 @@ public class SupplierList {
 		suppliers.add(s);
 		return true;
 	}
-	
+	*/
 		
 	/**
 	 * Αφαίρεση supplier εφοσον το ΑΦΜ του υπαρχει
 	 * @param taxId
 	 */
-	public void removeSupplier(String taxId) {
+	/*public void removeSupplier(String taxId) {
 	    Supplier s = getSupplierByVat(taxId);
 	    if (s != null) {
 	        suppliers.remove(s);
@@ -59,7 +60,7 @@ public class SupplierList {
 	    }
 	   
 	}
-	
+	*/
 	/**
 	 *  Αναζήτηση supplier βαση του ΑΦΜ του. Αν τον βρει, καλουμε μεθοδους set για να αλλαξουμε στοιχεια
 	 * @param taxId
@@ -69,9 +70,9 @@ public class SupplierList {
 	 * @param email
 	 * @return
 	 */
-	public boolean updateSupplier(String taxId, String brandName, String phone, String address, String email) {
+	public boolean updateSupplier(int taxId, String brandName, String phone, String address, String email) {
 	    for (Supplier s : suppliers) {
-	        if (s.getTaxId().equals(taxId)) {
+	        if (s.getTaxId() == (taxId)) {
 	            s.setBrandName(brandName);
 	            s.setPhone(phone);
 	            s.setAddress(address);
@@ -98,22 +99,22 @@ public class SupplierList {
 	 * @param taxId
 	 * @return
 	 */
-	public boolean vatExists(String taxId) {
+	/*public boolean vatExists(String taxId) {
 	    for (Supplier s : suppliers) {
-	        if (s.getTaxId().equals(taxId)) {                   
+	        if (s.getTaxId() == (taxId)) {
 	            return true;
 	        }
 	    }
 	    return false;
 	}
-	
+	*/
 	
 	/**
 	 * ελεγχος και επιστροφη supplier βαση του ΑΦΜ του
 	 * @param taxId
 	 * @return
 	 */
-	public Supplier getSupplierByVat(String taxId) {
+	/*public Supplier getSupplierByVat(String taxId) {
 	    for (Supplier s : suppliers) {
 	        if (s.getTaxId().equals(taxId)) {
 	            return s;
@@ -122,5 +123,6 @@ public class SupplierList {
 	    System.out.println("Supplier not found");
 	    return null;
 	}
-
+*/
 }
+

@@ -47,9 +47,9 @@ public class Main {
 		//productList1.printList();
 		//suppliersTechnology.printList();
 		//Cosmote.printSupplier();
-		
-	/*  ------- SALEITEM + SALES CLASSES-METHODS TESTED <3---------*/
-		Supplier s1 = new Supplier("12", "Coc", "d2", "1324902", "femk", true);
+
+		/*  ------- SALEITEM + SALES CLASSES-METHODS TESTED <3---------*/
+		//Supplier s1 = new Supplier("12", "Coc", "d2", "1324902", "femk", true);
 		//Product p1 = new Product(1, "Shampoo", "Hair", 2, 1.85, 5, s1);
 		//Product p2 = new Product(2, "Cannabis", "Hair", 5, 1.85, 5, s1);
 //		SaleItem item1 = new SaleItem(p1,2);
@@ -68,17 +68,17 @@ public class Main {
 		sale1.sumTotal();
 		System.out.println(sale1.getTotalamount());
 		System.out.println(sale1.receipt());
-*/		
+*/
 
 		//Testing Order, OrderItem, OrderList classes
 		//Create a supplier, a product or two and test if the classes works
-		ArrayList<OrderItem> items = new ArrayList<OrderItem>();
+		//ArrayList<OrderItem> items = new ArrayList<OrderItem>();
 		//OrderItem orderitem1 = new OrderItem(p1, 5);
 		//OrderItem orderitem2 = new OrderItem(p2, 10);
 //		items.add(orderitem1);
 //		items.add(orderitem2);
 		
-		/**
+		/*
 		Order order1 = new Order(1, s1, items, Order.PaymentMethod.cash);
 		order1.totalOrderValue();
 		//System.out.println(order1.toString());
@@ -89,17 +89,12 @@ public class Main {
 		*/
 
 		//System.out.println(order1.toString());
-		OrderList orderlist1 = new OrderList();
+		//OrderList orderlist1 = new OrderList();
 //		orderlist1.addOrder(order1);
 		//orderlist1.printAllOrders();
 		//OrderList orderlist1 = new OrderList();
 		//orderlist1.addOrder(order1);
 		//orderlist1.printAllOrders();
-
-
-
-
-
 
 
 		// κατασκευή και δοκιμη supplier και supplierList
@@ -108,7 +103,7 @@ public class Main {
 		//suppliers.createAndAddSupplier("1", "2321", "32", "23f", "1rr");
 		//suppliers.createAndAddSupplier("2", "231", "321", "23", "1r");
 		//suppliers.printList();
-		
+
 		//suppliers.updateSupplier(null, "mmm", "145", "13254","1431", );
 		//suppliers.printList();
 
@@ -127,7 +122,7 @@ public class Main {
 		suppliers.printList();
 		*/
 
-
+/*
 		//Creation of Userlist
 		UserList userlist = new UserList();
 
@@ -171,33 +166,41 @@ public class Main {
 
 		pavlos19.printUser();
 		karamf29.printUser();
-
- /*Customer Testing
-		Customer c5 = new Customer("C1001", "Maria", "maria@gmail.com", "6912345678", 25);
+*/
+//Customer Testing
+		/*Customer c5 = new Customer(001, "Maria", "Maria@gmail.com", "6912345678", "Female",25,0);
 		c5.printCustomer();
 		c5.addPoints(150);
 		c5.redeemAllPoints();
 		c5.printLoyaltyPoints();
 		c5.setPhone("6988888888");
 		System.out.println("Updated phone: " + c5.getPhone()); */
+
+
 		//CustomerList Testing
-        //CustomerList list = new CustomerList();
-        //Δημιουργία πελατών
-		/*list.createCustomer("001", "Maria", "maria@mail.com", "6912345678", 30, 150);
-		list.createCustomer("002", "Nikos", "nikos@mail.com", "6923456789, 40, 200);
-		 */
+		CustomerList list = new CustomerList();
+
+		//Δημιουργία πελατών
+		list.createCustomer(001, "Maria", "maria@mail.com", "6912345678", "neutral", 150, 0);
+		list.createCustomer(002, "Herrer", "her@mail.com", "6912323278", "neutral", 10, 0);
+
 		//Εκτύπωση όλων
-        //list.printList();
+		// list.printList();
+
 		// Προσθήκη πελάτη
-		/* Customer Giannis= newCustomer("003","Giannis", "Giannis@gmail.com,"6945678912","Male",35,90);
-        list.addCustomerToList(Giannis);
+		Customer Giannis= new Customer("Giannis", "Giannis@gmail.com","6945678912","Male",35,90);
+		Customer Ilias= new Customer("Ilias", "iliass@gmail.com","6945678912","Male",35,90);
+		list.addCustomerToList(Giannis);
+		list.addCustomerToList(Ilias);
+		list.printList();
 
-        // Αναζήτηση πελάτη
-       Customer found = list.getCustomerById("002");
+        // Αναζήτηση πελάτ
+		/**
+       Customer found = list.getCustomerById(002);
        if (found != null) {
-       found.printCustomer();} */
-
-       // Ενημέρωση πελάτη
+       found.printCustomer();}
+		*/
+		// Ενημέρωση πελάτη
 		/*list.updateCustomer("001", "Maria Papadopoulou", "newmaria@mail.com", "6900000001", "Female", 31, 300);
 
        // Διαγραφή
@@ -293,5 +296,5 @@ public class Main {
       orderList.printAllOrders();  */
 
 
-
 	}
+}
