@@ -1,4 +1,6 @@
 package retailhub;
+import org.w3c.dom.ls.LSOutput;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class Sales {
 		this.paymentMethod = paymentMethod;
 		this.customer = customer;
 		sumTotal();
+		//loyalty points
 		if (customer != null) {
 			customer.redeemAllPoints(); //redeem to receive the discount
 			customer.addPoints(((int) totalamount) / 5); // add point to customer
@@ -136,6 +139,6 @@ public class Sales {
 		}
 	}
 
-	//loyalty points
+
 
 }
