@@ -32,4 +32,6 @@ public class OrderItem {
 	public Product getProduct() {
 		return this.p;
 	}
+
+
 }

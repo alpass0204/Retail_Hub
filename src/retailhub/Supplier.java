@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Supplier {
 
-	private String taxId;
+	private int taxId;
 	private String brandName;
 	private String address;
 	private String phone;
@@ -20,7 +20,7 @@ public class Supplier {
 	 * @param phone
 	 * @param email
 	 */
-	public Supplier(String taxId, String brandName, String address, String phone, String email, Boolean active) {
+	public Supplier(int taxId, String brandName, String address, String phone, String email, Boolean active) {
 		this.taxId = taxId;
 		this.brandName = brandName;
 		this.address = address;
@@ -62,11 +62,11 @@ public class Supplier {
 
 	//SETTER AND GETTERS FOR SUPPLIERS FIELDS
 
-	public String getTaxId() {
+	public int getTaxId() {
 		return taxId;
 	}
 
-	public void setTaxId(String taxId) {
+	public void setTaxId(int taxId) {
 		this.taxId = taxId;
 	}
 

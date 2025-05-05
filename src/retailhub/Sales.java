@@ -1,4 +1,6 @@
 package retailhub;
+import org.w3c.dom.ls.LSOutput;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ public class Sales {
 	private double totalamount;
 	private ArrayList<SaleItem> items; //the list of sold products per sale
 	private PaymentMethod paymentMethod;
+	private Customer customer;
+	private double discountApplied = 0.0;
 	
 	public enum PaymentMethod {
 		CASH,
@@ -19,12 +23,19 @@ public class Sales {
 		MOBILE_PAY
 	}
 	
-	public Sales(int salesId, ArrayList<SaleItem> items, PaymentMethod paymentMethod) {
+	public Sales(int salesId, ArrayList<SaleItem> items, PaymentMethod paymentMethod, Customer customer) {
 		
 		this.salesId = salesId;
 		this.items = new ArrayList<SaleItem>(items);
 		this.paymentMethod = paymentMethod;
+		this.customer = customer;
 		sumTotal();
+		//loyalty points
+		if (customer != null) {
+			customer.redeemAllPoints(); //redeem to receive the discount
+			customer.addPoints(((int) totalamount) / 5); // add point to customer
+			customer.printLoyaltyPoints(); // print customer's points
+		}
 	}
 
 	public int getSalesId() {
@@ -127,4 +138,7 @@ public class Sales {
 			System.out.println("Item not found in this sale.");
 		}
 	}
+
+
+
 }

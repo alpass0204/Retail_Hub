@@ -168,6 +168,18 @@ public class UserList {
 
         return true;
     }
+
+    //for 8.1 reports
+    public double getTotalSalaryExpenses() {
+        double sal = 0;
+        for (User user : userList) {
+            if (user instanceof Employee) {
+                sal += ((Employee) user).getSalary();
+            }
+        }
+        System.out.println("Total Salary Expenses: €" + sal);
+        return sal;
+    }
 }
 
 

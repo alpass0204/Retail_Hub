@@ -73,4 +73,13 @@ public class OrderList {
 		// If no sale is found with the given orderId
 		System.out.println("No order found with ID " + orderId + ".");
 	}
+
+	//total expenses for 8.1 but we need to sum also the hr costs
+	public double getTotalPurchaseCost() {
+		double total = 0;
+		for (Order order : orderlist) {
+			total += order.totalOrderValue();
+		}
+		return total;
+	}
 }

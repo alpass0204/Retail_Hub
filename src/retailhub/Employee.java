@@ -131,4 +131,5 @@ public class Employee extends User {
     }
 
     // Μπορείς να προσθέσεις κι άλλες μεθόδους ειδικές για τον Employee εδώ.
+
 }

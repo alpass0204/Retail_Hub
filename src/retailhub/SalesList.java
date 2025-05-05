@@ -84,4 +84,14 @@ public class SalesList {
     public int totalSalesCount() {
         return sales.size();
     }
+
+    //total revenue unit case 8.1
+    public double getTotalRevenue() {
+        double revenue = 0;
+        for (Sales sale : sales) {
+            revenue += sale.getTotalamount();
+        }
+        System.out.println("Total revenue: " + revenue);
+        return revenue;
+    }
 }

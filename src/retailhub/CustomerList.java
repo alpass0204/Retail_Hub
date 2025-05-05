@@ -1,6 +1,7 @@
 package retailhub;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CustomerList {
 
@@ -18,20 +19,27 @@ public class CustomerList {
 		customers.add(c);
 	}
 
-	public boolean createCustomer(String customerId, String name, String email, String phone, String gender, int age, int loyaltyPoints) {
-		if (getCustomerById(customerId) != null) {
-			System.out.println("A customer with this ID already exists.");
-			return false;
+	public void createCustomer(int customerId, String name, String email,
+								  String phone, String gender, int age, int loyaltyPoints) {
+		Iterator<Customer> iterator = customers.iterator();
+		boolean foundAndAdded = false; // Adding a flag
+		while (iterator.hasNext()) {
+			Customer c = iterator.next();
+			if(c.getCustomerId() == customerId) {
+				System.out.println("Customer " + customerId + " already exists.");
+				break;
+			}
 		}
-
-		Customer c = new Customer(customerId, name, email, phone, gender, age, 0);
-		customers.add(c);
-		return true;
+		if(!foundAndAdded) {
+			Customer c = new Customer(customerId, name, email, phone, gender, age, loyaltyPoints);
+			customers.add(c);
+		}
 	}
 
-	public Customer getCustomerById(String customerId) {
+	public Customer getCustomerById(int customerId) {
 		for (Customer c : customers) {
-			if (c.getCustomerId().equals(customerId)) {
+
+			if (c.getCustomerId() == (customerId)) {
 				return c;
 			}
 
@@ -40,7 +48,7 @@ public class CustomerList {
 		return null;
 	}
 
-	public void removeCustomer(String customerId) {
+	public void removeCustomer(int customerId) {
 		Customer c = getCustomerById(customerId);
 		if (c != null) {
 			customers.remove(c);
@@ -51,9 +59,9 @@ public class CustomerList {
 
 	}
 
-	public boolean updateCustomer(String customerId, String name, String email, String phone, String gender, int age, int loyaltyPoints) {
+	public boolean updateCustomer(int customerId, String name, String email, String phone, String gender, int age, int loyaltyPoints) {
 		for (Customer c : customers) {
-			if (c.getCustomerId().equals(customerId)) {
+			if (c.getCustomerId() == (customerId)) {
 				c.setName(name);
 				c.setPhone(phone);
 				c.setEmail(email);
