@@ -1,5 +1,4 @@
 package retailhub;
-import org.w3c.dom.ls.LSOutput;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,7 +12,7 @@ public class Sales {
 	private ArrayList<SaleItem> items; //the list of sold products per sale
 	private PaymentMethod paymentMethod;
 	private Customer customer;
-	private double discountApplied = 0.0;
+	//private double discountApplied = 0.0;
 	
 	public enum PaymentMethod {
 		CASH,
@@ -32,10 +31,13 @@ public class Sales {
 		sumTotal();
 		//loyalty points
 		if (customer != null) {
-			customer.redeemAllPoints(); //redeem to receive the discount
+			double discount = customer.redeemAllPoints(); //redeem to receive the discount
 			customer.addPoints(((int) totalamount) / 5); // add point to customer
 			customer.printLoyaltyPoints(); // print customer's points
+			this.totalamount -= discount;
 		}
+
+
 	}
 
 	public int getSalesId() {
