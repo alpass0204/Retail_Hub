@@ -1,5 +1,7 @@
 package retailhub;
 
+import java.util.ArrayList;
+
 public class Customer {
 	private static int id = 1;
 	private int customerId;
@@ -9,6 +11,7 @@ public class Customer {
 	private String gender;
 	private int age;
 	private int loyaltyPoints;
+	private ArrayList<Sales> salesOfCustomer;
 	
 	//*BASIKOS KATASKEYASTIS
 	
@@ -25,7 +28,7 @@ public class Customer {
 	//*DEYTEROS KATASKEYASTHS
 	//*ISWS VALOUME KAI KATI AKOMA???
 	
-	public Customer( String name) {
+	public Customer(String name) {
 		this.customerId = id++;
 		this.name = name;
 		this.loyaltyPoints = 0;
@@ -35,14 +38,14 @@ public class Customer {
 	}
 	
 	//Constructor which loyalty points are given by the user
-	public Customer( String name, String email, String phone, String gender, int age, int loyaltyPoints) {
+	public Customer (String name, String email, String phone, String gender, int age, int loyaltyPoints) {
 		this.customerId = id++;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.gender = gender;
 		this.age = age;
-		this.loyaltyPoints = loyaltyPoints;
+		this.loyaltyPoints = 0;
 		
 	}
 
@@ -54,8 +57,7 @@ public class Customer {
 	public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-	
-	
+
 	public String getName() {
         return name;
     }
@@ -140,18 +142,15 @@ public class Customer {
 			  this.loyaltyPoints -= pointsToRemove;
 			  System.out.println("Customer redeem points: " + pointsToRemove + " real discount: " + discount + "€.");
 			  return discount;
-		  } else {
+		  }
+		  else {
 			  System.out.println("Δεν υπάρχουν αρκετοί πόντοι για έκπτωση. Απαιτούνται 100.");
 			  return 0.0;
 		  }
 	  }
 
-
 	//print loyalty points
 	public void printLoyaltyPoints() {
 		System.out.println("Ο πελάτης έχει " + loyaltyPoints + " πόντους.");
 	}
-
-
-
 }

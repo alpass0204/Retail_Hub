@@ -19,27 +19,50 @@ public class CustomerList {
 		customers.add(c);
 	}
 
-	public void createCustomer(int customerId, String name, String email,
-								  String phone, String gender, int age, int loyaltyPoints) {
-		Iterator<Customer> iterator = customers.iterator();
+	/**
+	 *
+	 * @param name
+	 * @param email
+	 * @param phone
+	 * @param gender
+	 * @param age
+	 */
+	public void createCustomer(String name, String email, String phone, String gender, int age) {
 		boolean foundAndAdded = false; // Adding a flag
-		while (iterator.hasNext()) {
-			Customer c = iterator.next();
-			if(c.getCustomerId() == customerId) {
-				System.out.println("Customer " + customerId + " already exists.");
+		for(Customer allreadyCustomer : customers) {
+			if(allreadyCustomer.getEmail() != null && allreadyCustomer.getEmail().toLowerCase().trim().equals(email.toLowerCase().trim())) {
+				foundAndAdded = true; // Duplicated user found and skipped
+				break;
+			}
+			if(allreadyCustomer.getPhone()!=null && allreadyCustomer.getPhone().toLowerCase().trim().equals(phone)) {
+				foundAndAdded = true; // Duplicated user found and skipped
 				break;
 			}
 		}
+
 		if(!foundAndAdded) {
-			Customer c = new Customer(customerId, name, email, phone, gender, age, loyaltyPoints);
-			customers.add(c);
+			Customer newCustomer = new Customer(name,email,phone,gender, age);
+			customers.add(newCustomer);
+			System.out.println("Customer: "+newCustomer.getName()+" has been added succesfully!" );
 		}
+
 	}
 
-	public Customer getCustomerById(int customerId) {
+	public Customer getCustomerByEmail(String email) {
 		for (Customer c : customers) {
 
-			if (c.getCustomerId() == (customerId)) {
+			if (c.getEmail() == email) {
+				return c;
+			}
+
+		}
+		System.out.println("Customer not found");
+		return null;
+	}
+	public Customer getCustomerByPhone(String phone) {
+		for (Customer c : customers) {
+
+			if (c.getPhone().trim().equals(phone)) {
 				return c;
 			}
 
@@ -48,20 +71,19 @@ public class CustomerList {
 		return null;
 	}
 
-	public void removeCustomer(int customerId) {
-		Customer c = getCustomerById(customerId);
+	public void removeCustomer(String email) {
+		Customer c = getCustomerByEmail(email);
 		if (c != null) {
 			customers.remove(c);
-			System.out.println("The customer with ID " + c.getCustomerId() + " has been removed!");
+			System.out.println("The customer with Email " + getCustomerByEmail(email) + " has been removed!");
 		} else {
-			System.out.println("No such VAT exists. Please try again.");
+			System.out.println("No such Email exists. Please try again.");
 		}
-
 	}
 
-	public boolean updateCustomer(int customerId, String name, String email, String phone, String gender, int age, int loyaltyPoints) {
+	public boolean updateCustomer(String name, String email, String phone, String gender, int age, int loyaltyPoints) {
 		for (Customer c : customers) {
-			if (c.getCustomerId() == (customerId)) {
+			if (getCustomerByEmail(email.toLowerCase()).equals(email.toLowerCase())) {
 				c.setName(name);
 				c.setPhone(phone);
 				c.setEmail(email);
@@ -80,8 +102,3 @@ public class CustomerList {
 		}
 	}
 }
-	
-
-
-
-
