@@ -5,7 +5,7 @@ package retailhub;
  * Security levels are hierarchical , with higher levels have all
  */
 
-public class    SecurityLevel{
+public class SecurityLevel{
 
     // FIELDS
 
@@ -26,11 +26,19 @@ public class    SecurityLevel{
         }
     }
 
+    /**
+     *
+     * @return the layer of the SecurityLayer object.
+     */
     public SecurityLayer getLayer(){
         return this.layer;
     }
 
-
+    /**
+     *
+     * @param newLayer
+     * @param adminUser
+     */
 
     public void setSecurityLayer(SecurityLayer newLayer, User adminUser){
         // Main Idea : Users with level4 credentials only can change the SecurityLevel.
@@ -44,26 +52,24 @@ public class    SecurityLevel{
         System.out.println("Security layer updated to "+newLayer+ " by "+adminUser.getUsername());
     }
 
-    /**
+    /** HAS_REQUIRED_LEVEL
      * CHECKS if this security level can perform operations requiring a certain minimum level
      * @param requiredLevel = The min security level.
      * @return True if the User has the Credentials to perform the wanted Action or False if he doesn't.
      */
-
     public boolean hasRequiredLevel(SecurityLayer requiredLevel){
         return this.layer.ordinal()>= requiredLevel.ordinal();
     }
 
-    /**
+    /** CAN_UPDATE_USER
      *  CHECKS if the user has the credentials to handle other Users data
      *  Every User can access his own data
      *  Layer3+ can manage other peoples information (Layer2 and Layer1)
      *  Layer4 is God Mode.
-     * @param userPerformer
-     * @param targetUser
+     * @param userPerformer USER
+     * @param targetUser   USER
      * @return
      */
-
     public boolean canUpdateUser(User userPerformer, User targetUser){
         if(userPerformer == null || targetUser == null){
             return false;
@@ -72,22 +78,22 @@ public class    SecurityLevel{
         SecurityLayer performersLevel = userPerformer.getSecurityLevel().getLayer();
         SecurityLayer targetsLevel = targetUser.getSecurityLevel().getLayer();
 
-        // Ideas:
+        // Main ideas
         //1) Any user can view their own info.
         //2) Layer3+ can update users at their level or below.
         //3) Layer4 has god mode.
 
-        // Implementation of (1)
+        // Implementation of 1
         if(userPerformer.getUsername().equals(targetUser.getUsername())){
             return true;
         }
 
-        // Implementation of (2)
+        // Implementation of 2
         if(performersLevel == SecurityLayer.layer3 && targetsLevel.ordinal() <= performersLevel.ordinal()){
             return true;
         }
 
-        // Implementation of (3)
+        // Implementation of 3
         if(performersLevel == SecurityLayer.layer4){
             return true;
         }
@@ -95,10 +101,10 @@ public class    SecurityLevel{
         return false;
     }
 
-    /**
+    /** CAN_MANAGE_PRODUCTS
      * CHEKCS if user can manage products (create, update, delete)
-     * @param userPerformer The User attempting to manage products.
-     * @param isCritical Wheter the action trying to operate is Critical/Not Critical
+     * @param userPerformer (USER) The User attempting to manage products.
+     * @param isCritical  (BOOLEAN) Whether the action trying to operate is Critical/Not Critical
      * @return true if the operation is allowed, false otherwise
      */
 

@@ -1,23 +1,23 @@
 package retailhub;
 
-import java.util.ArrayList; // Χρειάζεται για το workHours
+import java.util.ArrayList;
 
 /**
- * Αφηρημένη κλάση βάσης για όλους τους χρήστες του συστήματος.
- * Περιέχει τα βασικά στοιχεία ταυτοποίησης και ασφάλειας.
+ * Abstract Class for all system users.
+ * Contains all the basis elements for authentication and security
  */
 public abstract class User {
 
-    private String username; // Μοναδικό όνομα χρήστη
-    private String password; // Κωδικός πρόσβασης (Σημείωση: Σε πραγματικό σύστημα θα ήταν hashed)
-    private SecurityLevel securityLevel; // Το επίπεδο ασφαλείας (ΕΝΑ πεδίο εδώ)
-    private ArrayList<Object> workHours; // Λίστα για ώρες εργασίας (Ο τύπος Object είναι γενικός, μπορείς να τον αλλάξεις)
+    private String username; // UNIQUE username
+    private String password; // User's Password
+    private SecurityLevel securityLevel; // Security Level
+    private ArrayList<Object> workHours; // User's hours worked.
 
     /**
-     * Constructor για τη βασική κλάση User.
-     * @param username Το όνομα χρήστη.
-     * @param password Ο κωδικός πρόσβασης.
-     * @param initialLayer Το αρχικό επίπεδο ασφαλείας (enum SecurityLayer).
+     * Constructor
+     * @param username unique username
+     * @param password password
+     * @param initialLayer the initial security layer (enum SecurityLayer).
      */
     public User(String username, String password, SecurityLayer initialLayer) {
         if (username == null || username.trim().isEmpty()) {
@@ -30,17 +30,17 @@ public abstract class User {
             throw new IllegalArgumentException("Initial SecurityLayer cannot be null.");
         }
 
-        this.username = username.trim(); // Αφαίρεση κενών αρχής/τέλους
+        this.username = username.trim(); // removes unwanted spaces
         this.password = password;
-        this.workHours = new ArrayList<>(); // Αρχικοποίηση λίστας
-        // Δημιουργία του SecurityLevel αντικειμένου εδώ, με βάση το layer
+        this.workHours = new ArrayList<>(); // initial list
+        // Creation of Security Level object based on the 4 Security Layers
         this.securityLevel = new SecurityLevel(initialLayer);
     }
 
-    // --- Getters ---
+    //  GETTERS
 
     /**
-     * Επιστρέφει το όνομα χρήστη.
+     *
      * @return το username.
      */
     public String getUsername() {
@@ -48,54 +48,48 @@ public abstract class User {
     }
 
     /**
-     * Επιστρέφει τον (μη κρυπτογραφημένο) κωδικό πρόσβασης.
-     * @return τον κωδικό πρόσβασης.
+     *
+     * @return the password
      */
     public String getPassword() {
-        // Σημείωση: Η επιστροφή του password έτσι δεν είναι ασφαλής πρακτική.
-        // Συνήθως θα είχαμε μέθοδο checkPassword(String attempt).
+
         return password;
     }
 
     /**
-     * Επιστρέφει το αντικείμενο SecurityLevel του χρήστη.
-     * @return το SecurityLevel.
+     * returns the object Security Level
+     * @return the SecurityLevel.
      */
     public SecurityLevel getSecurityLevel() {
         return securityLevel;
     }
 
     /**
-     * Επιστρέφει τη λίστα ωρών εργασίας.
-     * @return ArrayList για τις ώρες εργασίας.
+     * Returning the list of working hours.
+     * @return ArrayList for working hours.
      */
     public ArrayList<Object> getWorkHours() {
         return workHours;
-        // Σημείωση: Η επιστροφή της λίστας απευθείας επιτρέπει εξωτερική τροποποίηση.
-        // Καλύτερα: return new ArrayList<>(workHours); ή παροχή μεθόδων add/remove workHour.
     }
 
 
-    // --- Setters ---
+    //  SETTERS
 
     /**
-     * Ορίζει έναν νέο κωδικό πρόσβασης.
-     * @param newPassword Ο νέος κωδικός.
+     * Defines a new password
+     * @param newPassword the new password
      */
     public void setPassword(String newPassword) {
         if (newPassword == null || newPassword.isEmpty()) {
-            System.err.println("Warning: Attempted to set an empty password for user " + this.username);
-            // ή throw new IllegalArgumentException("Password cannot be empty.");
-            return;
+                throw new IllegalArgumentException("Failed to change password, please Try Again!");
         }
         this.password = newPassword;
     }
 
     /**
-     * Ορίζει ένα νέο επίπεδο ασφαλείας.
-     * Σημείωση: Ο έλεγχος δικαιωμάτων για το *ποιος* μπορεί να καλέσει αυτή τη μέθοδο
-     * πρέπει να γίνεται *πριν* την κλήση της (π.χ., στην UserList.updateUser).
-     * @param securityLevel Το νέο αντικείμενο SecurityLevel.
+     * The credential's check should be investigated before this method get called.
+     * e.g. UserList.udateUser
+     * @param securityLevel The new object SecurityLayer.
      */
     public void setSecurityLevel(SecurityLevel securityLevel) {
         if (securityLevel == null) {
@@ -105,60 +99,60 @@ public abstract class User {
     }
 
     /**
-     * Ορίζει ένα νέο username.
-     * ΠΡΟΣΟΧΗ: Αν το username είναι κλειδί σε λίστες, αυτή η αλλαγή
-     * μπορεί να προκαλέσει προβλήματα αν δεν γίνει σωστή διαχείριση.
+     * Sets a new Username
      * @param newUsername Το νέο username.
      */
     public void setUsername(String newUsername) {
         if (newUsername == null || newUsername.trim().isEmpty()) {
             throw new IllegalArgumentException("Username cannot be empty.");
         }
-        // Εδώ θα χρειαζόταν έλεγχος μοναδικότητας αν καλείται αφού ο χρήστης είναι σε λίστα
         this.username = newUsername.trim();
     }
 
     // --- Abstract Methods ---
 
     /**
-     * Αφηρημένη μέθοδος για τη λήψη του κύριου ονόματος του χρήστη (π.χ. "Γιώργος").
-     * Πρέπει να υλοποιηθεί από τις υποκλάσεις.
-     * @return το όνομα.
+     * Abstract method for getting User's first name.
+     * @return name.
      */
     public abstract String getName();
 
-    // --- Other Methods ---
+    //  OTHER METHODS
 
     /**
-     * Εκτυπώνει βασικές πληροφορίες του χρήστη. Μπορεί να γίνει override από υποκλάσεις.
+     * Prints basic information of the user. It can be overrided from the subclasses.
      */
     public void printUser() {
-        System.out.println("--- User Info ---");
+        System.out.println("--- USER INFO ---");
         System.out.println("Username: " + this.username);
-        // System.out.println("Password: [Protected]"); // Καλύτερα να μην τυπώνουμε τον κωδικό
         if (this.securityLevel != null) {
             System.out.println("Security Level: " + this.securityLevel.getLayer());
         } else {
             System.out.println("Security Level: Not Set");
         }
-        // Δεν τυπώνουμε όλη τη λίστα workHours εδώ συνήθως
         System.out.println("-----------------");
     }
 
     /**
-     * Ελέγχει αν αυτός ο χρήστης μπορεί να ενημερώσει έναν άλλο χρήστη.
-     * Απλά καλεί την αντίστοιχη μέθοδο του SecurityLevel.
-     * @param targetUser Ο χρήστης που πρόκειται να ενημερωθεί.
-     * @return true αν επιτρέπεται, false αλλιώς.
+     * Checks if this user can update another user.
+     * It calls the canUpdateUser from SecurityLevel
+     * @param targetUser The targeted user for updates.
+     * @return True if the performer User has the credentials, false if not
      */
     public boolean canUpdateUser(User targetUser) {
-        // Ο έλεγχος γίνεται από το SecurityLevel αυτού του χρήστη ('this')
-        if (this.securityLevel == null) return false; // Ασφάλεια αν δεν έχει οριστεί επίπεδο
+        // The check is being implemented by this user ('this')
+        if (this.securityLevel == null) {    //Small security check
+            return false;
+        }
+
         return this.securityLevel.canUpdateUser(this, targetUser);
     }
 
-    // Θα μπορούσες να προσθέσεις και άλλες μεθόδους can[Action] εδώ,
-    // καλώντας τις αντίστοιχες του securityLevel αντικειμένου.
+    /**
+     * Calling a method from SecurityLevel for the securityLevel object.
+     * @param isCritical if the operation is critical or not
+     * @return true if after the check the user can Manage the Products, false if not.
+     */
     public boolean canManageProducts(boolean isCritical) {
         if (this.securityLevel == null) return false;
         return this.securityLevel.canManageProducts(this, isCritical);

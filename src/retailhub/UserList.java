@@ -5,13 +5,19 @@ import java.util.Iterator;
 
 
 public class UserList {
+
     private ArrayList<User> userList;
 
     public UserList() {
+
         this.userList = new ArrayList<User>();
     }
 
-    // Create User to the list.
+    /**
+     * Method for creating a new User
+     * @param user
+     * @return
+     */
 
     public boolean addUser(User user) {
         if (findUser(user.getUsername()) != null) {
@@ -24,21 +30,27 @@ public class UserList {
     }
 
     /**
-     * Searching User
+     * Method for searching a user by his Username in a ArrayList<User>
+     * @param usernameToSearch
+     * @return Users Information through printUser() method
      */
-
-    public void searchUser(String usernameToSearch) { // <-- Νέα υπογραφή
-        for (User currentUser : userList) { // Απλή επανάληψη στη λίστα
-            if (currentUser.getUsername().equals(usernameToSearch)) {
+    public void searchUser(String usernameToSearch) {
+        for (User user : userList) { // Απλή επανάληψη στη λίστα
+            if (user.getUsername().equals(usernameToSearch)) {
                 System.out.println("User found:");
-                currentUser.printUser(); // <-- Καλούμε την διορθωμένη printUser
-                return; // Βρέθηκε ο χρήστης, τελειώνει η μέθοδος
+                user.printUser();
+                return;
             }
         }
-        // Η επανάληψη τελείωσε και ο χρήστης δεν βρέθηκε
         System.out.println("User not found: " + usernameToSearch);
     }
 
+
+    /**
+     * Emergency method to find user via their username.
+     * @param username
+     * @return
+     */
     public User findUser(String username) {
         for (User user : userList) {
             if (user.getUsername().equals(username)) {
@@ -48,29 +60,59 @@ public class UserList {
         return null;
     }
 
-    public boolean removeUser(String usernameToDelete, int UserIdToDelete) {
-        User targetUser = findUser(usernameToDelete);
-
-        if (targetUser == null) {
-            System.out.println("Action failed.\n User: " + usernameToDelete + " not found.");
-            return false;
-        } else {
-            userList.remove(targetUser);
-            System.out.println("User: " + usernameToDelete + " has been deleted!");
-            return true;
+    /**
+     * A method that removes a user
+     * @param userToDelete
+     * @return message if removed or not
+     */
+    public void removeUser(String userToDelete){
+        Iterator<User> iterator = userList.iterator();
+        boolean foundAndRemoved = false;
+        while(iterator.hasNext()){
+            User user = iterator.next();
+            if(user.getUsername().equals(userToDelete){
+                iterator.remove();
+                System.out.println("The user : "+userToDelete+" has been removed Successfully!");
+                foundAndRemoved = true;
+                break;
+            }
+            if(!foundAndRemoved){
+            System.out.println("User: "+userToDelete+" is not found!");
+            }
         }
     }
 
+    /**
+     * Method for printing all the objects(users) in a Arraylist<User>
+     */
     public void printList() {
         for (User user : userList) {
             user.printUser();
         }
     }
 
-    public boolean updateUser(User performingUser, // <-- ΠΡΟΣΘΗΚΗ: Ποιος κάνει την αλλαγή;
-                              String usernameToUpdate, String passwordToUpdate, String nameToUpdate,
+
+    /**
+     * Method for Updating users data.
+     * The Security Credentials are being checked inside the method.
+     * @param performingUser     // The user that's trying the operation.(User)
+     * @param usernameToUpdate   // new username(String)
+     * @param passwordToUpdate   // new password(String)
+     * @param nameToUpdate      // new name(String)
+     * @param userIdToUpdate     // new userId(Int)
+     * @param salaryToUpdate    // new gross salary
+     * @param emailToUpdate     // new email(String)
+     * @param addressToUpdate   // new address(String)
+     * @param roleToUpdate      // new role(Role)
+     * @param newSecurityLevel  // new SecurityLevel(SecuirtyLevel)
+     * @return
+     */
+
+    public boolean updateUser(User performingUser, String usernameToUpdate,
+                              String passwordToUpdate, String nameToUpdate,
                               int userIdToUpdate, double salaryToUpdate,
-                              String emailToUpdate, String addressToUpdate, Role roleToUpdate, SecurityLevel newSecurityLevel) {
+                              String emailToUpdate, String addressToUpdate,
+                              Role roleToUpdate, SecurityLevel newSecurityLevel) {
 
         User targetUser = findUser(usernameToUpdate);
 
@@ -120,7 +162,8 @@ public class UserList {
         if(updatedSpecifics){ // Ίσως να θες να αλλάξεις τη λογική εδώ
             System.out.println("User " + usernameToUpdate + " updated successfully by " + performingUser.getUsername());
         } else if (targetUser instanceof User) { // Πάντα θα είναι true αν βρέθηκε
-            System.out.println("User " + usernameToUpdate + " common fields updated by " + performingUser.getUsername() +". Specific type fields possibly not updated if type mismatch in instanceof checks.");
+            System.out.println("User " + usernameToUpdate + " common fields updated by " + performingUser.getUsername()
+                    +". Specific type fields possibly not updated if type mismatch in instanceof checks.");
         }
 
         return true;
