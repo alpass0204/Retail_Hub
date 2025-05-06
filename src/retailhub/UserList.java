@@ -106,7 +106,6 @@ public class UserList {
      * @param newSecurityLevel  // new SecurityLevel(SecuirtyLevel)
      * @return
      */
-
     public boolean updateUser(User performingUser, String usernameToUpdate,
                               String passwordToUpdate, String nameToUpdate,
                               int userIdToUpdate, double salaryToUpdate,
@@ -120,36 +119,33 @@ public class UserList {
             return false;
         }
 
-        // ---> 1. ΕΛΕΓΧΟΣ ΔΙΚΑΙΩΜΑΤΩΝ ΕΝΗΜΕΡΩΣΗΣ <---
-        // Χρησιμοποιούμε την canUpdateUser της SecurityLevel του performingUser
+        // 1) CHECK FOR CREDENTIALS TO UPDATE
+        //  We use the method canUpdateUser from SecurityLevel for the performingUser
+
         if (!performingUser.getSecurityLevel().canUpdateUser(performingUser, targetUser)) {
             System.out.println("Permission Denied: User " + performingUser.getUsername() +
                     " cannot update user " + targetUser.getUsername());
             return false; // Έξοδος αν δεν υπάρχει δικαίωμα
         }
 
-        // ---> 2. ΠΡΟΑΙΡΕΤΙΚΟΣ ΕΛΕΓΧΟΣ: Αλλαγή Security Level <---
-        // Μόνο ο Layer 4 μπορεί να αλλάξει Security Level άλλου (ή και του εαυτού του)
-        // Έλεγξε αν το επίπεδο όντως αλλάζει
+
+
+        // 2) Only layer 4 can change others Security Level.
+
         boolean levelChanging = !targetUser.getSecurityLevel().getLayer().equals(newSecurityLevel.getLayer());
         if (levelChanging && performingUser.getSecurityLevel().getLayer() != SecurityLayer.layer4) {
             System.out.println("Permission Denied: Only Administrators (Layer 4) can change security levels.");
-            // Μπορείς είτε να απορρίψεις όλη την ενημέρωση (return false)
-            // είτε να επιτρέψεις τις άλλες αλλαγές αλλά όχι του security level
-            // (πιο απλό είναι να το απορρίψεις εδώ)
             return false;
         }
 
-        // Αν οι έλεγχοι περάσουν, συνέχισε με τις ενημερώσεις:
+        // If checks are being passed, user can continue to Update other data
         targetUser.setPassword(passwordToUpdate);
-        if (levelChanging) { // Άλλαξε το level μόνο αν επιτρέπεται (ή αν δεν άλλαζε מלכתחילה)
+        if (levelChanging) { //Change level if only user has permission
             targetUser.setSecurityLevel(newSecurityLevel);
         } else if (!levelChanging) {
-            // Αν προσπαθούσε να αλλάξει επίπεδο χωρίς δικαίωμα, αλλά τα υπόλοιπα πεδία
-            // θέλουμε να ενημερωθούν, δεν κάνουμε τίποτα εδώ για το SecurityLevel.
-            // Αν όμως η προηγούμενη συνθήκη έκανε 'return false', δεν φτάνουμε ποτέ εδώ.
-            // Εξαρτάται πώς θα χειριστείς την αποτυχία αλλαγής επιπέδου.
-            // Ας υποθέσουμε ότι αν δεν έχει δικαίωμα να αλλάξει level, δεν γίνεται καμία αλλαγή.
+
+            // We suppose that if User don't have the rights to change Security level then he wont
+            // reach these fields.
         }
 
 
@@ -169,7 +165,10 @@ public class UserList {
     }
 
 
-
+    /**
+     * Calculates the Total Salaries spend
+     * @return
+     */
     public double getTotalSalaryExpenses() {
         double sal = 0;
         for (User user : userList) {
