@@ -14,11 +14,10 @@ public class UserList {
     }
 
     /**
-     * Method for creating a new User
+     * Method for adding a new User.
      * @param user
      * @return
      */
-
     public boolean addUser(User user) {
         if (findUser(user.getUsername()) != null) {
             throw new IllegalArgumentException("You must create a Unique username! ");
@@ -154,12 +153,12 @@ public class UserList {
         }
 
 
-        boolean updatedSpecifics = false;
-        // ... οι instanceof έλεγχοι και οι υπόλοιπες ενημερώσεις ...
-        // (setName, setUserId, setSalary κλπ)
+        boolean updatedSpecifics = false; // flag
+        // (setName, setUserId, setSalary ..)
+        //  the instanceof checks and updates
 
-        // ... εκτύπωση μηνύματος επιτυχίας ...
-        if(updatedSpecifics){ // Ίσως να θες να αλλάξεις τη λογική εδώ
+        // prints Success message
+        if(updatedSpecifics){
             System.out.println("User " + usernameToUpdate + " updated successfully by " + performingUser.getUsername());
         } else if (targetUser instanceof User) { // Πάντα θα είναι true αν βρέθηκε
             System.out.println("User " + usernameToUpdate + " common fields updated by " + performingUser.getUsername()
@@ -169,7 +168,8 @@ public class UserList {
         return true;
     }
 
-    //for 8.1 reports
+
+
     public double getTotalSalaryExpenses() {
         double sal = 0;
         for (User user : userList) {

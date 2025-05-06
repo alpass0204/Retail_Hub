@@ -33,7 +33,6 @@ public class SecurityLevel{
     public SecurityLayer getLayer(){
         return this.layer;
     }
-
     /**
      *
      * @param newLayer
@@ -107,7 +106,6 @@ public class SecurityLevel{
      * @param isCritical  (BOOLEAN) Whether the action trying to operate is Critical/Not Critical
      * @return true if the operation is allowed, false otherwise
      */
-
     public boolean canManageProducts(User userPerformer, boolean isCritical){
         if (userPerformer == null){
             return false;

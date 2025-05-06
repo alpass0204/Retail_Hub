@@ -25,7 +25,6 @@ public class Employee extends User {
      * @param initialLayer  Security Access Level     (User class)
      * @param name          First name of employee
      * @param lastName      Second name of employee
-     * @param userId        ID of employee
      * @param salary        Salary of employee
      * @param email         Email address of employee
      * @param address       Address of employee

@@ -30,6 +30,7 @@ public class Customer {
 	 * @param phone // Of Customer
 	 * @param gender // Of Customer
 	 * @param age // Of Customer
+	 *  The main idea is that Customers can be found by their phone or email which are unique.
 	 */
 	public Customer(String name, String email, String phone, String gender, int age) {
 		this.customerId = id++;
@@ -41,18 +42,6 @@ public class Customer {
 		this.loyaltyPoints = 0;
 	}
 
-	/**
-	 * Second Constructor that creates a new instance of Customer with 1 parameter:
-	 * @param name
-	 */
-	public Customer(String name) {
-		this.customerId = id++;
-		this.name = name;
-		this.loyaltyPoints = 0;
-/*		this.email = "n/a" etc
- * 		
- */
-	}
 	
 	//Constructor which loyalty points are given by the user
 	public Customer (String name, String email, String phone, String gender, int age, int loyaltyPoints) {
@@ -62,7 +51,7 @@ public class Customer {
 		this.phone = phone;
 		this.gender = gender;
 		this.age = age;
-		this.loyaltyPoints = 0;
+		this.loyaltyPoints = loyaltyPoints;
 		
 	}
 
@@ -90,7 +79,7 @@ public class Customer {
     }
 
 	// METHODS FOR EMAIL
-	
+
 	public String getEmail() {
         return email;
     }
@@ -100,7 +89,7 @@ public class Customer {
     }
 
 	//METHODS FOR PHONE
-	
+
 	public String getPhone() {
         return phone;
     }
@@ -110,7 +99,7 @@ public class Customer {
     }
 
 	//METHODS FOR GENDER
-	
+
 	public String getGender() {
         return gender;
     }
@@ -120,7 +109,7 @@ public class Customer {
     }
 
 	//METHODS FOR AGE
-	
+
 	public int getAge() {
         return age;
     }
@@ -130,7 +119,7 @@ public class Customer {
     }
 
 	//METHODS FOR LOYALTY POINTS
-	
+
 	public int getLoyaltyPoints() {
         return loyaltyPoints;
     }
