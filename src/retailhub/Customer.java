@@ -74,8 +74,13 @@ public class Customer {
         return name;
     }
 	
-	public void setName(String name) {
-        this.name = name;
+	public void setName(String newName) {
+		if(newName.trim() != null && !newName.trim().isEmpty()){
+			this.name = newName;
+		}
+		else{
+			System.err.println("Attempted to set a null name for the customer.");
+		}
     }
 
 	// METHODS FOR EMAIL
@@ -84,8 +89,13 @@ public class Customer {
         return email;
     }
 	
-	public void setEmail(String email) {
-        this.email = email;
+	public void setEmail(String newEmail) {
+		if(newEmail.trim() != null && !newEmail.trim().isEmpty()){
+			this.email = newEmail;
+		}
+		else{
+			System.err.println("Attempted to set a null email for the customer.");
+		}
     }
 
 	//METHODS FOR PHONE
@@ -94,8 +104,13 @@ public class Customer {
         return phone;
     }
 	
-	public void setPhone(String phone) {
-        this.phone = phone;
+	public void setPhone(String newPhone) {
+        if(newPhone.trim() != null && !newPhone.trim().isEmpty()){
+			this.phone = newPhone;
+		}
+		else{
+			System.err.println(newPhone+" is an invalid phone number form.");
+		}
     }
 
 	//METHODS FOR GENDER
@@ -114,8 +129,13 @@ public class Customer {
         return age;
     }
 	
-	public void setAge(int age) {
-        this.age = age;
+	public void setAge(int newAge) {
+        if(age > 0 ){
+			this.age = newAge;
+		}
+		else{
+			System.err.println(+newAge+" is an Invalid age.");
+		}
     }
 
 	//METHODS FOR LOYALTY POINTS
@@ -129,7 +149,12 @@ public class Customer {
 	 * @param newLoyaltyPoints
 	 */
 	public void setLoyaltyPoints(int newLoyaltyPoints) {
-        this.loyaltyPoints = newLoyaltyPoints;
+       if(newLoyaltyPoints >= 0) {
+		   this.loyaltyPoints = newLoyaltyPoints;
+	   }
+	   else{
+		   System.err.println("Attempted to set negative loyatly points: "+newLoyaltyPoints);
+	   }
     }
 	
 	//Prints all customer information
