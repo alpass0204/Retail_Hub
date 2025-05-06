@@ -62,6 +62,8 @@ public class Supplier {
 
 	//SETTER AND GETTERS FOR SUPPLIERS FIELDS
 
+	//METHODS FOR taxId
+
 	public int getTaxId() {
 		return taxId;
 	}
@@ -69,6 +71,8 @@ public class Supplier {
 	public void setTaxId(int taxId) {
 		this.taxId = taxId;
 	}
+
+	//METHODS FOR brandName
 
 	public String getBrandName() {
 		return brandName;
@@ -78,6 +82,8 @@ public class Supplier {
 		this.brandName = brandName;
 	}
 
+	//METHODS FOR address
+
 	public String getAddress() {
 		return address;
 	}
@@ -86,6 +92,8 @@ public class Supplier {
 		this.address = address;
 	}
 
+	//METHODS FOR phone
+
 	public String getPhone() {
 		return phone;
 	}
@@ -93,6 +101,8 @@ public class Supplier {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	//METHODS FOR email
 
 	public String getEmail() {
 		return email;

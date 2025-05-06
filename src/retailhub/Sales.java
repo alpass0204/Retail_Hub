@@ -4,16 +4,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Shows a sale transaction, with items sold, customer, total amount, payment method
+ */
+
 public class Sales {
-	private int salesId;
-	private LocalDate date = LocalDate.now();
-	private LocalTime time = LocalTime.now();
-	private double totalamount;
+	private int salesId; // Unique salesID
+	private LocalDate date = LocalDate.now(); // Date of sale
+	private LocalTime time = LocalTime.now(); // Time of sale
+	private double totalamount; // Total amount of sale
 	private ArrayList<SaleItem> items; //the list of sold products per sale
-	private PaymentMethod paymentMethod;
-	private Customer customer;
+	private PaymentMethod paymentMethod; // Method of payment used
+	private Customer customer; // customer who made the purchase
 	//private double discountApplied = 0.0;
-	
+
+	//Payment methods available
+
 	public enum PaymentMethod {
 		CASH,
 		CREDIT_CARD,
@@ -21,29 +27,39 @@ public class Sales {
 		TRANSFER,
 		MOBILE_PAY
 	}
-	
+
+	/**
+	 * CONSTRUCTOR FOR CREATING A SALE TRANSACTION
+	 * @param salesId Unique ID of the sale
+	 * @param items List of sale items
+	 * @param paymentMethod Payment method
+	 * @param customer Customer making the purchase
+	 */
+
 	public Sales(int salesId, ArrayList<SaleItem> items, PaymentMethod paymentMethod, Customer customer) {
 		
 		this.salesId = salesId;
 		this.items = new ArrayList<SaleItem>(items);
 		this.paymentMethod = paymentMethod;
 		this.customer = customer;
-		sumTotal();
+		sumTotal(); //Calculate total before discounts
+
 		//loyalty points
+
 		if (customer != null) {
-			double discount = customer.redeemAllPoints(); //redeem to receive the discount
-			customer.addPoints(((int) totalamount) / 5); // add point to customer
-			customer.printLoyaltyPoints(); // print customer's points
-			this.totalamount -= discount;
+			double discount = customer.redeemAllPoints(); //redeem to receive the discount from points
+			customer.addPoints(((int) totalamount) / 5); // add point to customer (1 per 5 euro)			customer.printLoyaltyPoints(); // print customer's points
+			this.totalamount -= discount; // apply discount to total
 		}
 
 
 	}
 
+	//GETTERS
+
 	public int getSalesId() {
 		return salesId;
 	}
-
 
 	public String getDate() {
 		return LocalDate.now().toString();
@@ -56,6 +72,8 @@ public class Sales {
 	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
 	}
+
+	//SETTERS
 
 	public void setPaymentMethod(PaymentMethod paymentMethod) {
 		this.paymentMethod = paymentMethod;
@@ -74,6 +92,7 @@ public class Sales {
 	}**/
 	
 	//method with which we access the whole list of sold products and we add each product's price to sum
+
 	public void sumTotal() {
 		double sum = 0;
 		for(SaleItem i:items) {
@@ -83,14 +102,19 @@ public class Sales {
 	}
 
 	//add sold product and call method sumtotal in order to add the amount in the totalamount
+
 	public void addItem(SaleItem i) {	
 		items.add(i);
 		sumTotal();
 		i.getProduct().decreaseStock(i.getQuantity()); //decrease stock when we make a sale
 		i.getProduct().notificationForLowStock();
 	}
-	
-	//remove product only when this products exists
+
+	/**
+	 * Removes an item from the sale if it exists, updates total
+	 * @param item The SaleItem to remove
+	 */
+
 	public void removeItem(SaleItem item) {  //The if statement ensures that sumTotal() is only called if the  SaleItem was actually removed from the items collection.
 	    if (items.remove(item)) {
 	        sumTotal();
@@ -98,7 +122,9 @@ public class Sales {
 	}
 	
 	public String receipt() {
+
 	    // At first we have the header
+
 	    String receipt = 
 	          "=== RECEIPT ===\n"
 	        + "Sale ID: " + salesId + "\n"
@@ -107,11 +133,13 @@ public class Sales {
 	        + "Items  : " + items;
 	    
 	    // 2) Add each product to the receipt
+
 	    for (SaleItem i : items) {
 	        receipt +=  "  - " + i.getName() + " x" + i.getQuantity() + " @ " + i.getPrice() + "\n";
 	    }
 	    
-	    // 3) Payment method and total amount 
+	    // 3) Payment method and total amount
+
 	    receipt += 
 	          "Payment: " + paymentMethod + "\n"
 	        + "-----------------\n"
@@ -119,7 +147,9 @@ public class Sales {
 	    
 	    return receipt;
 	}
-	
+
+	//Summary of sale
+
 	public String toString() {
 		return "Sale{" +
 	               "idSale='" + salesId + '\'' +
@@ -130,6 +160,7 @@ public class Sales {
 	               '}';
 	}
 	// The returnItem method
+
 	public void returnItem(SaleItem item) {
 		if (items.contains(item)) {
 			items.remove(item); // Remove the item from the sale

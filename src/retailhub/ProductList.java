@@ -2,9 +2,13 @@ package retailhub;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Manages a list of products available in the store
+ * Supports adding, removing, updating, searching, printing products
+ */
 
 public class ProductList {
-    private ArrayList<Product> products;
+    private ArrayList<Product> products; // List storing all products
 
     /**
      * Constructor for list of products.
@@ -41,9 +45,10 @@ public class ProductList {
 
     /**
      * Method for searching product in the list through ID.
-     * @param id
-     * @return
+     * @param id the product ID to search for
+     * @return the product if found, otherwise null
      */
+
     public Product searchProducts(int id){
         if(id<=0){
             //System.out.println("Give a valid ID number");
@@ -69,13 +74,14 @@ public class ProductList {
     }
 
     /**
-     * Method for updating fields of products.
-     * @param id
-     * @param newName
-     * @param newCategory
-     * @param Price
-     * @param newStock
+     * Method for updating a product's name, category, price, and stock
+     * @param id ID of the product to be updated
+     * @param newName New product name
+     * @param newCategory New product category
+     * @param Price New purchase price
+     * @param newStock New stock quantity
      */
+
     public void updateProduct(int id, String newName, String newCategory, double Price, int newStock){
         for(Product product : products){
             if(product.getProductId() == id){
@@ -93,11 +99,12 @@ public class ProductList {
 
     /**
      * Method for creating a product and adding it directly to the product list.
-     * @param productId
-     * @param name
-     * @param category
-     * @param price
-     * @param stock
+     * Makes sure product is unique
+     * @param productId Product ID
+     * @param name Product name
+     * @param category Product category
+     * @param price Purchase price
+     * @param stock Initial stock
      */
     public void createProduct(int productId, String name, String category, double price, int stock) {
         for (Product product : products) {

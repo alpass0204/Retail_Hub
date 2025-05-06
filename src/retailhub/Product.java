@@ -1,7 +1,9 @@
 package retailhub;
 
-
-
+/**
+ * Represents a product available in the store
+ * Includes all necessary product details and stock
+ */
 
 public class Product{
     // Product's ID
@@ -45,7 +47,7 @@ public class Product{
     }
 
     /**
-     * Constructor χωρίς supplier
+     * Constructor without supplier
      */
     public Product(int productId, String name, String category, double purchasePrice, double sellPrice, int stock) {
         this(productId, name, category, purchasePrice, sellPrice, stock, null, 0);
@@ -190,6 +192,7 @@ public class Product{
         this.stock -= quantity;
         notificationForLowStock();
     }
+    // Prints a warning if the current stock is below the notification limit
 
     public void notificationForLowStock() {
         if(this.stock < notificationStock) {
