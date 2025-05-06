@@ -1,11 +1,6 @@
 package retailhub;
 
-import retailhub.Role;
-import retailhub.SecurityLayer;
-
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import retailhub.Sales.PaymentMethod;
 
 public class Main {
@@ -322,9 +317,12 @@ public class Main {
       System.out.println("\n=== Final Order List ===");
       orderList.printAllOrders();  */
 
-		Customer c1 = new Customer("Alex", "asasq","14351","male",25);
-		c1.addPoints(100);
-		Supplier supplier = new Supplier(32,"324","3214","2311","23",true);
+
+		//TESTING SALES
+
+		Customer c1 = new Customer("Alex", "asasq","14351","male",25); //CREATE CUSTOMERS
+		c1.addPoints(100); //ADD LOYALTY POINTS
+		Supplier supplier = new Supplier(32,"324","3214","2311","23",true); //CREATE NEW SUPPLIER
 		Product p1 = new Product(14,"NS", "1r4",12.23,21.32,5000,supplier,5);
 		ArrayList<SaleItem> items = new ArrayList<>();
 		SaleItem si1 = new SaleItem(p1,125);

@@ -36,6 +36,7 @@ public class SalesList {
         }
         if (productStock) {
             System.out.println("Sale added successfully.");
+            sales.add(sale);
         }
     }
 
