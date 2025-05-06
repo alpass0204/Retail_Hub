@@ -123,14 +123,18 @@ public abstract class User {
      * Prints basic information of the user. It can be overrided from the subclasses.
      */
     public void printUser() {
-        System.out.println("--- USER INFO ---");
-        System.out.println("Username: " + this.username);
+        //System.out.println("--- USER INFO ---");
+       //System.out.println("Username: " + this.username);
         if (this.securityLevel != null) {
-            System.out.println("Security Level: " + this.securityLevel.getLayer());
-        } else {
-            System.out.println("Security Level: Not Set");
+            //System.out.println("Security Level: " + this.securityLevel.getLayer());
         }
-        System.out.println("-----------------");
+        else {
+            //System.out.println("Security Level: Not Set");
+        }
+        //System.out.println("-----------------");
+        System.out.println("--- Employee Details ---");
+        System.out.println("username: " + this.username);
+        System.out.println("password: " + "*************");
     }
 
     /**

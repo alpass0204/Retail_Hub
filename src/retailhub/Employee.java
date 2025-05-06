@@ -9,7 +9,8 @@ public class Employee extends User {
     // Πεδία ΜΟΝΟ για τον Employee
     private String name;
     private String lastName;
-    private int userId; // Θεωρούμε ότι παραμένει μοναδικό ID
+    private static int id = 1;
+    private int userId; //   ============ NA MPEI STATIC =============
     private double salary;
     private String email;
     private String address;
@@ -23,14 +24,13 @@ public class Employee extends User {
      * @param initialLayer  Το αρχικό SecurityLayer (για την User).
      * @param name          Το όνομα του υπαλλήλου.
      * @param lastName      Το επώνυμο του υπαλλήλου.
-     * @param userId        Το ID του υπαλλήλου.
      * @param salary        Ο μισθός.
      * @param email         Το email.
      * @param address       Η διεύθυνση.
      * @param role          Ο ρόλος (από το enum Role).
      */
-    public Employee(String username, String password, SecurityLayer initialLayer,
-                    String name, String lastName, int userId, double salary, String email,
+    public Employee(String username, String password,  SecurityLayer initialLayer,
+                    String name, String lastName, double salary, String email,
                     String address, Role role) {
 
         // 1. Κλήση του constructor της υπερκλάσης User
@@ -39,8 +39,7 @@ public class Employee extends User {
         // 2. Αρχικοποίηση των πεδίων της κλάσης Employee
         this.name = name;
         this.lastName = lastName;
-        // TODO: Έλεγχος μοναδικότητας για userId; (Ίσως σε επίπεδο UserList)
-        this.userId = userId;
+        this.userId = id++;
         this.salary = salary;
         this.email = email;
         this.address = address;
@@ -120,7 +119,7 @@ public class Employee extends User {
         // Κάλεσε τη βασική εκτύπωση της User
         super.printUser();
         // Πρόσθεσε την εκτύπωση των πεδίων του Employee
-        System.out.println("--- Employee Details ---");
+        //System.out.println("--- Employee Details ---");
         System.out.println("Full Name: " + this.name + " " + this.lastName);
         System.out.println("User ID: " + this.userId);
         System.out.println("Role: " + this.role);

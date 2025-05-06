@@ -70,7 +70,7 @@ public class UserList {
         boolean foundAndRemoved = false;
         while(iterator.hasNext()){
             User user = iterator.next();
-            if(user.getUsername().equals(userToDelete){
+            if(user.getUsername().equals(userToDelete)){
                 iterator.remove();
                 System.out.println("The user : "+userToDelete+" has been removed Successfully!");
                 foundAndRemoved = true;

@@ -11,6 +11,33 @@ import retailhub.Sales.PaymentMethod;
 public class Main {
 
 	public static void main(String[] args) {
+
+		// Authentication class testing.
+		// User loging in with 3 attempts, method finds user and types password
+		Scanner in = new Scanner(System.in);
+		Employee e1 = new Employee("kwstas", "willie", SecurityLayer.layer2,
+				"jane", "doe", 3.13, "uom@2323.gr",
+				"toumpa", Role.accountant);
+		e1.printUser();
+		UserList userList = new UserList();
+		userList.addUser(e1);
+		userList.printList();
+
+		Authentication.login("kwstas", userList);
+
+
+		/*
+
+
+
+
+
+
+
+
+
+
+
 		//TESTING CRUD FOR SUPPLIER AND SUPPLIERLIST
 
 		//CREATION OF SUPPLIER LIST FOR STORAGE OF SUPPLIERS
@@ -178,21 +205,21 @@ public class Main {
 
 
 		//CustomerList Testing
-		CustomerList list = new CustomerList();
+	//	CustomerList list = new CustomerList();
 
 		//Δημιουργία πελατών
-		list.createCustomer(001, "Maria", "maria@mail.com", "6912345678", "neutral", 150, 0);
-		list.createCustomer(002, "Herrer", "her@mail.com", "6912323278", "neutral", 10, 0);
+	//	list.createCustomer(001, "Maria", "maria@mail.com", "6912345678", "neutral", 150, 0);
+	//	list.createCustomer(002, "Herrer", "her@mail.com", "6912323278", "neutral", 10, 0);
 
 		//Εκτύπωση όλων
 		// list.printList();
 
 		// Προσθήκη πελάτη
-		Customer Giannis= new Customer("Giannis", "Giannis@gmail.com","6945678912","Male",35,90);
-		Customer Ilias= new Customer("Ilias", "iliass@gmail.com","6945678912","Male",35,90);
-		list.addCustomerToList(Giannis);
-		list.addCustomerToList(Ilias);
-		list.printList();
+	//	Customer Giannis= new Customer("Giannis", "Giannis@gmail.com","6945678912","Male",35,90);
+	//	Customer Ilias= new Customer("Ilias", "iliass@gmail.com","6945678912","Male",35,90);
+	//	list.addCustomerToList(Giannis);
+	//	list.addCustomerToList(Ilias);
+	//	list.printList();
 
         // Αναζήτηση πελάτ
 		/**

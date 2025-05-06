@@ -1,6 +1,6 @@
 package retailhub;
 
-public enum SecurityLayer{
+public enum SecurityLayer {
     layer1,
     layer2,
     layer3,
