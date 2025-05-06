@@ -3,32 +3,52 @@ package retailhub;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Manage a list of Customer
+ * Operations: add, search, update, remove, print
+ */
+
 public class CustomerList {
 
-	private ArrayList<Customer> customers;
+	private ArrayList<Customer> customers; //List of all customer
+
+	/**
+	 * Constructor initializing the list of customers
+	 */
 
 	public CustomerList() {
 		this.customers = new ArrayList<Customer>();
 	}
 
+	/**
+	 * Returns the list of customers
+	 */
+
 	public ArrayList<Customer> getAllCustomers() {
 		return customers;
 	}
 
+	/**
+	 * Adds a new customer to the list
+	 */
 	public void addCustomerToList(Customer c) {
 		customers.add(c);
 	}
 
 	/**
-	 *
-	 * @param name
-	 * @param email
-	 * @param phone
-	 * @param gender
-	 * @param age
+	 * Creates a new customer and adds them to the list if email or phone is unique
+	 * @param name Customer name
+	 * @param email Customer email
+	 * @param phone Customer phone
+	 * @param gender Customer gender
+	 * @param age Customer age
 	 */
+
 	public void createCustomer(String name, String email, String phone, String gender, int age) {
-		boolean foundAndAdded = false; // Adding a flag
+		boolean foundAndAdded = false; // Adding a flag if duplicate found
+		/**
+		 * Check if customer already exists by email or phone
+		 */
 		for(Customer allreadyCustomer : customers) {
 			if(allreadyCustomer.getEmail() != null && allreadyCustomer.getEmail().toLowerCase().trim().equals(email.toLowerCase().trim())) {
 				foundAndAdded = true; // Duplicated user found and skipped
@@ -39,6 +59,9 @@ public class CustomerList {
 				break;
 			}
 		}
+		/**
+		 * If no duplicate, add new customer
+		 */
 
 		if(!foundAndAdded) {
 			Customer newCustomer = new Customer(name,email,phone,gender, age);
@@ -47,6 +70,12 @@ public class CustomerList {
 		}
 
 	}
+
+	/**
+	 * Finds a customer based on email
+	 * @param email Customer email
+	 * @return customer if found, otherwise null
+	 */
 
 	public Customer getCustomerByEmail(String email) {
 		for (Customer c : customers) {
@@ -58,7 +87,15 @@ public class CustomerList {
 		}
 		System.out.println("Customer not found");
 		return null;
+
 	}
+
+	/**
+	 * Finds a customer based on phone
+	 * @param phone customer
+	 * @return Customer if found , otherwise null
+	 */
+
 	public Customer getCustomerByPhone(String phone) {
 		for (Customer c : customers) {
 
@@ -71,6 +108,11 @@ public class CustomerList {
 		return null;
 	}
 
+	/**
+	 * Removes a customer from the list using their email address
+	 * @param email of the customer to remove
+	 */
+
 	public void removeCustomer(String email) {
 		Customer c = getCustomerByEmail(email);
 		if (c != null) {
@@ -80,6 +122,17 @@ public class CustomerList {
 			System.out.println("No such Email exists. Please try again.");
 		}
 	}
+
+	/**
+	 * Updates the customer info using their email as q unique identifier
+	 * @param name New name
+	 * @param email used to identify the customer
+	 * @param phone New phone
+	 * @param gender New gender
+	 * @param age New age
+	 * @param loyaltyPoints New loyalty points
+	 * @return TRUE if customer is found and updated, FALSE otherwise
+	 */
 
 	public boolean updateCustomer(String name, String email, String phone, String gender, int age, int loyaltyPoints) {
 		for (Customer c : customers) {
@@ -95,6 +148,8 @@ public class CustomerList {
 		System.out.println("This customer does not exist. Please enter a valid ID!");
 		return false;
 	}
+
+	// Prints all customers in the list
 
 	public void printList() {
 		for (Customer c : customers) {

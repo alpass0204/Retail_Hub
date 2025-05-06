@@ -322,6 +322,20 @@ public class Main {
       System.out.println("\n=== Final Order List ===");
       orderList.printAllOrders();  */
 
+		Customer c1 = new Customer("Alex", "asasq","14351","male",25);
+		c1.addPoints(100);
+		Supplier supplier = new Supplier(32,"324","3214","2311","23",true);
+		Product p1 = new Product(14,"NS", "1r4",12.23,21.32,5000,supplier,5);
+		ArrayList<SaleItem> items = new ArrayList<>();
+		SaleItem si1 = new SaleItem(p1,125);
+		items.add(si1);
+		SalesList sL1 = new SalesList();
+		Sales s1 = new Sales(123,items,PaymentMethod.DEBIT_CARD,c1);
+		sL1.addSaleToList(s1);
+
+		System.out.println(s1.toString());
+		sL1.printAllSales();
+		
 
 	}
 }

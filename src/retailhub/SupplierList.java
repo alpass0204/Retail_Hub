@@ -3,21 +3,26 @@ package retailhub;
 
 import java.util.ArrayList;
 
+/**
+ * Manages a list of suppliers for the retail system
+ * You can add, update, print the suppliers
+ */
 
 public class SupplierList {
 	
-	private ArrayList<Supplier> suppliers;
+	private ArrayList<Supplier> suppliers; // List of all suppliers
 	
 	/**
-	 * Constructor για την λιστα προμηθευτων
+	 * CONSTRUCTOR initializing the supplier list
 	 */
+
 	public SupplierList() {
 		this.suppliers = new ArrayList<Supplier>();
 	}
 	
 	/**
-	 * Μέθοδος προσθηκης supplier στη λιστα (προαιρετικο)
-	 * @param s
+	 * Adds a supplier to the list
+	 * @param s Supplier to be added
 	 */
 	public void addSupplier(Supplier s) {
 		suppliers.add(s);
@@ -25,13 +30,13 @@ public class SupplierList {
 	}
 	
 	/**
-	 * Δημιουργια supplier και καταχωριση του στη λιστα σε μια μεθοδο (με αποθηκευση και ελεγχο)
-	 * @param taxId
+	 * Creating a supplier and adding it to the list
+	 * @param taxId Suppliers VAT number
 	 * @param brandName
 	 * @param phone
 	 * @param address
 	 * @param email
-	 * @return
+	 * @return TRUE if supplier was found, FALSER otherwise
 	 */
 	/*public boolean createSupplier(int taxId, String brandName, String phone, String address, String email) {
 		if(getSupplierByVat(taxId) != 0) {
@@ -46,7 +51,7 @@ public class SupplierList {
 	*/
 		
 	/**
-	 * Αφαίρεση supplier εφοσον το ΑΦΜ του υπαρχει
+	 * Remove supplier if VAT already exists
 	 * @param taxId
 	 */
 	/*public void removeSupplier(String taxId) {
@@ -62,7 +67,7 @@ public class SupplierList {
 	}
 	*/
 	/**
-	 *  Αναζήτηση supplier βαση του ΑΦΜ του. Αν τον βρει, καλουμε μεθοδους set για να αλλαξουμε στοιχεια
+	 * Search supplier based on VAT. If it is  found, we call set methods to change data
 	 * @param taxId
 	 * @param brandName
 	 * @param phone
@@ -87,7 +92,7 @@ public class SupplierList {
 
 
 	/**
-	 * Εκτύπωση ολων των Suppliers στη λιστα
+	 * PRINTS all suppliers in the list
 	 */
 	public void printList() {
 		for(Supplier i: suppliers) {
@@ -95,7 +100,7 @@ public class SupplierList {
 		}
 	}
 	/**
-	 * Ελεγχος αν υπαρχει ενα ΑΦΜ ηδη στη λιστα Suppliers
+	 * Check if a VAT number already exists in Suppliers List
 	 * @param taxId
 	 * @return
 	 */
@@ -110,7 +115,7 @@ public class SupplierList {
 	*/
 	
 	/**
-	 * ελεγχος και επιστροφη supplier βαση του ΑΦΜ του
+	 * Check and return supplier based on its VAT
 	 * @param taxId
 	 * @return
 	 */

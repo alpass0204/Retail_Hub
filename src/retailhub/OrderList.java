@@ -2,20 +2,34 @@ package retailhub;
 
 import java.util.ArrayList;
 
-public class OrderList {
-	private ArrayList<Order> orderlist;
+/**
+ * Manages a list of orders made to suppliers
+ * Provides methods to add, remove, update, calculate costs
+ */
 
-	//Constructor
+public class OrderList {
+	private ArrayList<Order> orderlist; // List of all orders
+
+	// CONSTRUCTOR OrderList
+
 	public OrderList() {
 		this.orderlist = new ArrayList<>();
 	}
 
-	//Νέα παραγγελία
+	/**
+	 * Adds a new order to the list
+	 * @param order The order to be added
+	 */
+
 	public void addOrderToList(Order order) {
 		orderlist.add(order);
 	}
 
-	//Εκτυπώνει ολες τις παραγγελίες
+	/**
+	 * Prints all orders in the list
+	 * If list is empty, shows message to user
+	 */
+
 	public void printAllOrders() {
 		if (orderlist.isEmpty()) {
 			System.out.println("No orders have been made yet.");
@@ -31,7 +45,8 @@ public class OrderList {
 		return orderlist.size();
 	}
 
-	//Calculating total order value
+	//Returns the total value of all orders
+
 	public double totalOrderListValue() {
 		double sum = 0;
 		for (Order order : orderlist) {
@@ -40,7 +55,11 @@ public class OrderList {
 		return sum;
 	}
 
-	//Removes an order from list
+	/**
+	 * Removes an order from the list based on its ID
+	 * @param orderId The ID of the order to be removed
+	 */
+
 	public void removeOrderFromList(int orderId) {
 		Order orderToRemove = null;
 		for (Order order : orderlist) {
@@ -57,6 +76,12 @@ public class OrderList {
 			System.out.println("No order found with ID " + orderId + ".");
 		}
 	}
+
+	/**
+	 * Updates the payment method of an order from its ID
+	 * @param orderId The ID of the order
+	 * @param newPaymentMethod New payment method to apply
+	 */
 
 	public void updateOrder(int orderId, Order.PaymentMethod newPaymentMethod) {
 		for (Order order : orderlist) {

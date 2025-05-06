@@ -2,15 +2,25 @@ package retailhub;
 
 import java.util.ArrayList;
 
-public class SalesList {
-    private ArrayList<Sales> sales;
+/**
+ * Manages a list of sales transactions
+ * Provides adding, updating, removing, calculating statistics on sales
+ */
 
-    // Constructor
+public class SalesList {
+    private ArrayList<Sales> sales; // List of all sales
+
+    // CONSTRUCTOR
+
     public SalesList() {
         this.sales = new ArrayList<>();
     }
 
-    // Προσθήκη νέας πώλησης στην λιστα
+    /**
+     * Adds a sale to the list if all items are in stock
+     * @param sale sale to be added
+     */
+
     public void addSaleToList(Sales sale) {
         boolean productStock = true;
         for (SaleItem item : sale.getItemsSold()) {
@@ -29,7 +39,7 @@ public class SalesList {
         }
     }
 
-    // Εκτύπωση όλων των πωλήσεων
+    // Prints all sales in the list
     public void printAllSales() {
         if (sales.isEmpty()) {
             System.out.println("No sales have been made yet.");
@@ -40,7 +50,10 @@ public class SalesList {
         }
     }
 
-    //Removes a sale from the list
+    /**
+     * Removes a sale based on ID
+     * @param salesId ID of the sale to remove
+     */
     public void removeSaleFromTheList(int salesId) {
         Sales saleToRemove = null;
         for (Sales sale : sales) {
@@ -57,7 +70,13 @@ public class SalesList {
             System.out.println("No sale found with ID " + salesId + ".");
         }
     }
-    
+
+    /**
+     * Updates the payment method of a sale
+     * @param salesId sale to update
+     * @param newPaymentMethod Payment method to set
+     */
+
     public void updateSale(int salesId, Sales.PaymentMethod newPaymentMethod) {
         for (Sales sale : sales) {
             if (sale.getSalesId() == salesId) {
@@ -75,17 +94,25 @@ public class SalesList {
         System.out.println("No sale found with ID " + salesId + ".");
     }
 
-    //
+    /**
+     * Returns an item from a sale
+     * @param sale the sale where the return is happening
+     * @param item the item being returned
+     */
     public void returnSaleItem(Sales sale, SaleItem item) {
         sale.returnItem(item);
     }
 
-    // Πόσες πωλήσεις έχουν γίνει
+    //RETURN Total number of sales
+
     public int totalSalesCount() {
         return sales.size();
     }
 
-    //total revenue unit case 8.1
+    /**
+     * Calculates total revenue from all sales
+     * @return revenue amount
+     */
     public double getTotalRevenue() {
         double revenue = 0;
         for (Sales sale : sales) {
