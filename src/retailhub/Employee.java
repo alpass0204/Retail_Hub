@@ -126,14 +126,14 @@ public class Employee extends User {
      */
 
 
-    // --- Override άλλων μεθόδων (π.χ., printUser) ---
+
 
     @Override
     public void printUser() {
         // Call the basic print of User
         super.printUser();
-        // Πρόσθεσε την εκτύπωση των πεδίων του Employee
-        //System.out.println("--- Employee Details ---");
+
+        System.out.println("--- Employee Details ---");
         System.out.println("Full Name: " + this.name + " " + this.lastName);
         System.out.println("User ID: " + this.userId);
         System.out.println("Role: " + this.role);
@@ -143,6 +143,5 @@ public class Employee extends User {
         System.out.println("----------------------");
     }
 
-    // Μπορείς να προσθέσεις κι άλλες μεθόδους ειδικές για τον Employee εδώ.
 
 }
