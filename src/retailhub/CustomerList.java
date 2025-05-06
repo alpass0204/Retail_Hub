@@ -12,6 +12,10 @@ public class CustomerList {
 
 	private ArrayList<Customer> customers; //List of all customer
 
+	private static final SecurityLayer viewCustomer = SecurityLayer.layer1;
+	private static final SecurityLayer manageCustomer = SecurityLayer.layer2; // CRUD
+
+
 	/**
 	 * Constructor initializing the list of customers
 	 */
@@ -24,18 +28,34 @@ public class CustomerList {
 	 * Returns the list of customers
 	 */
 
-	public ArrayList<Customer> getAllCustomers() {
-		return customers;
+	public ArrayList<Customer> getAllCustomers(User performingUser) throws SecurityException{
+		// check for invalid user type
+		if (performingUser.equals(null)){
+			throw new SecurityException("Performing user can't be NULL.");
+		}
+		// check for permisions
+		if(!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)){
+			throw new SecurityException("You "+performingUser+" permission forbidden.");
+		}
+		return new ArrayList<>(customers); // returns a copy
 	}
 
 	/**
 	 * Adds a new customer to the list
 	 */
 	public void addCustomerToList(User performingUser, Customer c) throws SecurityException {
-		if (!performingUser.getSecurityLevel().getLayer().equals(SecurityLayer.layer1)) {
+		// check for invalid user type
+		if(performingUser.equals(null)){
+			throw new SecurityException("Performing user can't be NULL.");
+		}
+		if(c.equals(null)){
+			throw new SecurityException("Customer cant be NULL.");
+		}
+		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) {
 			throw new SecurityException("You do not have the required permission to perform this operation");
 		}
 		customers.add(c);
+		System.out.println("Customer: "+c+" has been added by "+performingUser);
 	}
 
 	/**
@@ -49,27 +69,37 @@ public class CustomerList {
 	 */
 
 	public void createCustomer(User performingUser, String name, String email, String phone, String gender, int age) throws SecurityException {
-		if (!performingUser.getSecurityLevel().getLayer().equals(SecurityLayer.layer1)) {
-			throw new SecurityException("You do not have the required permission to perform this operation");
+		if(performingUser.equals(null)){ //First check: User for null
+			throw new SecurityException("Performing user can't be NULL.");
 		}
-		boolean foundAndAdded = false; // Adding a flag if duplicate found
+		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { //checks if user have the
+			throw new SecurityException("Permission forbidden."); 				   // credentials.
+		}
+		if(name.trim().isEmpty() || email.trim().isEmpty() && phone.trim().isEmpty()){
+			throw new SecurityException("E-mail and Phone cant be NULL");
+		}
+
+
+		boolean foundAndAdded = false; // Adding a flag if duplicate data found
+
 		/**
 		 * Check if customer already exists by email or phone
 		 */
 		for (Customer allreadyCustomer : customers) {
 			if (allreadyCustomer.getEmail() != null && allreadyCustomer.getEmail().toLowerCase().trim().equals(email.toLowerCase().trim())) {
+				System.out.println("Error. This email is being already is use : "+email+" . E-mail must be unique.");
 				foundAndAdded = true; // Duplicated user found and skipped
 				break;
 			}
 			if (allreadyCustomer.getPhone() != null && allreadyCustomer.getPhone().toLowerCase().trim().equals(phone)) {
+				System.out.println("Error. This phone is being already is use : "+email+" . Phone must be unique.");
 				foundAndAdded = true; // Duplicated user found and skipped
 				break;
 			}
 		}
 		/**
-		 * If no duplicate, add new customer
+		 * If check passes, add new customer.
 		 */
-
 		if (!foundAndAdded) {
 			Customer newCustomer = new Customer(name, email, phone, gender, age);
 			customers.add(newCustomer);
@@ -81,22 +111,28 @@ public class CustomerList {
 	/**
 	 * Finds a customer based on email
 	 *
-	 * @param email Customer email
+	 * @param email of customer
 	 * @return customer if found, otherwise null
 	 */
-
 	public Customer getCustomerByEmail(User performingUser, String email) throws SecurityException {
-		if (!performingUser.getSecurityLevel().getLayer().equals(SecurityLayer.layer1)) {
-			throw new SecurityException("You do not have the required permission to perform this operation");
+
+		if (!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)) { // Layer1++ can see Customer
+			throw new SecurityException("Permission Forbidden");
 		}
+
+		if(email.trim().isEmpty() || performingUser.equals(null)){
+			throw new SecurityException("Please enter a valid email or Performing User.");
+		}
+
+
 		for (Customer c : customers) {
 
-			if (c.getEmail() == email) {
+			if (c.getEmail().trim().toLowerCase().equals(email.trim().toLowerCase())) {
 				return c;
 			}
 
 		}
-		System.out.println("Customer not found");
+		System.out.println("Customer with email "+email+" not found.");
 		return null;
 
 	}
@@ -109,17 +145,23 @@ public class CustomerList {
 	 */
 
 	public Customer getCustomerByPhone(User performingUser, String phone) throws SecurityException {
-		if (!performingUser.getSecurityLevel().getLayer().equals(SecurityLayer.layer1)) {
-			throw new SecurityException("You do not have the required permission to perform this operation");
-		}
-		for (Customer c : customers) {
 
-			if (c.getPhone().trim().equals(phone)) {
+		if (!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)) { // Layer1++ can see Customer
+			throw new SecurityException("Permission Forbidden");
+		}
+
+		if(phone.trim().isEmpty() || performingUser.equals(null)){
+			throw new SecurityException("Please enter a valid phone or Performing User.");
+		}
+
+
+		for (Customer c : customers) {
+			if (c.getPhone().trim().toLowerCase().equals(phone.trim().toLowerCase())) {
 				return c;
 			}
-
 		}
-		System.out.println("Customer not found");
+
+		System.out.println("Customer with phone "+phone+" not found.");
 		return null;
 	}
 
@@ -130,15 +172,18 @@ public class CustomerList {
 	 */
 
 	public void removeCustomer(User performingUser, String email) throws SecurityException {
-		if (!performingUser.getSecurityLevel().getLayer().equals(SecurityLayer.layer1)) {
-			throw new SecurityException("You do not have the required permission to perform this operation");
+		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { //credentials check
+			throw new SecurityException("Permission Forbidden");
+		}
+		if(performingUser.equals(null) && email.trim().isEmpty()){ // null values check ( email - perf.User)
+			throw new SecurityException("Please enter a valid E-mail and Performing User.");
 		}
 		Customer c = getCustomerByEmail(performingUser, email);
 		if (c != null) {
 			customers.remove(c);
 			System.out.println("The customer with Email " + getCustomerByEmail(performingUser, email) + " has been removed!");
 		} else {
-			System.out.println("No such Email exists. Please try again.");
+			System.out.println("No such E-mail exists. Please try again.");
 		}
 
 	}
@@ -154,22 +199,22 @@ public class CustomerList {
 	 * @param loyaltyPoints New loyalty points
 	 * @return TRUE if customer is found and updated, FALSE otherwise
 	 */
-
 	public boolean updateCustomer(User performingUser, String name, String email, String phone, String gender, int age, int loyaltyPoints) {
-		if (!performingUser.getSecurityLevel().getLayer().equals(SecurityLayer.layer1)) {
-			throw new SecurityException("You do not have the required permission to perform this operation");}
-			for (Customer c : customers) {
-				if (getCustomerByEmail(performingUser, email.toLowerCase()).equals(email.toLowerCase())) {
-					c.setName(name);
-					c.setPhone(phone);
-					c.setEmail(email);
-					c.setAge(age);
-					c.setLoyaltyPoints(loyaltyPoints);
-					return true;
-				}
+		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { // credentials check
+			throw new SecurityException("Permission Forbidden.");
+		}
+		for (Customer c : customers) {
+			if (getCustomerByEmail(performingUser, email.trim().toLowerCase()).equals(email.trim().toLowerCase())) {
+				c.setName(name);
+				c.setPhone(phone);
+				c.setEmail(email);
+				c.setAge(age);
+				c.setLoyaltyPoints(loyaltyPoints);
+				return true;
 			}
+		}
 
-		System.out.println("This customer does not exist. Please enter a valid ID!");
+		System.out.println("This customer does not exist. Please enter a valid E-mail!");
 		return false;
 	}
 
@@ -177,8 +222,8 @@ public class CustomerList {
 	// Prints all customers in the list
 
 	public void printList(User performingUser) {
-		if (!performingUser.getSecurityLevel().getLayer().equals(SecurityLayer.layer1)) {
-			throw new SecurityException("You do not have the required permission to perform this operation");}
+		if (!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)) {
+			throw new SecurityException("Permission Forbidden.");}
 			for (Customer c : customers) {
 				c.printCustomer();
 			}
