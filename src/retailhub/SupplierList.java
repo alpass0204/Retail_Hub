@@ -9,24 +9,36 @@ import java.util.ArrayList;
  */
 
 public class SupplierList {
-	
+
+	// FIELDS
+
 	private ArrayList<Supplier> suppliers; // List of all suppliers
-	
+	private static final SecurityLayer viewSupplier = SecurityLayer.layer1;
+	private static final SecurityLayer manageSupplier = SecurityLayer.layer2;
+
 	/**
 	 * CONSTRUCTOR initializing the supplier list
 	 */
-
 	public SupplierList() {
 		this.suppliers = new ArrayList<Supplier>();
 	}
-	
+
+
+	// FIELDS
+
+
 	/**
 	 * Adds a supplier to the list
 	 * @param s Supplier to be added
 	 */
-	public void addSupplier(Supplier s) {
+	public void addSupplier(Supplier s,User performerUser)throws SecurityException {
+		if(performerUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
+			throw new SecurityException("Forbidden."); // credentials check
+		}
+		if(s.equals(null)){ // checks suppliers existence
+			throw new SecurityException("Supplier has to be initialized before added to list");
+		}
 		suppliers.add(s);
-		
 	}
 	
 	/**
@@ -38,7 +50,7 @@ public class SupplierList {
 	 * @param email
 	 * @return TRUE if supplier was found, FALSER otherwise
 	 */
-	/*public boolean createSupplier(int taxId, String brandName, String phone, String address, String email) {
+	/public boolean createSupplier(int taxId, String brandName, String phone, String address, String email) {
 		if(getSupplierByVat(taxId) != 0) {
 			 System.out.println("A supplier with this VAT already exists.");
 		     return false;

@@ -195,7 +195,7 @@ public class UserList {
        if(performerUser.getSecurityLevel().hasRequiredLevel(basicManageUser)){
            throw new SecurityException("Forbidden.");
        }
-        
+
         double sal = 0;
         for (User user : userList) {
             if (user instanceof Employee) {
