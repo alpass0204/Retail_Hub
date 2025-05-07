@@ -8,6 +8,11 @@ import java.util.ArrayList;
  */
 
 public class OrderList {
+
+	// FIELDS
+
+	private static final SecurityLayer viewOrder = SecurityLayer.layer1;
+	private static final SecurityLayer manageOrder = SecurityLayer.layer2;
 	private ArrayList<Order> orderlist; // List of all orders
 
 	// CONSTRUCTOR OrderList
@@ -30,7 +35,11 @@ public class OrderList {
 	 * If list is empty, shows message to user
 	 */
 
-	public void printAllOrders() {
+	public void printAllOrders(User performerUser) {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(viewOrder)){
+			throw new IllegalArgumentException("Forbidden."); // Credentials check
+		}
+
 		if (orderlist.isEmpty()) {
 			System.out.println("No orders have been made yet.");
 		} else {
@@ -41,13 +50,21 @@ public class OrderList {
 	}
 
 	//Returns the total number of orders
-	public int totalOrdersCount() {
+	public int totalOrdersCount(User performerUser) {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(viewOrder)){
+			throw new IllegalArgumentException("Forbidden."); // Credentials check
+		}
+
 		return orderlist.size();
 	}
 
 	//Returns the total value of all orders
 
-	public double totalOrderListValue() {
+	public double totalOrderListValue(User performerUser) {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(viewOrder)){
+			throw new IllegalArgumentException("Forbidden."); // Credentials check
+		}
+
 		double sum = 0;
 		for (Order order : orderlist) {
 			sum = sum + order.totalOrderValue();
@@ -59,8 +76,15 @@ public class OrderList {
 	 * Removes an order from the list based on its ID
 	 * @param orderId The ID of the order to be removed
 	 */
+	public void removeOrderFromList(User performerUser,int orderId) {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageOrder)){
+			throw new IllegalArgumentException("Forbidden."); // Credentials check
+		}
+		if(orderId==0){
+			throw new IllegalArgumentException("Order-ID cant be 0."); //check for invalid orderId
+		}																// or 0 value.
 
-	public void removeOrderFromList(int orderId) {
+
 		Order orderToRemove = null;
 		for (Order order : orderlist) {
 			if (order.getOrderId() == orderId) {
@@ -82,8 +106,15 @@ public class OrderList {
 	 * @param orderId The ID of the order
 	 * @param newPaymentMethod New payment method to apply
 	 */
+	public void updateOrder(User performingUser,int orderId,
+							Order.PaymentMethod newPaymentMethod) {
+		if(!performingUser.getSecurityLevel().hasRequiredLevel(manageOrder)){
+			throw new IllegalArgumentException("Forbidden.");
+		}
+		if(orderId == 0){
+			throw new IllegalArgumentException("Order-ID cant be 0.");
+		}
 
-	public void updateOrder(int orderId, Order.PaymentMethod newPaymentMethod) {
 		for (Order order : orderlist) {
 			if (order.getOrderId() == orderId) {
 				order.getDate();
@@ -94,13 +125,16 @@ public class OrderList {
 				return;  // Exit the method after updating the order
 			}
 		}
-
 		// If no sale is found with the given orderId
 		System.out.println("No order found with ID " + orderId + ".");
 	}
 
-	//total expenses for 8.1 but we need to sum also the hr costs
-	public double getTotalPurchaseCost() {
+	//total expenses for products coming in
+	public double getTotalPurchaseCost(User performerUser) {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageOrder)){
+			throw new IllegalArgumentException("Forbidden.");
+		}
+
 		double total = 0;
 		for (Order order : orderlist) {
 			total += order.totalOrderValue();

@@ -42,6 +42,12 @@ public class Order {
 	 */
 
 	public Order(int orderId, Supplier supplier, ArrayList<OrderItem> items, PaymentMethod paymentMethod) {
+		if(orderId==0){
+			throw new IllegalArgumentException("Order-ID cant be null.");
+		}
+		if(supplier.equals(null)){
+			throw new IllegalArgumentException("Enter a Supplier");
+		}
 		this.orderId = orderId;
 		this.items = new ArrayList<OrderItem>(items);
 		this.paymentMethod = paymentMethod;
@@ -57,6 +63,7 @@ public class Order {
 	 */
 
 	public double totalOrderValue() {
+
 		double sum = 0;
 		for (OrderItem i: items) {
 			sum += i.getPurchaseOrderLineTotal(); // unit price * quantity

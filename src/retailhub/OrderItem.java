@@ -9,7 +9,6 @@ public class OrderItem {
 	 * @param p The product being ordered
 	 * @param quantity Quantity of the product being ordered
 	 */
-
 	public OrderItem(Product p, int quantity) {
 		this.quantity = quantity;
 		this.p = p;
@@ -45,7 +44,8 @@ public class OrderItem {
 	//RETURNS A summary of the order item
 
 	public String toString() {
-		return " " + p.getName() + " : " + this.quantity +" pieces  * "+  p.getPurchasePrice() + " €";
+		return " " + p.getName() + " : " + this.quantity +" pieces  * "
+				+  p.getPurchasePrice() + " €";
 	}
 
 	public Product getProduct() {
