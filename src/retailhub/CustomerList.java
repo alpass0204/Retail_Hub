@@ -79,6 +79,9 @@ public class CustomerList {
 		if(name.trim().isEmpty() || email.trim().isEmpty() && phone.trim().isEmpty()){
 			throw new SecurityException("E-mail and Phone cant be NULL");
 		}
+		if(phone.length() < 10 ){
+			throw new IllegalArgumentException("Invalid phone number length");
+		}
 
 
 		boolean foundAndAdded = false; // Adding a flag if duplicate data found

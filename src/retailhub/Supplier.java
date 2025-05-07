@@ -21,10 +21,22 @@ public class Supplier {
 	 * @param email
 	 */
 	public Supplier(int taxId, String brandName, String address, String phone, String email, Boolean active) {
+		if(brandName.equals(null)){
+			throw new IllegalArgumentException("Brand-Name cant be NULL");
+		}
+		if(taxId == 0){
+			throw new IllegalArgumentException("Tax-Id cant be NULL");
+		}
+		if(phone.length() < 10 ){
+			throw new IllegalArgumentException("Invalid phone number length");
+		}
+		if(email.equals(null)){
+			throw new IllegalArgumentException("E-mail cant be NULL");
+		}
 		this.taxId = taxId;
-		this.brandName = brandName;
-		this.address = address;
-		this.phone = phone;
+		this.brandName = brandName.trim().toLowerCase();
+		this.address = address.trim().toLowerCase();
+		this.phone = phone.trim();
 		this.email = email;
 		this.isActive = true;
 		this.products = new ArrayList<>();
@@ -69,8 +81,9 @@ public class Supplier {
 	}
 
 	public void setTaxId(int taxId) {
+		if(taxId == 0 ){
 
-		this.taxId = taxId;
+		}
 	}
 
 	//METHODS FOR brandName
@@ -125,7 +138,8 @@ public class Supplier {
 	 * METHOD FOR PRINTING SUPPLIER INFO
 	 */
 	public void printSupplier() {
-		System.out.println("TaxID: "+taxId+" BrandName: "+brandName+" Address: "+address+" E-mail: "+email+
+		System.out.println("TaxID: "+taxId+" BrandName: "+brandName+" Address: "
+				+address+" E-mail: "+email+
 				phone+" Status:"+isActive);
 	}
 

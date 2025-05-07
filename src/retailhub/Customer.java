@@ -33,10 +33,17 @@ public class Customer {
 	 *  The main idea is that Customers can be found by their phone or email which are unique.
 	 */
 	public Customer(String name, String email, String phone, String gender, int age) {
+		if(phone.length() < 10 ){
+			throw new IllegalArgumentException("Invalid phone number length");
+		}
+		if(email.equals(null)){
+			throw new IllegalArgumentException("");
+		}
+
 		this.customerId = id++;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
+		this.name = name.trim().toLowerCase();
+		this.email = email.trim();
+		this.phone = phone.trim();
 		this.gender = gender;
 		this.age = age;
 		this.loyaltyPoints = 0;
@@ -44,11 +51,18 @@ public class Customer {
 
 	
 	//Constructor which loyalty points are given by the user
-	public Customer (String name, String email, String phone, String gender, int age, int loyaltyPoints) {
+	public Customer (String name, String email, String phone, String gender,
+					 int age, int loyaltyPoints) {
+		if(phone.length() < 10 ){
+			throw new IllegalArgumentException("Invalid phone number length");
+		}
+		if(email.equals(null)){
+			throw new IllegalArgumentException("");
+		}
 		this.customerId = id++;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
+		this.name = name.trim().toLowerCase();
+		this.email = email.trim();
+		this.phone = phone.trim();
 		this.gender = gender;
 		this.age = age;
 		this.loyaltyPoints = loyaltyPoints;
@@ -197,7 +211,8 @@ public class Customer {
 			  int pointsToRemove = redeemableSets * 100;
 			  double discount = redeemableSets * 5.0;
 			  this.loyaltyPoints -= pointsToRemove;
-			  System.out.println("Customer redeem points: " + pointsToRemove + " real discount: " + discount + "€.");
+			  System.out.println("Customer redeem points: " + pointsToRemove +
+					  " real discount: " + discount + "€.");
 			  return discount;
 		  }
 		  else {
