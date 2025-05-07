@@ -43,7 +43,7 @@ public class FinancialReport {
             throw new SecurityException("Forbidden");
         }
         double revenue = salesList.getTotalRevenue(); // Total income from sales
-        double purchaseExpenses = orderList.getTotalPurchaseCost(); // Cost of buying products
+        double purchaseExpenses = orderList.getTotalPurchaseCost(performerUser); // Cost of buying products
         double salaryExpenses = userList.getTotalSalaryExpenses(performerUser); // Employee salaries
 
         double totalExpenses = purchaseExpenses + salaryExpenses; // Sum of all expenses

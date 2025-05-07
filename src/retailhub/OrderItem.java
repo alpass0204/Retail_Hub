@@ -19,7 +19,7 @@ public class OrderItem {
 		if(p.equals(null)){ //check if product data entry is empty
 			throw new IllegalArgumentException("Forbidden.");
 		}
-		if(quantity<1){
+		if(quantity<1){ // The idea is that quantity has to be a real integer number.
 			throw new IllegalArgumentException("Quantinty cant be negative or 0.");
 		}
 

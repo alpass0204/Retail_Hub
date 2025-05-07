@@ -21,14 +21,16 @@ public class Main {
 		// Authentication class testing. USE CASE 11
 		// User loging in with 3 attempts, method finds user and types password
 
-
-		Employee e1 = new Employee("kwstas", "willie", SecurityLayer.layer3,
+		User ilias = new Employee("ilias", "maz", SecurityLayer.layer4,
 				"jane", "doe", 3000.13, "uom@2323.gr",
-				"toumpa", Role.manager);                                                 //CREATION OF MANAGER EMPLOYEE
+				"toumpa", Role.accountant);
+		Employee e1 = new Employee("kwstas", "willie", SecurityLayer.layer2,
+				"jane", "doe", 3000.13, "uom@2323.gr",
+				"toumpa", Role.accountant);                                 //CREATION OF MANAGER EMPLOYEE
 
 
-		userList.addUserToList(e1, e1);															//ADDITION TO USERLIST
-		userList.printList(e1);																	//PRINT
+		userList.addUserToList(ilias, e1);										//ADDITION TO USERLIST
+		userList.printList(e1);													//PRINT
 
 		Authentication.login("kwstas", userList);
 
