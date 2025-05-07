@@ -7,6 +7,7 @@ package retailhub;
 
 public class Product{
     // Product's ID
+    private static int id = 1;
     private int productId;
     // Product's Name
     private String name;
@@ -24,14 +25,13 @@ public class Product{
 
     /**
      * Constructor for the Product class.
-     * @param productId
      * @param name
      * @param category
      * @param sellPrice
      * @param stock
      */
-    public Product(int productId, String name, String category, double purchasePrice, double sellPrice, int stock,Supplier supplier,int notificationStock) {
-        this.productId = productId;
+    public Product( String name, String category, double purchasePrice, double sellPrice, int stock,Supplier supplier,int notificationStock) {
+        this.productId = id++;
         this.name = name;
         this.category = category;
         this.purchasePrice = purchasePrice;
@@ -43,14 +43,14 @@ public class Product{
      * Unknown products Constructor
      */
     public Product() {
-        this(000,"unknown-name","None",0.0,0.0,0,null, 0);
+        this("unknown-name","None",0.0,0.0,0,null, 0);
     }
 
     /**
      * Constructor without supplier
      */
-    public Product(int productId, String name, String category, double purchasePrice, double sellPrice, int stock) {
-        this(productId, name, category, purchasePrice, sellPrice, stock, null, 0);
+    public Product( String name, String category, double purchasePrice, double sellPrice, int stock) {
+        this( name, category, purchasePrice, sellPrice, stock, null, 0);
     }
     /**
      * 3rd Constructor for Product Class with 3 inputs

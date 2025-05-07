@@ -14,7 +14,6 @@ public class Supplier {
 
 	/**
 	 * Constructor για Suppliers
-	 * @param taxId
 	 * @param brandName
 	 * @param address
 	 * @param phone
@@ -25,7 +24,8 @@ public class Supplier {
 			throw new IllegalArgumentException("Brand-Name cant be NULL");
 		}
 		if(taxId == 0){
-			throw new IllegalArgumentException("Tax-Id cant be NULL");
+
+			throw new IllegalArgumentException("Tax id can't be empty.");
 		}
 		if(phone.length() < 10 ){
 			throw new IllegalArgumentException("Invalid phone number length");

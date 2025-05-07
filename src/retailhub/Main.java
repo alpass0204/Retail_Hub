@@ -17,22 +17,60 @@ public class Main {
 		SalesList salesList = new SalesList();
 		SupplierList supplierList = new SupplierList();
 
-
-		// Authentication class testing. USE CASE 11
+		//USE CASE 1
+		// Authentication class testing.
 		// User loging in with 3 attempts, method finds user and types password
 
-		User ilias = new Employee("ilias", "maz", SecurityLayer.layer4,
+		User e3 = new Employee("ilias", "maz", SecurityLayer.layer3,
 				"jane", "doe", 3000.13, "uom@2323.gr",
 				"toumpa", Role.accountant);
 		Employee e1 = new Employee("kwstas", "willie", SecurityLayer.layer2,
 				"jane", "doe", 3000.13, "uom@2323.gr",
 				"toumpa", Role.accountant);                                 //CREATION OF MANAGER EMPLOYEE
+		Employee e2 = new Employee("Harry","qwerty",SecurityLayer.layer1,
+				"Harris","Karam",967.5,"xarkar@uom.gr",
+				"473 BROADWAY", Role.salesPerson);						//CREATION OF LAYER1 EMPLOYEE
+		User sysadmin = new Employee("sudo","wqfvdsf",SecurityLayer.layer4,
+				"Administrator","ADMIN",0.0,
+				"A@A.com","",Role.sysadmin);							//CREATION OF LAYER4 SYSADMIN
 
 
-		userList.addUserToList(ilias, e1);										//ADDITION TO USERLIST
-		userList.printList(e1);													//PRINT
+
+		//ADDITION TO USERLIST
+		userList.addUserToList(e3, e1);
+		userList.addUserToList(e3, e2);
+		userList.addUserToList(e3, e3);
+
+		//PRINT LIST
+		userList.printList(e1);
+
+		//LOGIN FEATURE
 
 		Authentication.login("kwstas", userList);
+			WorkHours workHours = new WorkHours();
+			e1.addWorkSession(workHours);
+
+
+
+
+
+
+		//USE CASE 3
+		//PRODUCT AND STOCK MANAGEMENT
+
+		//CREATION OF SUPPLIER
+		supplierList.createSupplier(e3,784523948,"WHOLESALE SUPPLIER","210 1234568",
+				"Leoforos poseidonos 180", "generalmanagement@wholesale.com");
+
+		supplierList.printList(e3);
+
+		//PRODUCT CREATION FROM DIFERENT SECURITY LAYERS
+		//productList.createProduct(e1, "Headphones", "Electronics",289,350,1 , );
+		//productList.createProduct(e2, "PC monitor", "Electronics",25.0,21);
+		//productList.createProduct(e3,"Mac Lipstick", "Beauty",45.2,13);
+
+
+		//String name, String category, double purchasePrice, double sellPrice, int stock,Supplier supplier,int notificationStock
 
 
 		/*

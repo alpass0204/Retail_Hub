@@ -20,6 +20,14 @@ public class WorkHours {
 
     }
 
+
+    //constructor
+    public WorkHours() {
+        this.date = LocalDate.now();
+        this.arrivalTime = LocalTime.now();
+        this.departureTime = LocalTime.now();
+
+    }
     //getters/setters
     public LocalDate getDate() {
         return date;

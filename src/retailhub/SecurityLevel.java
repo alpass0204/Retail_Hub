@@ -101,22 +101,22 @@ public class SecurityLevel{
 
     /** CAN_MANAGE_PRODUCTS
      * CHEKCS if user can manage products (create, update, delete)
-     * @param userPerformer (USER) The User attempting to manage products.
+     * @param performerUser (USER) The User attempting to manage products.
      * @param isCritical  (BOOLEAN) Whether the action trying to operate is Critical/Not Critical
      * @return true if the operation is allowed, false otherwise
      */
-    public boolean canManageProducts(User userPerformer, boolean isCritical){
-        if (userPerformer == null){
+    public boolean canManageProducts(User performerUser, boolean isCritical){
+        if (performerUser == null){
             return false;
         }
-        SecurityLayer performersLevel = userPerformer.getSecurityLevel().getLayer();
+        SecurityLayer performerUserLevel = performerUser.getSecurityLevel().getLayer();
         //Not Critical Layer2+
         if(!isCritical){
-            return performersLevel.ordinal() >= SecurityLayer.layer2.ordinal();
+            return performerUserLevel.ordinal() >= SecurityLayer.layer2.ordinal();
         }
 
         // Critical  Layer3+
-        return performersLevel.ordinal() >= SecurityLayer.layer3.ordinal();
+        return performerUserLevel.ordinal() >= SecurityLayer.layer3.ordinal();
     }
 
     /**

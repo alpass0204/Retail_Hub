@@ -50,8 +50,8 @@ public class SupplierList {
 	 * @param email
 	 * @return TRUE if supplier was found, FALSER otherwise
 	 */
-	public boolean createSupplier(User performingUser,
-								  int taxId, String brandName,
+	public boolean createSupplier(User performingUser, int taxId,
+								  String brandName,
 								  String phone, String address,
 								  String email) throws SecurityException {
 		if(performingUser.equals(null)) { // First check: If performing User = null
@@ -76,9 +76,28 @@ public class SupplierList {
 	 * Remove supplier if VAT already exists
 	 * @param taxId
 	 */
-	public void removeSupplier(String taxId) {
+	public void removeSupplierFromList(User performerUser , int taxId) {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
+			throw new IllegalArgumentException("Forbidden."); // Credentials check
+		}
+		if(taxId==0){
+			throw new IllegalArgumentException("TaxId-ID cant be 0."); //check for invalid orderId
+		}
 
-	   
+		Supplier supplierToRemove = null;
+		for(Supplier supplier : suppliers){
+			if(supplier.getTaxId() == taxId){
+				supplierToRemove = supplier;
+				break;
+			}
+		}
+		if(supplierToRemove != null){
+			suppliers.remove(supplierToRemove);
+			System.out.println("Supplier with TaxId: "+taxId+" has been removed.");
+		}
+		else{
+			System.out.println("No order found with ID "+taxId+".");
+		}
 	}
 
 	/**

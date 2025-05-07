@@ -42,7 +42,7 @@ public class FinancialReport {
         if(!performerUser.getSecurityLevel().hasRequiredLevel(getReport)){
             throw new SecurityException("Forbidden");
         }
-        double revenue = salesList.getTotalRevenue(); // Total income from sales
+        double revenue = salesList.getTotalRevenue(performerUser); // Total income from sales
         double purchaseExpenses = orderList.getTotalPurchaseCost(performerUser); // Cost of buying products
         double salaryExpenses = userList.getTotalSalaryExpenses(performerUser); // Employee salaries
 
