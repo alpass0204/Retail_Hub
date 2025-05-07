@@ -38,12 +38,20 @@ public class Employee extends User {
         super(username, password, initialLayer);
 
         // 2. Initializing the FIELDS of Employee class
-        this.name = name;
-        this.lastName = lastName;
+        if(name.equals(null) || lastName.equals(null)){
+            throw new IllegalArgumentException("Name can't be NULL");
+        }
+        if(email.trim().equals(null)){
+            throw new IllegalArgumentException("E-mail can't be NULL");
+        }
+
+
+        this.name = name.trim().toLowerCase();
+        this.lastName = lastName.trim().toLowerCase();
         this.userId = id++;
         this.salary = salary;
-        this.email = email;
-        this.address = address;
+        this.email = email.trim();
+        this.address = address.trim().toLowerCase();
         this.role = role;
     }
 
@@ -64,6 +72,9 @@ public class Employee extends User {
     //METHODS FOR NAME
 
     public void setName(String name) {
+        if(name.equals(null)){
+            throw new IllegalArgumentException("Name can't be NULL");
+        }
         this.name = name;
     }
 
@@ -72,6 +83,9 @@ public class Employee extends User {
     }
 
     public void setLastName(String lastName) {
+        if(lastName.equals(null)){
+            throw new IllegalArgumentException("Name can't be NULL");
+        }
         this.lastName = lastName;
     }
 
@@ -79,16 +93,15 @@ public class Employee extends User {
         return userId;
     }
 
-    // Συνήθως το ID δεν αλλάζει, οπότε δεν βάζουμε setter. Αν χρειάζεται, πρόσθεσέ τον.
-    // public void setUserId(int userId) { this.userId = userId; }
 
     public double getSalary() {
         return salary;
     }
 
     public void setSalary(double salary) {
-        // TODO: Ίσως έλεγχος δικαιωμάτων και εδώ; Ή μόνο στην updateUser της UserList.
-        this.salary = salary;
+        if(salary < 0){
+            throw new IllegalArgumentException("Salary cant be Negative.");
+        }
     }
 
     //METHODS FOR EMAIL
@@ -98,6 +111,9 @@ public class Employee extends User {
     }
 
     public void setEmail(String email) {
+        if(email.equals(null)){
+            throw new IllegalArgumentException("E-mail cant be NULL");
+        }
         this.email = email;
     }
 
@@ -130,7 +146,7 @@ public class Employee extends User {
 
     @Override
     public void printUser() {
-        // Call the basic print of User
+
         super.printUser();
 
         System.out.println("--- Employee Details ---");
@@ -139,7 +155,7 @@ public class Employee extends User {
         System.out.println("Role: " + this.role);
         System.out.println("Email: " + this.email);
         System.out.println("Address: " + this.address);
-        System.out.println("Salary: " + this.salary); // Ίσως να μην θέλεις να τυπώνεται πάντα
+        System.out.println("Salary: " + this.salary);
         System.out.println("----------------------");
     }
 
