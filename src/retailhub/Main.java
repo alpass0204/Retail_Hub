@@ -2,21 +2,33 @@ package retailhub;
 
 import java.util.ArrayList;
 import retailhub.Sales.PaymentMethod;
+import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		// Authentication class testing.
-		// User loging in with 3 attempts, method finds user and types password
+		//INITIALIZATION OF LISTS FOR STORAGE
 		Scanner in = new Scanner(System.in);
-		Employee e1 = new Employee("kwstas", "willie", SecurityLayer.layer2,
-				"jane", "doe", 3.13, "uom@2323.gr",
-				"toumpa", Role.accountant);
-		e1.printUser();
 		UserList userList = new UserList();
-		userList.addUser(e1);
-		userList.printList();
+		CustomerList customerList = new CustomerList();
+		OrderList orderList = new OrderList();
+		ProductList productList = new ProductList();
+		SalesList salesList = new SalesList();
+		SupplierList supplierList = new SupplierList();
+
+
+		// Authentication class testing. USE CASE 11
+		// User loging in with 3 attempts, method finds user and types password
+
+
+		Employee e1 = new Employee("kwstas", "willie", SecurityLayer.layer3,
+				"jane", "doe", 3000.13, "uom@2323.gr",
+				"toumpa", Role.manager);                                                 //CREATION OF MANAGER EMPLOYEE
+
+
+		userList.addUserToList(e1, e1);															//ADDITION TO USERLIST
+		userList.printList(e1);																	//PRINT
 
 		Authentication.login("kwstas", userList);
 
@@ -319,7 +331,7 @@ public class Main {
 
 
 		//TESTING SALES
-
+/*
 		Customer c1 = new Customer("Alex", "asasq","14351","male",25); //CREATE CUSTOMERS
 		c1.addPoints(100); //ADD LOYALTY POINTS
 		Supplier supplier = new Supplier(32,"324","3214","2311","23",true); //CREATE NEW SUPPLIER
@@ -333,7 +345,7 @@ public class Main {
 
 		System.out.println(s1.toString());
 		sL1.printAllSales();
-		
+*/
 
 	}
 }
