@@ -7,12 +7,9 @@ public class Authentication {
         Scanner in = new Scanner(System.in);
 
         User user = userlist.findUser(username);
-        for(int i = 1; i <= 3; i++) {
-            if (user == null) {
-                System.out.println("Invalid Username.");
-                return false;
-            }
-            System.err.println("You have recently made too many attempts. Please try again later.");
+        if (user == null) {
+            System.out.println("Invalid Username.");
+            return false;
         }
         for (int i = 1; i <= 3; i++) {
             System.out.println("Enter password: ");
@@ -22,7 +19,7 @@ public class Authentication {
                 return true;
             }
             else {
-                System.err.println("You have recently made too many attempts. Please try again later. " + i + " attempts.");
+                System.err.println("Wrong password/username. Please try again . " + i + "/3 attempts.");
             }
         }
         System.out.println("Too many failed attempts.");
