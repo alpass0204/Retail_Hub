@@ -6,12 +6,12 @@ package retailhub;
  */
 public class Employee extends User {
 
-    // FIELDS ONLY FOR EMPLOYEE
+    // FIELDS
+
     private String name;
     private String lastName;
     private int userId; // unique employee ID
     private static int id = 1;
-    private int userId; //   ============ NA MPEI STATIC =============
     private double salary;
     private String email;
     private String address;
@@ -55,19 +55,15 @@ public class Employee extends User {
         this.role = role;
     }
 
-    // --- Υλοποίηση Abstract Μεθόδων της User ---
+    //  Abstract Methods
     // Returns the name of the employee
     @Override
     public String getName() {
         return this.name;
     }
 
-    // Η getUsername() υλοποιείται πλέον στην User και επιστρέφει το πεδίο username.
 
-    // --- GETTERS and SETTERS for Employee FIELDS ---
-
-    // Μπορείς να κάνεις override το getName() αν η abstract δεν σε καλύπτει
-    // @Override public String getName() { return this.name; }
+    //  GETTERS and SETTERS for Employee FIELDS
 
     //METHODS FOR NAME
 
