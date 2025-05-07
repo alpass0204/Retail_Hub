@@ -69,6 +69,7 @@ public class Supplier {
 	}
 
 	public void setTaxId(int taxId) {
+
 		this.taxId = taxId;
 	}
 

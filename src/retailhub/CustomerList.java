@@ -70,7 +70,7 @@ public class CustomerList {
 	 */
 
 	public void createCustomer(User performingUser, String name, String email, String phone, String gender, int age) throws SecurityException {
-		if(performingUser.equals(null)){ //First check: User for null
+		if(performingUser.equals(null)){ // First check: If performing User = null
 			throw new SecurityException("Performing user can't be NULL.");
 		}
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { //checks if user have the

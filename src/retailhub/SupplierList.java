@@ -50,34 +50,37 @@ public class SupplierList {
 	 * @param email
 	 * @return TRUE if supplier was found, FALSER otherwise
 	 */
-	/public boolean createSupplier(int taxId, String brandName, String phone, String address, String email) {
-		if(getSupplierByVat(taxId) != 0) {
-			 System.out.println("A supplier with this VAT already exists.");
-		     return false;
+	public boolean createSupplier(User performingUser,
+								  int taxId, String brandName,
+								  String phone, String address,
+								  String email) throws SecurityException {
+		if(performingUser.equals(null)) { // First check: If performing User = null
+			throw new SecurityException("Performing user can't be NULL");
+		}
+		if(!performingUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
+			throw new SecurityException("Forbidden."); // Credentials check
+		}
+
+		if(taxId == 0 && brandName.trim().toLowerCase().equals(null) ||
+		brandName.trim().toLowerCase().isEmpty()){ // Brand Name and Tax-Id not null values check
+			throw new SecurityException("Tax-Id And Brand Name can't be NULLS");
 		}
 		
 		Supplier s = new Supplier(taxId, brandName, address, phone, email,true);
 		suppliers.add(s);
 		return true;
 	}
-	*/
+
 		
 	/**
 	 * Remove supplier if VAT already exists
 	 * @param taxId
 	 */
-	/*public void removeSupplier(String taxId) {
-	    Supplier s = getSupplierByVat(taxId);
-	    if (s != null) {
-	        suppliers.remove(s);
-	        System.out.println("The supplier with VAT "+s.getTaxId()+" has been removed!");
-	    }
-	    else {
-	    	System.out.println("No such VAT exists. Please try again.");
-	    }
+	public void removeSupplier(String taxId) {
+	
 	   
 	}
-	*/
+
 	/**
 	 * Search supplier based on VAT. If it is  found, we call set methods to change data
 	 * @param taxId
