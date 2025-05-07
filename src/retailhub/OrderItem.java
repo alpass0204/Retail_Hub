@@ -1,33 +1,45 @@
 package retailhub;
 
 public class OrderItem {
+
+	// FIELDS
+
 	private Product p; // The product being ordered
 	private int quantity; // Quantity of product
-
+	private static final SecurityLayer manageOrderItem = SecurityLayer.layer3;
 	/**
 	 *  CONSTRUCTOR for OrderItem
 	 * @param p The product being ordered
 	 * @param quantity Quantity of the product being ordered
 	 */
-	public OrderItem(Product p, int quantity) {
+	public OrderItem(User performerUser,Product p, int quantity) {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageOrderItem)){
+			throw new IllegalArgumentException("Forbidden."); // Credentials check
+		}
+		if(p.equals(null)){ //check if product data entry is empty
+			throw new IllegalArgumentException("Forbidden.");
+		}
+		if(quantity<1){
+			throw new IllegalArgumentException("Quantinty cant be negative or 0.");
+		}
+
 		this.quantity = quantity;
 		this.p = p;
 	}
 
-	// RETURNS the purchase price per unit of the product
+	// METHODS
 
+	// RETURNS the purchase price per unit of the product
 	public double getProductPurchasePrice() {
 		return p.getPurchasePrice();
 	}
 
 	// RETURNS the name of the product being ordered
-
 	public String getPurchaseProductName() {
         return p.getName();
     }
 
 	//RETURNS the quantity being ordered
-
     public int getQuantity() {
         return quantity;
     }
