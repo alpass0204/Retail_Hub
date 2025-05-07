@@ -90,18 +90,28 @@ public class SupplierList {
 	 * @param email
 	 * @return
 	 */
-	public boolean updateSupplier(int taxId, String brandName, String phone, String address, String email) {
+	public boolean updateSupplier(User performerUser,int taxId,
+								  String brandName, String phone,
+								  String address, String email) {
+
+		// 1) CHECK FOR CREDENTIALS TO UPDATE
+	   if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
+		   System.err.println("Forbidden");
+		   return false; // exits the operation
+	   }
+
+
 	    for (Supplier s : suppliers) {
-	        if (s.getTaxId() == (taxId)) {
+	        if (s.getTaxId() == (taxId)) { // checks and update supplier by taxId
 	            s.setBrandName(brandName);
 	            s.setPhone(phone);
 	            s.setAddress(address);
 	            s.setEmail(email);
-	            return true;
+				return true;
 	        }
 	    }
 	    System.out.println("This supplier does not exist. Please enter a valid VAT!");
-	    return false; //we need to create an exception error ( try-catch-final )
+		return false; //exits the operation
 	}
 
 
@@ -109,7 +119,10 @@ public class SupplierList {
 	/**
 	 * PRINTS all suppliers in the list
 	 */
-	public void printList() {
+	public void printList(User performingUser)throws SecurityException {
+		if(!performingUser.getSecurityLevel().hasRequiredLevel(viewSupplier)){
+			throw new SecurityException("Forbidden");
+		}
 		for(Supplier i: suppliers) {
 			i.printSupplier();
 		}
@@ -119,30 +132,44 @@ public class SupplierList {
 	 * @param taxId
 	 * @return
 	 */
-	/*public boolean vatExists(String taxId) {
+	public boolean vatExists(User performingUser,int taxId) {
+		if(!performingUser.getSecurityLevel().hasRequiredLevel(viewSupplier)){
+			System.err.println("Forbidden.");
+			return false; //exits operation if user don't have the credentials
+		}
+		if(taxId==0){
+			System.err.println("TaxId cant be NULL");
+			return false; //exits operation
+		}
 	    for (Supplier s : suppliers) {
-	        if (s.getTaxId() == (taxId)) {
+	        if (s.getTaxId() == taxId) {
 	            return true;
 	        }
 	    }
-	    return false;
+	    return true;
 	}
-	*/
 	
 	/**
 	 * Check and return supplier based on its VAT
 	 * @param taxId
 	 * @return
 	 */
-	/*public Supplier getSupplierByVat(String taxId) {
+	public Supplier getSupplierByVat(User performingUser,
+									 int taxId) {
+		if(!performingUser.getSecurityLevel().hasRequiredLevel(viewSupplier)){
+			throw new IllegalArgumentException("Forbidden.");  // credentials check
+		}
+		if(taxId==0){ // taxId value validation
+			throw new IllegalArgumentException("TaxId can't be null.");
+		}
+
 	    for (Supplier s : suppliers) {
-	        if (s.getTaxId().equals(taxId)) {
+	        if (s.getTaxId()== taxId) {
 	            return s;
 	        }
 	    }
 	    System.out.println("Supplier not found");
 	    return null;
 	}
-*/
 }
 

@@ -147,7 +147,8 @@ public class UserList {
         if (!performingUser.getSecurityLevel().canUpdateUser(performingUser, targetUser)) {
             System.out.println("Permission Denied: User " + performingUser.getUsername() +
                     " cannot update user " + targetUser.getUsername());
-            return false; // Έξοδος αν δεν υπάρχει δικαίωμα
+            return false; // Exits if performingUser don't have the credentials for
+                         // the operation.
         }
 
 
