@@ -9,6 +9,9 @@ import java.util.ArrayList;
  */
 
 public class Sales {
+
+	// FIELDS
+
 	private int salesId; // Unique salesID
 	private LocalDate date = LocalDate.now(); // Date of sale
 	private LocalTime time = LocalTime.now(); // Time of sale
@@ -17,8 +20,9 @@ public class Sales {
 	private PaymentMethod paymentMethod; // Method of payment used
 	private Customer customer; // customer who made the purchase
 	//private double discountApplied = 0.0;
+	private static final SecurityLayer manageSales = SecurityLayer.layer2;
 
-	//Payment methods available
+
 
 	public enum PaymentMethod {
 		CASH,
@@ -37,12 +41,18 @@ public class Sales {
 	 */
 
 	public Sales(int salesId, ArrayList<SaleItem> items, PaymentMethod paymentMethod, Customer customer) {
-		
-		this.salesId = salesId;
-		this.items = new ArrayList<SaleItem>(items);
-		this.paymentMethod = paymentMethod;
-		this.customer = customer;
-		sumTotal(); //Calculate total before discounts
+
+		// validation check
+
+		if(salesId==0){ // Checks if salesId is a valid data entry.
+			throw new IllegalArgumentException("Invalid SALES-ID");
+		}
+		if(paymentMethod.equals(null)){ // payment method check
+			throw new IllegalArgumentException("Payment Method can't be null");
+		}
+		if(customer.equals(null)){
+			throw new IllegalArgumentException("Customer cant be null.");
+		}
 
 		//loyalty points
 
@@ -52,8 +62,14 @@ public class Sales {
 			this.totalamount -= discount; // apply discount to total
 		}
 
+		this.salesId = salesId;
+		this.items = new ArrayList<SaleItem>(items);
+		this.paymentMethod = paymentMethod;
+		this.customer = customer;
+		sumTotal(); //Calculate total before discounts
 
 	}
+
 
 	//GETTERS
 
@@ -103,7 +119,13 @@ public class Sales {
 
 	//add sold product and call method sumtotal in order to add the amount in the totalamount
 
-	public void addItem(SaleItem i) {	
+	public void addItem(User performerUser,SaleItem i)throws SecurityException {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
+			throw new SecurityException("Forbidden."); // credentials check
+		}
+		if(i.equals(null)){
+			throw new SecurityException("Item cant be null."); // check of items validation
+		}
 		items.add(i);
 		sumTotal();
 		i.getProduct().decreaseStock(i.getQuantity()); //decrease stock when we make a sale
@@ -114,14 +136,26 @@ public class Sales {
 	 * Removes an item from the sale if it exists, updates total
 	 * @param item The SaleItem to remove
 	 */
+	public void removeItem(User performerUser,SaleItem item) {  //The if statement ensures t
+																// hat sumTotal() is only called if the  SaleItem was actually removed
+															   //from the item's collection.
+	    if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
+			throw new SecurityException("Forbidden."); // credentials check
+		}
+		if(item.equals(null)){
+			throw new SecurityException("Item cant be null."); // check of items validation
+		}
 
-	public void removeItem(SaleItem item) {  //The if statement ensures that sumTotal() is only called if the  SaleItem was actually removed from the items collection.
-	    if (items.remove(item)) {
+		if (items.remove(item)) {
 	        sumTotal();
 	    }
 	}
 	
-	public String receipt() {
+	public String receipt(User performerUser) {
+
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
+			throw new SecurityException("Forbidden"); // credentials check
+		}
 
 	    // At first we have the header
 
@@ -148,9 +182,12 @@ public class Sales {
 	    return receipt;
 	}
 
-	//Summary of sale
 
-	public String toString() {
+	/**
+	 * Sales Summary
+	 * @return
+	 */
+	public String saleSummary() {
 		return "Sale{" +
 	               "idSale='" + salesId + '\'' +
 	               ", date=" + date +	               
@@ -159,9 +196,18 @@ public class Sales {
 	               ", total=" + totalamount +
 	               '}';
 	}
-	// The returnItem method
 
-	public void returnItem(SaleItem item) {
+	/**
+	 * Removes SalesItem from a single Sale.
+	 * @param performerUser
+	 * @param item
+	 * @throws SecurityException
+	 */
+	public void returnItem(User performerUser,SaleItem item)throws SecurityException {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
+			throw new SecurityException("Forbidden."); // credentials check
+		}
+
 		if (items.contains(item)) {
 			items.remove(item); // Remove the item from the sale
 			totalamount -= item.getLineTotal(); // Subtract the item's price from the total
