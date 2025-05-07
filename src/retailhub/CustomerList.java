@@ -10,6 +10,8 @@ import java.util.Iterator;
 
 public class CustomerList {
 
+	// FIELDS
+
 	private ArrayList<Customer> customers; //List of all customer
 
 	private static final SecurityLayer viewCustomer = SecurityLayer.layer1;
@@ -19,7 +21,6 @@ public class CustomerList {
 	/**
 	 * Constructor initializing the list of customers
 	 */
-
 	public CustomerList() {
 		this.customers = new ArrayList<Customer>();
 	}
@@ -35,7 +36,7 @@ public class CustomerList {
 		}
 		// check for permisions
 		if(!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)){
-			throw new SecurityException("You "+performingUser+" permission forbidden.");
+			throw new SecurityException("You "+performingUser+" Forbidden.");
 		}
 		return new ArrayList<>(customers); // returns a copy
 	}
@@ -73,7 +74,7 @@ public class CustomerList {
 			throw new SecurityException("Performing user can't be NULL.");
 		}
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { //checks if user have the
-			throw new SecurityException("Permission forbidden."); 				   // credentials.
+			throw new SecurityException("Forbidden."); 				   // credentials.
 		}
 		if(name.trim().isEmpty() || email.trim().isEmpty() && phone.trim().isEmpty()){
 			throw new SecurityException("E-mail and Phone cant be NULL");
@@ -117,7 +118,7 @@ public class CustomerList {
 	public Customer getCustomerByEmail(User performingUser, String email) throws SecurityException {
 
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)) { // Layer1++ can see Customer
-			throw new SecurityException("Permission Forbidden");
+			throw new SecurityException("Forbidden");
 		}
 
 		if(email.trim().isEmpty() || performingUser.equals(null)){
@@ -147,7 +148,7 @@ public class CustomerList {
 	public Customer getCustomerByPhone(User performingUser, String phone) throws SecurityException {
 
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)) { // Layer1++ can see Customer
-			throw new SecurityException("Permission Forbidden");
+			throw new SecurityException("Forbidden");
 		}
 
 		if(phone.trim().isEmpty() || performingUser.equals(null)){
@@ -173,7 +174,7 @@ public class CustomerList {
 
 	public void removeCustomer(User performingUser, String email) throws SecurityException {
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { //credentials check
-			throw new SecurityException("Permission Forbidden");
+			throw new SecurityException("Forbidden");
 		}
 		if(performingUser.equals(null) && email.trim().isEmpty()){ // null values check ( email - perf.User)
 			throw new SecurityException("Please enter a valid E-mail and Performing User.");
@@ -201,7 +202,7 @@ public class CustomerList {
 	 */
 	public boolean updateCustomer(User performingUser, String name, String email, String phone, String gender, int age, int loyaltyPoints) {
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { // credentials check
-			throw new SecurityException("Permission Forbidden.");
+			throw new SecurityException("Forbidden.");
 		}
 		for (Customer c : customers) {
 			if (getCustomerByEmail(performingUser, email.trim().toLowerCase()).equals(email.trim().toLowerCase())) {
@@ -223,7 +224,7 @@ public class CustomerList {
 
 	public void printList(User performingUser) {
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)) {
-			throw new SecurityException("Permission Forbidden.");}
+			throw new SecurityException("Forbidden.");}
 			for (Customer c : customers) {
 				c.printCustomer();
 			}

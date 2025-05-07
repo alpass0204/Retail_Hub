@@ -81,7 +81,7 @@ public abstract class User {
      */
     public void setPassword(String newPassword) {
         if (newPassword == null || newPassword.isEmpty()) {
-                throw new IllegalArgumentException("Failed to change password, please Try Again!");
+                throw new IllegalArgumentException("Password cant be NULL");
         }
         this.password = newPassword;
     }
@@ -123,15 +123,7 @@ public abstract class User {
      * Prints basic information of the user. It can be overrided from the subclasses.
      */
     public void printUser() {
-        //System.out.println("--- USER INFO ---");
-       //System.out.println("Username: " + this.username);
-        if (this.securityLevel != null) {
-            //System.out.println("Security Level: " + this.securityLevel.getLayer());
-        }
-        else {
-            //System.out.println("Security Level: Not Set");
-        }
-        //System.out.println("-----------------");
+
         System.out.println("--- Employee Details ---");
         System.out.println("username: " + this.username);
         System.out.println("password: " + "*************");

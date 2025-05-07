@@ -16,7 +16,6 @@ public class SecurityLevel{
      * @param layer The security layer to assign.
      * @throws SecurityException if the layer is null.
      */
-
     public SecurityLevel(SecurityLayer layer){
         if(layer==null){
             throw new SecurityException("The Security level must be a Valid Choice.");

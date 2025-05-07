@@ -6,26 +6,35 @@ import java.util.Iterator;
 
 public class UserList {
 
-    private ArrayList<User> userList;
+    // FIELDS
 
+    private ArrayList<User> userList; //List of all Users
+    private static final SecurityLayer viewUser = SecurityLayer.layer2;
+    private static final SecurityLayer basicManageUser = SecurityLayer.layer3;
+    private static final SecurityLayer godMode = SecurityLayer.layer4;
+
+    /**
+     * Constructor
+     */
     public UserList() {
 
         this.userList = new ArrayList<User>();
     }
 
+    // METHODS
+
     /**
-     * Method for adding a new User.
-     * @param user
-     * @return
+     * Emergency method to find user via their username.
+     * @param username
+     * @return user or null
      */
-    public boolean addUser(User user) {
-        if (findUser(user.getUsername()) != null) {
-            throw new IllegalArgumentException("You must create a Unique username! ");
-        } else {
-            userList.add(user);
-            //System.out.println("User: " + user.printUser() + " has been created!");
-            return true;
+    public User findUser(String username) {
+        for (User user : userList) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
         }
+        return null;
     }
 
     /**
@@ -45,37 +54,48 @@ public class UserList {
     }
 
 
-    /**
-     * Emergency method to find user via their username.
-     * @param username
+    /** addUserToList METHOD
+     * adds a new User to a List.
+     * @param performingUser user that operates the add
+     * @param newUser
      * @return
      */
-    public User findUser(String username) {
-        for (User user : userList) {
-            if (user.getUsername().equals(username)) {
-                return user;
-            }
+    public void addUserToList(User performingUser, User newUser) throws SecurityException {
+        if (findUser(newUser.getUsername()) != null) { // check if its already in the list
+            throw new IllegalArgumentException("You must create a Unique username! ");
         }
-        return null;
+        if(!performingUser.getSecurityLevel().hasRequiredLevel(basicManageUser)){ //credentials check
+            throw new SecurityException("Forbidden");
+        }
+        if(newUser.equals(null)){ //checks if the user to be added,  exists
+            throw new IllegalArgumentException("User have to be initialized first");
+        }
+
+        userList.add(newUser);
+        System.out.println("User: " + newUser + " has been created!");
     }
 
-    /**
+    /** removeUser METHOD
      * A method that removes a user
      * @param userToDelete
      * @return message if removed or not
      */
-    public void removeUser(String userToDelete){
+    public void removeUser(User performingUser,String userToDelete)throws SecurityException{
+        User targetUser = findUser(userToDelete);
+        if(!performingUser.getSecurityLevel().canUpdateUser(performingUser,targetUser)){
+            throw new SecurityException("Forbidden");
+        }
         Iterator<User> iterator = userList.iterator();
-        boolean foundAndRemoved = false;
+        boolean foundAndRemoved = false; // flag
         while(iterator.hasNext()){
             User user = iterator.next();
-            if(user.getUsername().equals(userToDelete)){
+            if(user.getUsername().trim().toLowerCase().equals(userToDelete.trim().toLowerCase())) { //
                 iterator.remove();
                 System.out.println("The user : "+userToDelete+" has been removed Successfully!");
                 foundAndRemoved = true;
                 break;
             }
-            if(!foundAndRemoved){
+            if(!foundAndRemoved){ //user to be deleted, not found
             System.out.println("User: "+userToDelete+" is not found!");
             }
         }
@@ -84,12 +104,14 @@ public class UserList {
     /**
      * Method for printing all the objects(users) in a Arraylist<User>
      */
-    public void printList() {
-        for (User user : userList) {
-            user.printUser();
-        }
+    public void printList(User performingUser)throws SecurityException {
+       if(!performingUser.getSecurityLevel().hasRequiredLevel(viewUser)){
+           throw new SecurityException("Forbidden");
+       }
+            for (User user : userList) {
+              user.printUser();
+            }
     }
-
 
     /**
      * Method for Updating users data.
@@ -114,7 +136,7 @@ public class UserList {
 
         User targetUser = findUser(usernameToUpdate);
 
-        if (targetUser == null) {
+        if (targetUser.equals(null)) {
             System.out.println("Action failed. User: " + usernameToUpdate + " not found.");
             return false;
         }
@@ -169,7 +191,11 @@ public class UserList {
      * Calculates the Total Salaries spend
      * @return
      */
-    public double getTotalSalaryExpenses() {
+    public double getTotalSalaryExpenses(User performerUser)throws SecurityException {
+       if(performerUser.getSecurityLevel().hasRequiredLevel(basicManageUser)){
+           throw new SecurityException("Forbidden.");
+       }
+        
         double sal = 0;
         for (User user : userList) {
             if (user instanceof Employee) {
