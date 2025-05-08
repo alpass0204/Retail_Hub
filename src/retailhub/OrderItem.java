@@ -4,8 +4,8 @@ public class OrderItem {
 
 	// FIELDS
 
-	private final Product p; // The product being ordered
-	private final int quantity; // Quantity of product
+	private  Product p; // The product being ordered
+	private  int quantity; // Quantity of product
 	private static final SecurityLayer manageOrderItem = SecurityLayer.layer3;
 	/**
 	 *  CONSTRUCTOR for OrderItem

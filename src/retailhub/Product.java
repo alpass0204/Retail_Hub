@@ -8,7 +8,7 @@ package retailhub;
 public class Product{
     // Product's ID
     private static int id = 1;
-    private int productId;
+    private static int productId;
     // Product's Name
     private String name;
     // Product's Categories

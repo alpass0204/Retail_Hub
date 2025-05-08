@@ -16,7 +16,7 @@ public class Sales {
 	private final LocalDate date = LocalDate.now(); // Date of sale
 	private final LocalTime time = LocalTime.now(); // Time of sale
 	private double totalamount; // Total amount of sale
-	private final ArrayList<SaleItem> items; //the list of sold products per sale
+	private ArrayList<SaleItem> items; //the list of sold products per sale
 	private PaymentMethod paymentMethod; // Method of payment used
 	private final Customer customer; // customer who made the purchase
 	//private double discountApplied = 0.0;

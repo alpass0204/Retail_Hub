@@ -14,7 +14,7 @@ public class Employee extends User {
     private String lastName;
     private final int userId; // unique employee ID
     private static int id = 1;
-    private final double salary;
+    private double salary;
     private String email;
     private String address;
     private Role role; // Role of the employee in the company
