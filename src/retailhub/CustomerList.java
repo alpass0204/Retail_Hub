@@ -46,10 +46,10 @@ public class CustomerList {
 	 */
 	public void addCustomerToList(User performingUser, Customer c) throws SecurityException {
 		// check for invalid user type
-		if(performingUser.equals(null)){
+		if(performingUser == null){
 			throw new SecurityException("Performing user can't be NULL.");
 		}
-		if(c.equals(null)){
+		if(c == null){
 			throw new SecurityException("Customer cant be NULL.");
 		}
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) {
@@ -69,8 +69,8 @@ public class CustomerList {
 	 * @param age    Customer age
 	 */
 
-	public void createCustomer(User performingUser, String name, String email, String phone, String gender, int age) throws SecurityException {
-		if(performingUser.equals(null)){ // First check: If performing User = null
+	public Customer createCustomer(User performingUser, String name, String email, String phone, String gender, int age) throws SecurityException {
+		if(performingUser == null){ // First check: If performing User = null
 			throw new SecurityException("Performing user can't be NULL.");
 		}
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { //checks if user have the
@@ -107,9 +107,11 @@ public class CustomerList {
 		if (!foundAndAdded) {
 			Customer newCustomer = new Customer(name, email, phone, gender, age);
 			customers.add(newCustomer);
-			System.out.println("Customer: " + newCustomer.getName() + " has been added succesfully!");
+			System.out.println("Customer: " + newCustomer.getName()
+					+ " has been added succesfully!");
+			return newCustomer;
 		}
-
+		return null;
 	}
 
 	/**
@@ -172,23 +174,16 @@ public class CustomerList {
 	/**
 	 * Removes a customer from the list using their email address
 	 *
-	 * @param email of the customer to remove
+	 * @param Customer
 	 */
 
-	public void removeCustomer(User performingUser, String email) throws SecurityException {
+	public void removeCustomer(User performingUser, Customer customer) throws SecurityException {
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { //credentials check
 			throw new SecurityException("Forbidden");
 		}
-		if(performingUser.equals(null) && email.trim().isEmpty()){ // null values check ( email - perf.User)
-			throw new SecurityException("Please enter a valid E-mail and Performing User.");
-		}
-		Customer c = getCustomerByEmail(performingUser, email);
-		if (c != null) {
-			customers.remove(c);
-			System.out.println("The customer with Email " + getCustomerByEmail(performingUser, email) + " has been removed!");
-		} else {
-			System.out.println("No such E-mail exists. Please try again.");
-		}
+
+		customers.remove(customer);
+		System.out.println("The customer " + customer.getName() + " has been removed!");
 
 	}
 

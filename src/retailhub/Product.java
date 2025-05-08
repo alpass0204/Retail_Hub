@@ -35,6 +35,7 @@ public class Product{
         this.name = name;
         this.category = category;
         this.purchasePrice = purchasePrice;
+        this.sellPrice = sellPrice;
         this.stock = stock;
         this.supplier = supplier;
         this.notificationStock = notificationStock;
@@ -59,6 +60,13 @@ public class Product{
      * @param category
      */
     public Product(int productId, String name, String category){
+        if(productId<1){
+            throw new IllegalArgumentException("Invalid Product id");
+        }
+        if(name.trim().toLowerCase().isEmpty()){
+            throw new IllegalArgumentException("Invalid Name");
+        }
+
         this.productId = productId;
         this.name = name;
         this.category = category;
@@ -82,7 +90,8 @@ public class Product{
      */
     public void printProduct() {
         System.out.println("Product ID: "+productId+" Name: "+name+
-                " Category: "+category+" Purchase Price: "+purchasePrice+" Sell Price: "+sellPrice+" (€)"+" In Stock: "+stock+ (supplier != null ? " Supplier: "+ supplier.getBrandName() : ""));
+                " Category: "+category+" Purchase Price: "+purchasePrice+" Sell Price: "+sellPrice+" (€)"+
+                " In Stock: "+stock+ (supplier != null ? " Supplier: "+ supplier.getBrandName() : ""));
     }
 
     /**
@@ -195,7 +204,7 @@ public class Product{
     // Prints a warning if the current stock is below the notification limit
 
     public void notificationForLowStock() {
-        if(this.stock < notificationStock) {
+        if(this.stock <= notificationStock) {
             System.out.println("Warning! Low stock in this product ID!");
         }
     }
@@ -206,5 +215,19 @@ public class Product{
 
     public int getNotificationStock() {
         return notificationStock;
+    }
+
+    @Override
+    public String toString() {
+        return "Product: " +
+                "productId =" + productId +
+                ", \nname ='" + name  +
+                ", \ncategory ='" + category  +
+                ", \npurchasePrice =" + purchasePrice +
+                ", \nsellPrice =" + sellPrice +
+                ", \nstock =" + stock +
+                ", \nsupplier =" + supplier +
+                ", \nnotificationStock =" + notificationStock +
+                ' ';
     }
 }

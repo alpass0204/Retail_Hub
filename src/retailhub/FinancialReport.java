@@ -50,7 +50,6 @@ public class FinancialReport {
         double netProfit = revenue - totalExpenses; // Final profit after expenses
 
         //PRINT FINANCIAL REPORT
-
         System.out.println("=== Financial Report ===");
         System.out.println("Total Revenue      : €" + revenue);
         System.out.println("Purchase Expenses  : €" + purchaseExpenses);

@@ -40,36 +40,29 @@ public class Sales {
 	 * @param customer Customer making the purchase
 	 */
 
-	public Sales(int salesId, ArrayList<SaleItem> items, PaymentMethod paymentMethod, Customer customer) {
+	public Sales(int salesId,
+				 ArrayList<SaleItem> items,
+				 PaymentMethod paymentMethod,
+				 Customer customer) {
 
-		// validation check
-
-		if(salesId==0){ // Checks if salesId is a valid data entry.
+		if (salesId == 0)
 			throw new IllegalArgumentException("Invalid SALES-ID");
-		}
-		if(paymentMethod.equals(null)){ // payment method check
+		if (paymentMethod == null)
 			throw new IllegalArgumentException("Payment Method can't be null");
-		}
-		if(customer.equals(null)){
-			throw new IllegalArgumentException("Customer cant be null.");
-		}
+		if (customer     == null)
+			throw new IllegalArgumentException("Customer can't be null");
 
-		//loyalty points
+		this.salesId      = salesId;
+		this.items        = new ArrayList<>(items);
+		this.paymentMethod= paymentMethod;
+		this.customer     = customer;
 
-		if (customer != null) {
-			double discount = customer.redeemAllPoints(); //redeem to receive the discount from points
-			customer.addPoints(((int) totalamount) / 5); // add point to customer (1 per 5 euro)			customer.printLoyaltyPoints(); // print customer's points
-			this.totalamount -= discount; // apply discount to total
-		}
+		sumTotal();
 
-		this.salesId = salesId;
-		this.items = new ArrayList<SaleItem>(items);
-		this.paymentMethod = paymentMethod;
-		this.customer = customer;
-		sumTotal(); //Calculate total before discounts
-
+		double discount    = customer.redeemAllPoints();
+		this.totalamount  -= discount;
+		customer.addPoints((int)(this.totalamount) / 5);
 	}
-
 
 	//GETTERS
 
@@ -123,13 +116,19 @@ public class Sales {
 		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
 			throw new SecurityException("Forbidden."); // credentials check
 		}
-		if(i.equals(null)){
+		if(i ==  null){
 			throw new SecurityException("Item cant be null."); // check of items validation
+		}
+		Product p =i.getProduct();
+		int qty = i.getQuantity();
+		if(p.getStock() < qty){
+			throw new IllegalStateException(String.format("Insufficient stock for product."));
+
 		}
 		items.add(i);
 		sumTotal();
-		i.getProduct().decreaseStock(i.getQuantity()); //decrease stock when we make a sale
-		i.getProduct().notificationForLowStock();
+		p.decreaseStock(qty); //decrease stock when we make a sale
+		p.notificationForLowStock();
 	}
 
 	/**
@@ -142,7 +141,7 @@ public class Sales {
 	    if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
 			throw new SecurityException("Forbidden."); // credentials check
 		}
-		if(item.equals(null)){
+		if(item == null){
 			throw new SecurityException("Item cant be null."); // check of items validation
 		}
 
@@ -150,8 +149,12 @@ public class Sales {
 	        sumTotal();
 	    }
 	}
+
+	public void printSale(){
+		System.out.println("Sales ID: " + salesId);
+	}
 	
-	public String receipt(User performerUser) {
+	public void receipt(User performerUser) {
 
 		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
 			throw new SecurityException("Forbidden"); // credentials check
@@ -174,12 +177,13 @@ public class Sales {
 	    
 	    // 3) Payment method and total amount
 
-	    receipt += 
+	    receipt +=
 	          "Payment: " + paymentMethod + "\n"
 	        + "-----------------\n"
 	        + "TOTAL  : " + totalamount + "\n";
-	    
-	    return receipt;
+
+		System.out.println(receipt);
+
 	}
 
 
@@ -187,13 +191,13 @@ public class Sales {
 	 * Sales Summary
 	 * @return
 	 */
-	public String saleSummary() {
-		return "Sale{" +
-	               "idSale='" + salesId + '\'' +
-	               ", date=" + date +	               
-	               ", products=" + items +
-	               ", paymentMethod='" + paymentMethod + '\'' +
-	               ", total=" + totalamount +
+	public String toString() {
+		return "Sale: " +
+	               "idSale ='" + salesId + '\'' +
+	               ", date =" + date +
+	               ", products =" + items +
+	               ", paymentMethod ='" + paymentMethod + '\'' +
+	               ", total =" + totalamount +
 	               '}';
 	}
 

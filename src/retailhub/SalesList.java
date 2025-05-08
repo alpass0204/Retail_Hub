@@ -29,8 +29,8 @@ public class SalesList {
         if(!performerUser.getSecurityLevel().hasRequiredLevel(viewSalesList)){
             throw new SecurityException("Forbidden."); // credentials check
         }
-        if(sale.equals(null)){
-            throw new SecurityException("Sale cant null."); // check of sale validation
+        if(sale == null){
+            throw new SecurityException("Sale cant be null."); // check of sale validation
         }
 
         boolean productStock = true; // raised a flag
@@ -39,8 +39,8 @@ public class SalesList {
             int soldQuantity = item.getQuantity();
             if (p.getStock() < soldQuantity) {
                 System.out.println("Insufficient Stock for product: "+ p.getProductId() +
-                        " Name: " + p.getName()+"\n Required: " + soldQuantity+
-                        "\n Available: " + p.getStock() + "\n Sale aborted.");
+                        " Name: " + p.getName()+"\nRequired: " + soldQuantity+
+                        "\n Available: " + p.getStock() + "\nSale aborted.");
                 productStock = false;
                 break;
             }
@@ -129,6 +129,30 @@ public class SalesList {
             }
         }
     //RETURN Total number of sales
+
+
+    /**
+     * Search Sales by salesId
+     * @param performerUser
+     * @param salesId
+     * @returns the Sale Id if exists
+     */
+    public Sales searchSale(User performerUser, int salesId){
+        if (salesId <= 0) {
+            System.out.println("Give a valid ID number");
+            return null;
+        }
+
+        for(Sales sale : sales) {
+            if (sale.getSalesId() == salesId) {
+                sale.printSale();
+                System.out.println("Sale found with ID " + salesId + ".");
+                return sale;
+            }
+        }
+        System.out.println("Sale not found.");
+        return null;
+    }
 
     public int totalSalesCount() {
         return sales.size();

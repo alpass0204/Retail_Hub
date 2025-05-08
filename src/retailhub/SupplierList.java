@@ -32,7 +32,7 @@ public class SupplierList {
 	 * @param s Supplier to be added
 	 */
 	public void addSupplier(Supplier s,User performerUser)throws SecurityException {
-		if(performerUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
 			throw new SecurityException("Forbidden."); // credentials check
 		}
 		if(s.equals(null)){ // checks suppliers existence
@@ -50,7 +50,7 @@ public class SupplierList {
 	 * @param email
 	 * @return TRUE if supplier was found, FALSER otherwise
 	 */
-	public boolean createSupplier(User performingUser, int taxId,
+	public Supplier createSupplier(User performingUser, int taxId,
 								  String brandName,
 								  String phone, String address,
 								  String email) throws SecurityException {
@@ -68,8 +68,10 @@ public class SupplierList {
 		
 		Supplier s = new Supplier(taxId, brandName, address, phone, email,true);
 		suppliers.add(s);
-		return true;
+		return s;
 	}
+
+
 
 		
 	/**
@@ -142,10 +144,12 @@ public class SupplierList {
 		if(!performingUser.getSecurityLevel().hasRequiredLevel(viewSupplier)){
 			throw new SecurityException("Forbidden");
 		}
-		for(Supplier i: suppliers) {
-			i.printSupplier();
+		for(Supplier supplier: suppliers) {
+			supplier.printSupplier();
 		}
 	}
+
+
 	/**
 	 * Check if a VAT number already exists in Suppliers List
 	 * @param taxId

@@ -39,17 +39,21 @@ public class ProductList {
             throw new SecurityException("Id cant be null");
         }
         Iterator<Product> iterator = products.iterator();
+        boolean found = false;
         while (iterator.hasNext()) {
             Product product = iterator.next();
+
             if (product.getProductId() == id) {
                 System.out.println("The product has been removed Successfully!");
                 iterator.remove();
+                found = true;
                 break;
-            } else {
+            }}
+            if(!found){
                 System.out.println("Product ID is not found!");
             }
         }
-    }
+
 
     /**
      * Method for searching product in the list through ID.
@@ -59,29 +63,39 @@ public class ProductList {
      */
 
     public Product searchProducts(User performerUser, int id) throws SecurityException {
-        if (!performerUser.getSecurityLevel().hasRequiredLevel(viewList))
+        // Permission check
+        if (!performerUser.getSecurityLevel().hasRequiredLevel(viewList)) {
             throw new SecurityException("Forbidden");
-        {
-            if (id <= 0) {
-                //System.out.println("Give a valid ID number");
-                return null;
-            }
-            for (Product product : products) {
-                if (product.getProductId() == id) {
-                    product.printProduct();
-                    System.out.println("Product: " + product + " has been found.");
-                    return product;
-                }
-            }
-            System.out.println("Product not found");
+        }
+
+        // ID sanity check
+        if (id <= 0) {
+            System.out.println("Give a valid ID number");
             return null;
         }
+
+        // Search for the product in the list
+        for (Product product : products) {
+            if (product.getProductId() == id) {
+                product.printProduct();
+                System.out.println("Product with ID " + product.getProductId() + " has been found.");
+                return product;
+            }
+        }
+
+        System.out.println("Product not found");
+        return null;
     }
-        /**
+
+
+
+
+    /**
          * Method for printing the list of products.
          */
-        public void printList(User performerUser) throws SecurityException{
-            if(!performerUser.getSecurityLevel().hasRequiredLevel(viewList))
+        public void printList (User performerUser) throws SecurityException {
+            if (!performerUser.getSecurityLevel().hasRequiredLevel(viewList))
+                throw new SecurityException("Forbidden");
             for (Product product : products) {
                 product.printProduct();
             }
@@ -92,24 +106,35 @@ public class ProductList {
          * @param id ID of the product to be updated
          * @param newName New product name
          * @param newCategory New product category
-         * @param Price New purchase price
+         * @param newPurchasePrice New purchase price
+         * @param newSellPrice New sell price
          * @param newStock New stock quantity
+         * @param supplier Supplier
+         * @param newNotificationStock New stock notification
          */
-
+        //TODO --SUPPLIER NEEDS TO BE UPDATED WHEN PRODUCT IS UPDATED--
         public void updateProduct (User performerUser,int id, String newName, String newCategory,
-        double Price, int newStock) throws SecurityException {
+        double newPurchasePrice,
+        double newSellPrice, int newStock, Supplier supplier,int newNotificationStock) throws SecurityException {
             if (!performerUser.getSecurityLevel().canManageProducts(performerUser, false))
                 throw new SecurityException("Forbidden");
+
+            boolean found = false;
             for (Product product : products) {
                 if (product.getProductId() == id) {
                     product.setName(newName);
                     product.setCategory(newCategory);
-                    product.setPurchasePrice(Price); //πρεπει να αλλάζει εδώ? αποφυγή λάθους τυπογράφησης.
-                    product.setStock(newStock); //πρεπει να αλλάζει εδώ? αποφυγή λάθους τυπογράφησης.
+                    product.setPurchasePrice(newPurchasePrice);
+                    product.setSellPrice(newSellPrice);
+                    product.setStock(newStock);
+                    product.setNotificationStock(newNotificationStock);
                     System.out.println("The Product has been Updated Successfully!");
-                } else {
-                    System.out.println("Product not found!");
+                    found = true;
+                    break;
                 }
+            }
+            if (!found) {
+                System.out.println("Product not found");
             }
         }
 
@@ -118,10 +143,14 @@ public class ProductList {
          * Makes sure product is unique
          * @param name Product name
          * @param category Product category
-         * @param price Purchase price
+         * @param purchasePrice Purchase price
+         * @param sellPrice Sell price
          * @param stock Initial stock
+         * @param supplier Supplier
+         * @param notificationStock Stock notification
          */
-        public void createProduct (User performerUser,String name, String category, double purchasePrice, double sellPrice, int stock,Supplier supplier,int notificationStock) throws SecurityException {
+        public void createProduct (User performerUser, String name, String category,double purchasePrice,
+        double sellPrice, int stock, Supplier supplier,int notificationStock) throws SecurityException {
             if (!performerUser.getSecurityLevel().canManageProducts(performerUser, false)) {
                 throw new SecurityException("Forbidden.");
             }
@@ -134,7 +163,7 @@ public class ProductList {
             if (purchasePrice < 0 && stock < 1) {
                 throw new SecurityException("Price or stock value error");
             }
-            Product newProduct = new Product(name, category,  purchasePrice, sellPrice, stock,supplier, notificationStock);
+            Product newProduct = new Product(name, category, purchasePrice, sellPrice, stock, supplier, notificationStock);
             products.add(newProduct);
             System.out.println("The product has been added Successfully.");
 

@@ -141,4 +141,27 @@ public class OrderList {
 		}
 		return total;
 	}
+
+	/**
+	 * searches order by its orderId
+	 * @param performerUser
+	 * @param orderId
+	 * @return
+	 * @throws SecurityException
+	 */
+	public Order searchOrder(User performerUser, int orderId) throws SecurityException {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageOrder)){
+			throw new IllegalArgumentException("Forbidden.");
+		}
+		for (Order order : orderlist) {
+			if (order.getOrderId() == orderId) {
+				order.getOrderId();
+				System.out.println("Order with ID " + orderId + " has been searched.");
+				return order;
+			}
+		}
+
+		System.out.println("No order found with ID " + orderId + ".");
+		return null;
+	}
 }

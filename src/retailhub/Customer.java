@@ -216,7 +216,7 @@ public class Customer {
 			  return discount;
 		  }
 		  else {
-			  System.out.println("Δεν υπάρχουν αρκετοί πόντοι για έκπτωση. Απαιτούνται 100.");
+			  System.out.println("Required at least 100 points for discount.");
 			  return 0.0;
 		  }
 	  }

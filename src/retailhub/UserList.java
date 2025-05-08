@@ -72,7 +72,7 @@ public class UserList {
         }
 
         userList.add(newUser);
-        System.out.println("User: " + newUser + " has been created!");
+
     }
 
     /** removeUser METHOD
@@ -193,7 +193,7 @@ public class UserList {
      * @return
      */
     public double getTotalSalaryExpenses(User performerUser)throws SecurityException {
-       if(performerUser.getSecurityLevel().hasRequiredLevel(basicManageUser)){
+       if(!performerUser.getSecurityLevel().hasRequiredLevel(basicManageUser)){
            throw new SecurityException("Forbidden.");
        }
 

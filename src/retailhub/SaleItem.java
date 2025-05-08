@@ -3,7 +3,7 @@ package retailhub;
 public class SaleItem {
 
 
-		private static final SecurityLayer manageSaleItem = SecurityLayer.layer3;
+	private static final SecurityLayer manageSaleItem = SecurityLayer.layer3;
 		private Product product; // The product being sold
 		private int quantity; // Quantity of product sold
 
@@ -16,7 +16,7 @@ public class SaleItem {
 		if(!performingUser.getSecurityLevel().hasRequiredLevel(manageSaleItem)){
 			throw new IllegalArgumentException("Forbidden."); // credentials check
 		}
-		if(product.equals(null)){ // Products not null check
+		if(product == null){ // Products not null check
 			throw new IllegalArgumentException("Product cant be null.");
 		}
 		if(quantity < 1){ // valid form of quantity variable.
@@ -55,4 +55,13 @@ public class SaleItem {
 		public Product getProduct() {
 			return this.product;
 		}
+
+	@Override
+	public String toString() {
+		return "SaleItem{" +
+				"product=" + product +
+				", quantity=" + quantity +
+				' ';
 	}
+}
+
