@@ -12,7 +12,7 @@ public class CustomerList {
 
 	// FIELDS
 
-	private ArrayList<Customer> customers; //List of all customer
+	private final ArrayList<Customer> customers; //List of all customer
 
 	private static final SecurityLayer viewCustomer = SecurityLayer.layer1;
 	private static final SecurityLayer manageCustomer = SecurityLayer.layer2; // CRUD
@@ -133,7 +133,7 @@ public class CustomerList {
 
 		for (Customer c : customers) {
 
-			if (c.getEmail().trim().toLowerCase().equals(email.trim().toLowerCase())) {
+			if (c.getEmail().trim().equalsIgnoreCase(email.trim())) {
 				return c;
 			}
 
@@ -162,7 +162,7 @@ public class CustomerList {
 
 
 		for (Customer c : customers) {
-			if (c.getPhone().trim().toLowerCase().equals(phone.trim().toLowerCase())) {
+			if (c.getPhone().trim().equalsIgnoreCase(phone.trim())) {
 				return c;
 			}
 		}

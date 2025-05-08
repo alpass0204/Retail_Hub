@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Supplier {
 
-	private int taxId;
+	private final int taxId;
 	private String brandName;
 	private String address;
 	private String phone;
 	private String email;
 	private boolean isActive;
-	private ArrayList<Product> products;
+	private final ArrayList<Product> products;
 
 	/**
 	 * Constructor για Suppliers

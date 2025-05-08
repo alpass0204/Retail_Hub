@@ -10,9 +10,9 @@ public class FinancialReport {
     // FIELDS
 
     private static final SecurityLayer getReport = SecurityLayer.layer3;
-    private SalesList salesList; // CONTAINS all sales data
-    private OrderList orderList; // CONTAINS all order data
-    private UserList userList;   // CONTAINS all user(employee) data for salaries
+    private final SalesList salesList; // CONTAINS all sales data
+    private final OrderList orderList; // CONTAINS all order data
+    private final UserList userList;   // CONTAINS all user(employee) data for salaries
 
     /**
      * CONSTRUCTOR FOR THE FinancialReport

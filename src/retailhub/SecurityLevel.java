@@ -92,11 +92,8 @@ public class SecurityLevel{
         }
 
         // Implementation of 3
-        if(performersLevel == SecurityLayer.layer4){
-            return true;
-        }
+        return performersLevel == SecurityLayer.layer4;
         // Default Deny
-        return false;
     }
 
     /** CAN_MANAGE_PRODUCTS

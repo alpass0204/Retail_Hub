@@ -11,7 +11,7 @@ public class ProductList {
 
     private static final SecurityLayer viewList = SecurityLayer.layer1;
     private static final SecurityLayer manageList = SecurityLayer.layer2;
-    private ArrayList<Product> products; // List storing all products
+    private final ArrayList<Product> products; // List storing all products
 
     /**
      * Constructor for list of products.

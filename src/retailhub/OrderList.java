@@ -13,7 +13,7 @@ public class OrderList {
 
 	private static final SecurityLayer viewOrder = SecurityLayer.layer1;
 	private static final SecurityLayer manageOrder = SecurityLayer.layer2;
-	private ArrayList<Order> orderlist; // List of all orders
+	private final ArrayList<Order> orderlist; // List of all orders
 
 	// CONSTRUCTOR OrderList
 

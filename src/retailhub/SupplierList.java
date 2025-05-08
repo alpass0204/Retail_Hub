@@ -12,7 +12,7 @@ public class SupplierList {
 
 	// FIELDS
 
-	private ArrayList<Supplier> suppliers; // List of all suppliers
+	private final ArrayList<Supplier> suppliers; // List of all suppliers
 	private static final SecurityLayer viewSupplier = SecurityLayer.layer1;
 	private static final SecurityLayer manageSupplier = SecurityLayer.layer2;
 
@@ -62,7 +62,7 @@ public class SupplierList {
 		}
 
 		if(taxId == 0 && brandName.trim().toLowerCase().equals(null) ||
-		brandName.trim().toLowerCase().isEmpty()){ // Brand Name and Tax-Id not null values check
+		brandName.trim().isEmpty()){ // Brand Name and Tax-Id not null values check
 			throw new SecurityException("Tax-Id And Brand Name can't be NULLS");
 		}
 		

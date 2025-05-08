@@ -63,7 +63,7 @@ public class Product{
         if(productId<1){
             throw new IllegalArgumentException("Invalid Product id");
         }
-        if(name.trim().toLowerCase().isEmpty()){
+        if(name.trim().isEmpty()){
             throw new IllegalArgumentException("Invalid Name");
         }
 

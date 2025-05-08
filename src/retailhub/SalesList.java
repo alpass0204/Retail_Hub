@@ -12,7 +12,7 @@ public class SalesList {
     // FIELDS
     private static final SecurityLayer viewSalesList = SecurityLayer.layer1;
     private static final SecurityLayer manageSalesList = SecurityLayer.layer3;
-    private ArrayList<Sales> sales; // List of all sales
+    private final ArrayList<Sales> sales; // List of all sales
 
     // CONSTRUCTOR
 

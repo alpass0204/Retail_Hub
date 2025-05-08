@@ -11,7 +11,7 @@ public abstract class User {
     private String username; // UNIQUE username
     private String password; // User's Password
     private SecurityLevel securityLevel; // Security Level
-    private ArrayList<Object> workHours; // User's hours worked.
+    private final ArrayList<Object> workHours; // User's hours worked.
 
     /**
      * Constructor

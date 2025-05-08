@@ -12,13 +12,13 @@ public class Employee extends User {
 
     private String name;
     private String lastName;
-    private int userId; // unique employee ID
+    private final int userId; // unique employee ID
     private static int id = 1;
-    private double salary;
+    private final double salary;
     private String email;
     private String address;
     private Role role; // Role of the employee in the company
-    private ArrayList<WorkHours> workSessions;;
+    private final ArrayList<WorkHours> workSessions;
 
     /**
      * CONSTRUCTOR FOR CREATING AN EMPLOYEE OBJECT

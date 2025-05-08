@@ -17,7 +17,7 @@ public class Order {
 	private static int id = 1;
 	private int orderId; // Unique order ID
 	private LocalDate date = LocalDate.now(); // Order Date
-	private LocalTime time = LocalTime.now(); // Order Time
+	private final LocalTime time = LocalTime.now(); // Order Time
 	private PaymentMethod paymentMethod; // Payment method used for the order
 	private double total; // Total cost of the order
 	private Supplier supplier; // Supplier to whom the order is made

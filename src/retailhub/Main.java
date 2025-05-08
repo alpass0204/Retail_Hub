@@ -44,16 +44,15 @@ public class Main {
 
 /*
 		//PRINT LIST
-		userList.printList(e1);
+		//userList.printList(e1);
 
 		//LOGIN FEATURE AND WORKHOURS INITIALIZATION
 
 		Authentication.login("kwstas", userList);			//TODO - GET EMPLOYEE OBJECT FROM LOGIN
 			WorkHours workHours = new WorkHours();			//TODO - DEPARTURE TIME ON EXIT/CLOCKOUT
 			e1.addWorkSession(workHours);
-
 */
-		/*
+
 
 
 		//USE CASE 3
@@ -70,7 +69,7 @@ public class Main {
 		//PRODUCT CREATION FROM DIFFERENT SECURITY LAYERS
 
 		//LAYER1 CANNOT MANAGE PRODUCTS
-//		productList.createProduct(e1, "Headphones", "Electronics",289,350,1 , s, 0);
+		//productList.createProduct(e1, "Headphones", "Electronics",289,350,1 , s, 0);
 
 		//LAYER2 CAN MANAGE PRODUCTS
 		productList.createProduct(e2, "PC monitor", "Electronics",25.0,21,1,s,0 );
@@ -94,6 +93,9 @@ public class Main {
 		productList.printList(e2);
 
 
+
+		//productList.searchProducts(e2,)
+/*
 
 		//USE CASE 4
 		//MANAGEMENT OF SALES
@@ -206,7 +208,7 @@ public class Main {
 		supplierList.removeSupplierFromList(e3,784523948);
 		supplierList.printList(e3);
 
-*/
+
 
 /*
 		//ORDER

@@ -4,8 +4,8 @@ public class SaleItem {
 
 
 	private static final SecurityLayer manageSaleItem = SecurityLayer.layer3;
-		private Product product; // The product being sold
-		private int quantity; // Quantity of product sold
+		private final Product product; // The product being sold
+		private final int quantity; // Quantity of product sold
 
 	/**
 	 * CONSTRUCTOR for SaleItem

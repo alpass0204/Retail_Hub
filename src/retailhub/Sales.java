@@ -12,13 +12,13 @@ public class Sales {
 
 	// FIELDS
 
-	private int salesId; // Unique salesID
-	private LocalDate date = LocalDate.now(); // Date of sale
-	private LocalTime time = LocalTime.now(); // Time of sale
+	private final int salesId; // Unique salesID
+	private final LocalDate date = LocalDate.now(); // Date of sale
+	private final LocalTime time = LocalTime.now(); // Time of sale
 	private double totalamount; // Total amount of sale
-	private ArrayList<SaleItem> items; //the list of sold products per sale
+	private final ArrayList<SaleItem> items; //the list of sold products per sale
 	private PaymentMethod paymentMethod; // Method of payment used
-	private Customer customer; // customer who made the purchase
+	private final Customer customer; // customer who made the purchase
 	//private double discountApplied = 0.0;
 	private static final SecurityLayer manageSales = SecurityLayer.layer2;
 
@@ -122,7 +122,7 @@ public class Sales {
 		Product p =i.getProduct();
 		int qty = i.getQuantity();
 		if(p.getStock() < qty){
-			throw new IllegalStateException(String.format("Insufficient stock for product."));
+			throw new IllegalStateException("Insufficient stock for product.");
 
 		}
 		items.add(i);
