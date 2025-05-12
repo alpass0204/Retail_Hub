@@ -8,6 +8,16 @@ public class Main {
 
 	public static void main(String[] args) {
 
+
+
+
+
+
+
+
+
+
+
 		//INITIALIZATION OF LISTS FOR STORAGE
 		Scanner in = new Scanner(System.in);
 		UserList userList = new UserList();
