@@ -14,9 +14,10 @@ public class Order {
 	// FIELDS
 
 	private ArrayList<OrderItem> items; // List of items included in the order
+	private static int id = 1;
 	private int orderId; // Unique order ID
 	private LocalDate date = LocalDate.now(); // Order Date
-	private LocalTime time = LocalTime.now(); // Order Time
+	private final LocalTime time = LocalTime.now(); // Order Time
 	private PaymentMethod paymentMethod; // Payment method used for the order
 	private double total; // Total cost of the order
 	private Supplier supplier; // Supplier to whom the order is made
@@ -35,20 +36,17 @@ public class Order {
 
 	/**
 	 * CONSTRUCTOR FOR ORDER
-	 * @param orderId Unique ID for the order
 	 * @param supplier Supplier associated with the order
 	 * @param items List of order items
 	 * @param paymentMethod Method of payment
 	 */
 
-	public Order(int orderId, Supplier supplier, ArrayList<OrderItem> items, PaymentMethod paymentMethod) {
-		if(orderId==0){
-			throw new IllegalArgumentException("Order-ID cant be null.");
-		}
+	public Order( Supplier supplier, ArrayList<OrderItem> items, PaymentMethod paymentMethod) {
+
 		if(supplier.equals(null)){
 			throw new IllegalArgumentException("Enter a Supplier");
 		}
-		this.orderId = orderId;
+		this.orderId = id++;
 		this.items = new ArrayList<OrderItem>(items);
 		this.paymentMethod = paymentMethod;
 		this.total = 0; // Calculated with totalOrderValue

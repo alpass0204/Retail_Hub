@@ -8,7 +8,7 @@ public class UserList {
 
     // FIELDS
 
-    private ArrayList<User> userList; //List of all Users
+    private final ArrayList<User> userList; //List of all Users
     private static final SecurityLayer viewUser = SecurityLayer.layer2;
     private static final SecurityLayer basicManageUser = SecurityLayer.layer3;
     private static final SecurityLayer godMode = SecurityLayer.layer4;
@@ -72,7 +72,7 @@ public class UserList {
         }
 
         userList.add(newUser);
-        System.out.println("User: " + newUser + " has been created!");
+
     }
 
     /** removeUser METHOD
@@ -89,7 +89,7 @@ public class UserList {
         boolean foundAndRemoved = false; // flag
         while(iterator.hasNext()){
             User user = iterator.next();
-            if(user.getUsername().trim().toLowerCase().equals(userToDelete.trim().toLowerCase())) { //
+            if(user.getUsername().trim().equalsIgnoreCase(userToDelete.trim())) { //
                 iterator.remove();
                 System.out.println("The user : "+userToDelete+" has been removed Successfully!");
                 foundAndRemoved = true;
@@ -193,7 +193,7 @@ public class UserList {
      * @return
      */
     public double getTotalSalaryExpenses(User performerUser)throws SecurityException {
-       if(performerUser.getSecurityLevel().hasRequiredLevel(basicManageUser)){
+       if(!performerUser.getSecurityLevel().hasRequiredLevel(basicManageUser)){
            throw new SecurityException("Forbidden.");
        }
 

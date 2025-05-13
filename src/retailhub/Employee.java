@@ -1,5 +1,7 @@
 package retailhub;
 
+import java.util.ArrayList;
+
 /**
  * Represents an employee in the system
  * Extends the abstract user class and adds specific employee related fields
@@ -10,12 +12,13 @@ public class Employee extends User {
 
     private String name;
     private String lastName;
-    private int userId; // unique employee ID
+    private final int userId; // unique employee ID
     private static int id = 1;
     private double salary;
     private String email;
     private String address;
     private Role role; // Role of the employee in the company
+    private final ArrayList<WorkHours> workSessions;
 
     /**
      * CONSTRUCTOR FOR CREATING AN EMPLOYEE OBJECT
@@ -53,6 +56,7 @@ public class Employee extends User {
         this.email = email.trim();
         this.address = address.trim().toLowerCase();
         this.role = role;
+        this.workSessions = new ArrayList<>();
     }
 
     //  Abstract Methods
@@ -133,13 +137,20 @@ public class Employee extends User {
         this.role = role;
     }
 
+
+    //METHODS FOR WORKHOURS
+    public ArrayList<WorkHours> getWorkSessions() {
+        return workSessions;
+    }
+
+    public void addWorkSession(WorkHours session) {
+        if (session != null) {
+            this.workSessions.add(session);
+        }
+    }
     /**
      * Prints user and employee specific details
      */
-
-
-
-
     @Override
     public void printUser() {
 

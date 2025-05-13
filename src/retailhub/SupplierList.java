@@ -12,7 +12,7 @@ public class SupplierList {
 
 	// FIELDS
 
-	private ArrayList<Supplier> suppliers; // List of all suppliers
+	private final ArrayList<Supplier> suppliers; // List of all suppliers
 	private static final SecurityLayer viewSupplier = SecurityLayer.layer1;
 	private static final SecurityLayer manageSupplier = SecurityLayer.layer2;
 
@@ -32,7 +32,7 @@ public class SupplierList {
 	 * @param s Supplier to be added
 	 */
 	public void addSupplier(Supplier s,User performerUser)throws SecurityException {
-		if(performerUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
 			throw new SecurityException("Forbidden."); // credentials check
 		}
 		if(s.equals(null)){ // checks suppliers existence
@@ -50,8 +50,8 @@ public class SupplierList {
 	 * @param email
 	 * @return TRUE if supplier was found, FALSER otherwise
 	 */
-	public boolean createSupplier(User performingUser,
-								  int taxId, String brandName,
+	public Supplier createSupplier(User performingUser, int taxId,
+								  String brandName,
 								  String phone, String address,
 								  String email) throws SecurityException {
 		if(performingUser.equals(null)) { // First check: If performing User = null
@@ -62,23 +62,44 @@ public class SupplierList {
 		}
 
 		if(taxId == 0 && brandName.trim().toLowerCase().equals(null) ||
-		brandName.trim().toLowerCase().isEmpty()){ // Brand Name and Tax-Id not null values check
+		brandName.trim().isEmpty()){ // Brand Name and Tax-Id not null values check
 			throw new SecurityException("Tax-Id And Brand Name can't be NULLS");
 		}
 		
 		Supplier s = new Supplier(taxId, brandName, address, phone, email,true);
 		suppliers.add(s);
-		return true;
+		return s;
 	}
+
+
 
 		
 	/**
 	 * Remove supplier if VAT already exists
 	 * @param taxId
 	 */
-	public void removeSupplier(String taxId) {
+	public void removeSupplierFromList(User performerUser , int taxId) {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
+			throw new IllegalArgumentException("Forbidden."); // Credentials check
+		}
+		if(taxId==0){
+			throw new IllegalArgumentException("TaxId-ID cant be 0."); //check for invalid orderId
+		}
 
-	   
+		Supplier supplierToRemove = null;
+		for(Supplier supplier : suppliers){
+			if(supplier.getTaxId() == taxId){
+				supplierToRemove = supplier;
+				break;
+			}
+		}
+		if(supplierToRemove != null){
+			suppliers.remove(supplierToRemove);
+			System.out.println("Supplier with TaxId: "+taxId+" has been removed.");
+		}
+		else{
+			System.out.println("No order found with ID "+taxId+".");
+		}
 	}
 
 	/**
@@ -123,10 +144,12 @@ public class SupplierList {
 		if(!performingUser.getSecurityLevel().hasRequiredLevel(viewSupplier)){
 			throw new SecurityException("Forbidden");
 		}
-		for(Supplier i: suppliers) {
-			i.printSupplier();
+		for(Supplier supplier: suppliers) {
+			supplier.printSupplier();
 		}
 	}
+
+
 	/**
 	 * Check if a VAT number already exists in Suppliers List
 	 * @param taxId

@@ -8,6 +8,16 @@ public class Main {
 
 	public static void main(String[] args) {
 
+
+
+
+
+
+
+
+
+
+
 		//INITIALIZATION OF LISTS FOR STORAGE
 		Scanner in = new Scanner(System.in);
 		UserList userList = new UserList();
@@ -18,334 +28,244 @@ public class Main {
 		SupplierList supplierList = new SupplierList();
 
 
-		// Authentication class testing. USE CASE 11
+		//USE CASE 1
+		// Authentication class testing.
 		// User loging in with 3 attempts, method finds user and types password
 
-
-		Employee e1 = new Employee("kwstas", "willie", SecurityLayer.layer3,
+		User e3 = new Employee("ilias", "maz", SecurityLayer.layer3,
 				"jane", "doe", 3000.13, "uom@2323.gr",
-				"toumpa", Role.manager);                                                 //CREATION OF MANAGER EMPLOYEE
+				"toumpa", Role.accountant);                                    //CREATION OF MANAGE EMPLOYEE
+		Employee e1 = new Employee("kwstas", "willie", SecurityLayer.layer1,
+				"jane", "doe", 3000.13, "uom@2323.gr",
+				"toumpa", Role.salesPerson);                                 //CREATION OF LAYER1 EMPLOYEE
+		Employee e2 = new Employee("Harry", "qwerty", SecurityLayer.layer2,
+				"Harris", "Karam", 967.5, "xarkar@uom.gr",
+				"473 BROADWAY", Role.accountant);                        //CREATION OF  ACCOUNTANT
+		User sysadmin = new Employee("sudo", "wqfvdsf", SecurityLayer.layer4,
+				"Administrator", "ADMIN", 0.0,
+				"A@A.com", "", Role.sysadmin);                            //CREATION OF LAYER4 SYSADMIN
 
 
-		userList.addUserToList(e1, e1);															//ADDITION TO USERLIST
-		userList.printList(e1);																	//PRINT
+		//ADDITION TO USERLIST
+		userList.addUserToList(e3, e1);
+		userList.addUserToList(e3, e2);
+		userList.addUserToList(e3, e3);
 
-		Authentication.login("kwstas", userList);
-
-
-		/*
-
-
-
-
-
-
-
-
-
-
-
-		//TESTING CRUD FOR SUPPLIER AND SUPPLIERLIST
-
-		//CREATION OF SUPPLIER LIST FOR STORAGE OF SUPPLIERS
-		//SupplierList suppliersTechnology = new SupplierList();
-
-		//CREATION OF SUPPLIERS
-		//Supplier Cosmote = new Supplier("25021","Cosmote","Enwtikwn11","698400","asodiaosi",null);
-		//Supplier Vodafone = new Supplier("32232","Vodafone","Xaroupolh 22","69849584","ilias@iois",null);
-
-		//ProductList productList1 = new ProductList();
-		//Product product1 = new Product(123,"cola","electronics");
-		//Product product2 = new Product(1, "fanta", "cosmetics", 123231, 1321, null  );
-		//Product product3 = new Product();
-		//Product product4 = new Product(2, "sprite", "cosmetics", 123231, 1321,null );
-		//Product product5 = new Product(3, "sprite", "cosmetics", 123231, 1321,null);
-		//suppliersTechnology.addSupplier(Cosmote);
-		//suppliersTechnology.addSupplier(Vodafone);
-		//suppliersTechnology.printList();
-		//product1.printProduct();
-		//product2.productPrint();
-		//product3.productPrint();
-
-		//productList1.addProduct(product1);
-		//productList1.addProduct(product2);
-		//productList1.addProduct(product3);
-
-		//productList1.searchProducts(121);
-		//productList1.searchProducts(123);
-		//productList1.searchProducts(-1);
-
-		//productList1.printList();
-
-		//productList1.createProduct(121,"sdq", "21412", 2131, 2131);
-		//productList1.printList();
-		//suppliersTechnology.printList();
-		//Cosmote.printSupplier();
-
-		/*  ------- SALEITEM + SALES CLASSES-METHODS TESTED <3---------*/
-		//Supplier s1 = new Supplier("12", "Coc", "d2", "1324902", "femk", true);
-		//Product p1 = new Product(1, "Shampoo", "Hair", 2, 1.85, 5, s1);
-		//Product p2 = new Product(2, "Cannabis", "Hair", 5, 1.85, 5, s1);
-//		SaleItem item1 = new SaleItem(p1,2);
-//		SaleItem item2 = new SaleItem(p2,2);                                                                   //   SALEITEM + SALES CLASSES-METHODS TESTED <3
-	
-/*		System.out.println(item1.getName());
-		System.out.println(item1.getLineTotal());
-		Employee e1 = new Employee("34513","14432", 1,2254, "34124", "3i24kj","1431","14", Role.MANAGER);
-		ArrayList<SaleItem> items = new ArrayList<SaleItem>();
-		items.add(item1);
-		items.add(item2);
-		
-		
-		Sales sale1 = new Sales("14324","34125", e1, items, PaymentMethod.DEBIT_CARD);
-		
-		sale1.sumTotal();
-		System.out.println(sale1.getTotalamount());
-		System.out.println(sale1.receipt());
-*/
-
-		//Testing Order, OrderItem, OrderList classes
-		//Create a supplier, a product or two and test if the classes works
-		//ArrayList<OrderItem> items = new ArrayList<OrderItem>();
-		//OrderItem orderitem1 = new OrderItem(p1, 5);
-		//OrderItem orderitem2 = new OrderItem(p2, 10);
-//		items.add(orderitem1);
-//		items.add(orderitem2);
-		
-		/*
-		Order order1 = new Order(1, s1, items, Order.PaymentMethod.cash);
-		order1.totalOrderValue();
-		//System.out.println(order1.toString());
-//		order1.printOrder();
-		System.out.println("");
-		order1.addOrderItem(orderitem1);
-		order1.addOrderItem(orderitem2);
-		*/
-
-		//System.out.println(order1.toString());
-		//OrderList orderlist1 = new OrderList();
-//		orderlist1.addOrder(order1);
-		//orderlist1.printAllOrders();
-		//OrderList orderlist1 = new OrderList();
-		//orderlist1.addOrder(order1);
-		//orderlist1.printAllOrders();
-
-
-		// κατασκευή και δοκιμη supplier και supplierList
-		//SupplierList suppliers = new SupplierList();
-		//Supplier supplier1 = new Supplier;
-		//suppliers.createAndAddSupplier("1", "2321", "32", "23f", "1rr");
-		//suppliers.createAndAddSupplier("2", "231", "321", "23", "1r");
-		//suppliers.printList();
-
-		//suppliers.updateSupplier(null, "mmm", "145", "13254","1431", );
-		//suppliers.printList();
-
-
-
-
-		
-		/* Αφαίρεση supplier με scanner από το χρήστη.
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Give a VAT");
-		String taxID = sc.nextLine();             REMOVE SUPPLIER ME USER INPUT!!!
-		
-		suppliers.removeSupplier(taxID);
-		
-		sc.close();
-		suppliers.printList();
-		*/
 
 /*
-		//Creation of Userlist
-		UserList userlist = new UserList();
+		//PRINT LIST
+		//userList.printList(e1);
 
-		//Creation of users and SecurityLevel TESTING
-		User karamf29 = new UserOne("karamf29", "xaris", "xaris" ,"karamf",29,50000,"xaris@yahoo.gr",
-				"bp 39", Role.analyst  );
-		User maz25 = new UserOne("maz25", "ilias0984398", "ilias" ,"maz",25,50000,"xaris@yahoo.gr",
-				"bp 39", Role.analyst  );
-		User kostas28 = new UserTwo("kostas28","kostas","kostas","kotsaris",28,55000,
-				"kostas@uom.cz","Armenopoulou 12", Role.accountant);
-		User alex21 = new UserThree("alex21","alex","alexandros","alexakis",21,550000,
-				"alex@xela.com","Karaoli 12", Role.manager);
-		User pavlos19 = new UserFour("pavlos19","pavlos","pavlaras","Prof",19,150000,
-				"pavlosprof@igetis.com","Dodekanisou 99", Role.sysadmin);
+		//LOGIN FEATURE AND WORKHOURS INITIALIZATION
 
-		//Testing of userList methods
-
-		//AddUser to the userList
-		userlist.addUser(karamf29);
-		userlist.addUser(maz25);
-		userlist.addUser(kostas28);
-		userlist.addUser(alex21);
-		userlist.addUser(pavlos19);
-		//userlist.printList();
-
-		//Search User
-		//userlist.searchUser(karamf29,29 );
-		//userlist.searchUser(maz25,25);
-		//userlist.searchUser(Dora,11);
-
-
-		//Remove User
-		//userlist.removeUser("karamf29",29);
-		//userlist.printList();
-
-		//Update user
-
-		userlist.updateUser(pavlos19, "karamf29", "1234", "xaroulis", 11, 5, "a@a.net",
-				"giannitswn 23", Role.sysadmin, new SecurityLevel(SecurityLayer.layer4));
-		//userlist.printList();
-
-		pavlos19.printUser();
-		karamf29.printUser();
+		Authentication.login("kwstas", userList);			//TODO - GET EMPLOYEE OBJECT FROM LOGIN
+			WorkHours workHours = new WorkHours();			//TODO - DEPARTURE TIME ON EXIT/CLOCKOUT
+			e1.addWorkSession(workHours);
 */
-//Customer Testing
-		/*Customer c5 = new Customer(001, "Maria", "Maria@gmail.com", "6912345678", "Female",25,0);
-		c5.printCustomer();
-		c5.addPoints(150);
-		c5.redeemAllPoints();
-		c5.printLoyaltyPoints();
-		c5.setPhone("6988888888");
-		System.out.println("Updated phone: " + c5.getPhone()); */
 
 
-		//CustomerList Testing
-	//	CustomerList list = new CustomerList();
 
-		//Δημιουργία πελατών
-	//	list.createCustomer(001, "Maria", "maria@mail.com", "6912345678", "neutral", 150, 0);
-	//	list.createCustomer(002, "Herrer", "her@mail.com", "6912323278", "neutral", 10, 0);
+		//USE CASE 3
+		//PRODUCT AND STOCK MANAGEMENT
 
-		//Εκτύπωση όλων
-		// list.printList();
+		//CREATION OF SUPPLIER
+		supplierList.createSupplier(e3,784523948,"WHOLESALE SUPPLIER","210 1234568",
+				"Leoforos poseidonos 180", "generalmanagement@wholesale.com");
 
-		// Προσθήκη πελάτη
-	//	Customer Giannis= new Customer("Giannis", "Giannis@gmail.com","6945678912","Male",35,90);
-	//	Customer Ilias= new Customer("Ilias", "iliass@gmail.com","6945678912","Male",35,90);
-	//	list.addCustomerToList(Giannis);
-	//	list.addCustomerToList(Ilias);
-	//	list.printList();
-
-        // Αναζήτηση πελάτ
-		/**
-       Customer found = list.getCustomerById(002);
-       if (found != null) {
-       found.printCustomer();}
-		*/
-		// Ενημέρωση πελάτη
-		/*list.updateCustomer("001", "Maria Papadopoulou", "newmaria@mail.com", "6900000001", "Female", 31, 300);
-
-       // Διαγραφή
-       list.removeCustomer("003");
-
-      // Εκτύπωση τελικής λίστας
-      ist.printList(); }*/
-
-	  /*Testing Order Item
-		Supplier s1 = new Supplier("12", "Coc", "d2", "1324902", "femk", true);
-		Product p1 = new Product(1, "Shampoo", "Hair", 10, 1.50, 0, s1);
-
-		OrderItem item1 = new OrderItem(p1, 3);
-		items.add(item1);
+		//supplierList.printList(e3);
 
 
-		System.out.println("Όνομα προϊόντος: " + item1.getPurchaseProductName());
-		System.out.println("Τιμή αγοράς: " + item1.getProductPurchasePrice());
-		System.out.println("Ποσότητα: " + item1.getQuantity());
-		System.out.println("Γραμμή συνόλου: " + item1.getPurchaseOrderLineTotal() + " €");
+		Supplier s = supplierList.getSupplierByVat(e3,784523948);
+		//PRODUCT CREATION FROM DIFFERENT SECURITY LAYERS
 
-		System.out.println("toString(): " + item1);  */
+		//LAYER1 CANNOT MANAGE PRODUCTS
+		//productList.createProduct(e1, "Headphones", "Electronics",289,350,1 , s, 0);
 
- /*Testing OrderList
-		// Δημιουργία προϊόντων και supplier
-		Supplier s1 = new Supplier("SUP01", "PapCorp", "Athens", "2101234567", "info@papcorp.com", true);
-		Product p1 = new Product(1, "Printer", "Office", 5, 150.0, 2, s1);
-		OrderItem item1 = new OrderItem(p1, 1);
+		//LAYER2 CAN MANAGE PRODUCTS
+		productList.createProduct(e2, "PC monitor", "Electronics",25.0,21,1,s,0 );
+
+		//LAYER3 AND HIGHER CAN MANAGE PRODUCTS
+		productList.createProduct(e3,"Mac Lipstick", "Beauty",45.2,13, 3, s,1);
+
+		//VIEW PRODUCT/PRODUCTLIST  -- CAN BE VIEWED BY ANYONE
+		productList.printList(e2);
+
+		//UPDATE PRODUCT
+		productList.updateProduct(e2,1,"PC",";;;",345.4,340,12,s,2);
+
+		//DELETE PRODUCT
+		productList.removeProduct(e2,2);
+
+		//SEARCH PRODUCT
+		productList.searchProducts(e2,1);
+
+		//VIEW PRODUCT/PRODUCTLIST  -- CAN BE VIEWED BY ANYONE
+		productList.printList(e2);
+
+
+
+		//productList.searchProducts(e2,)
+/*
+
+		//USE CASE 4
+		//MANAGEMENT OF SALES
+
+
+
+		//CREATION OF PRODUCTS NEEDED FOR SALES
+		supplierList.createSupplier(e3,784523948,"WHOLESALE SUPPLIER","210 1234568",
+				"Leoforos poseidonos 180", "generalmanagement@wholesale.com");
+		Supplier s = supplierList.getSupplierByVat(e3,784523948);
+		Product p1 =  new Product( "PC monitor", "Electronics",25.0,21,10,s,0);
+		Product p2 = new Product("Mac Lipstick", "Beauty",45.2,13, 3, s,1);
+		Product p3 = new Product("Headphones", "Electronics",289,350,23 ,s, 1);
+
+
+		//CREATION OF CUSTOMERS NEEDED FOR SALES
+		Customer cust = new Customer("Alex","e124","6983249829","Male",25);
+
+
+		//ADDITION OF SALE ITEM AND QUANTITY
+
+		SaleItem sItems1 = new SaleItem(e3,p1,2);
+		SaleItem sItems2 = new SaleItem(e3,p3,1);
+		ArrayList<SaleItem> items = new ArrayList<>();
+
+
+		//INITIALIZATION OF SALE
+		Sales s1 = new Sales(123, items,PaymentMethod.CASH,cust);
+		s1.addItem(e2,sItems2);
+		s1.addItem(e2,sItems1);
+
+
+		//System.out.println(s1.toString());
+
+		//VIEW  Sales List
+		salesList.addSaleToList(e3,s1);
+		//salesList.printAllSales(e3);
+
+		//UPDATE SALE
+		salesList.updateSale(e3,123,PaymentMethod.CREDIT_CARD );
+
+		//SEARH SALE
+		salesList.searchSale(e3,123);
+
+		//RECEIPT OF SALE
+		s1.receipt(e3);
+
+		//REMOVE SALE
+		salesList.removeSaleFromTheList(e1,123);
+
+		//VIEW  Sales List
+		//salesList.addSaleToList(e3,s1);
+		salesList.printAllSales(e3);
+
+
+
+
+
+
+		//USE CASE 5
+		//CUSTOMER MANAGEMENT
+
+
+		//CREATE CUSTOMER AND ADDITION TO THE LIST
+		Customer c1 = customerList.createCustomer(e3,"Ilias","mazarakis@msn.com", "1234567890","+",58);
+		Customer c2 = customerList.createCustomer(e2, "MAria Papadopoulou", "maraki@yahoo.gr", "6969699696", "female", 27 );
+		Customer c3 = customerList.createCustomer(e3, "Sakis Ampatzoglou", "sk@yahoo.gr", "6969659696", "female", 27 );
+		Customer c4 = customerList.createCustomer(e3, "areti Papadopoulou", "areti@yahoo.gr", "6969799696", "female", 27 );
+		//customerList.addCustomerToList(e3, c4);
+
+		//PRINT CUSTOMERLIST
+		//customerList.printList(e3);
+
+		//SEARH AND UPDATE CUSTOMER
+		customerList.updateCustomer(e3,"george","mazarakis@msn.com","1234567890","+",58,0 );
+		//System.out.println(customerList.getCustomerByEmail(e3, "marewqreraki@yahoo.gr").getName());
+		customerList.printList(e3);
+
+		//SEARCH AND REMOVE CUSTOMER
+		Customer customerToRemove = customerList.getCustomerByPhone(e3,"1234567890");
+		customerList.removeCustomer(e3,customerToRemove);
+
+		//PRINT CUSTOMERLIST
+		customerList.printList(e3);
+
+
+
+
+		
+		//USE CASE 6
+		//MANAGEMENT OF SUPPLIERS AND ORDERS
+
+		//CREATE SUPPLIER AND ADD TO THE LIST
+		 Supplier s1 = supplierList.createSupplier(e3,784523948,
+				 "WHOLESALE SUPPLIER","210 1234568",
+				"Leoforos poseidonos 180", "generalmanagement@wholesale.com");
+
+		//supplierList.addSupplier(s1,e3);
+		supplierList.printList(e3);
+
+		//SEARCH SUPPLIER
+		supplierList.getSupplierByVat(e3,784523948);
+
+		//UPDATE SUPPLIER
+		supplierList.updateSupplier(e3,784523948,"wholesale","0123789456",
+				"SYggrou 12", "barethika@uom.gr");
+		supplierList.vatExists(e3, 784523948);
+
+		//REMOVE SUPPLIER
+		supplierList.removeSupplierFromList(e3,784523948);
+		supplierList.printList(e3);
+
+
+
+/*
+		//ORDER
+		//CREATE ORDER
+
+		//ORDER DEPENDENTS INITIALIZATION
+		Supplier s1 = supplierList.createSupplier(e3, 12456987, "Athens", "2101234567", "Leof. nikis 68", "info@papcorp.com");
+		Product p1 = new Product("test", "Beauty", 12, 27, 11, s1, 10);
+		OrderItem item1 = new OrderItem(e3, p1, 5);
 		ArrayList<OrderItem> items = new ArrayList<>();
 		items.add(item1);
 
-        // Δημιουργία παραγγελίας
-		Order order1 = new Order(1001, s1, items, Order.PaymentMethod.cash);
-		order1.setSupplier(s1);  // Μην ξεχνάς να το αρχικοποιήσεις
+        // CREATE ORDER
+		Order order1 = new Order( s1, items, Order.PaymentMethod.cash);
 
-        // Δημιουργία λίστας παραγγελιών
-		OrderList orderList = new OrderList();
+		order1.setSupplier(s1);  // SETTING SUPPLIER
+
 		orderList.addOrderToList(order1);
 
-        // Εκτύπωση
-		orderList.printAllOrders();
+        // VIEW/PRINT ORDER
+		orderList.printAllOrders(e3);
 
-        // Ενημέρωση πληρωμής
-		orderList.updateOrder(1001, Order.PaymentMethod.mobilePay);
+        // UPDATE ORDER
+		orderList.updateOrder(e3,1, Order.PaymentMethod.mobilePay);
 
-        // Υπολογισμός συνολικού κόστους
-		System.out.println("Total value of all orders: " + orderList.totalOrderListValue() + "€");
+        // CALCULATES TOTAL COST OF ORDERS
+		System.out.println("Total value of all orders: " + orderList.totalOrderListValue(e1) + "€");
 
-        // Διαγραφή παραγγελίας
-		orderList.removeOrderFromList(1001);
+		//SEARCH ORDER
+		orderList.searchOrder(e3,1);
 
+		//CHECKING STOCK OF PRODUCT ORDERED
+		System.out.println("Product " + p1.getName()+"has "+p1.getStock() +" items left in stock.");  //TODO method MUST update stock
 
-		//Testing Order,OrderItem,OrderList
-		/* ΔΗΜΙΟΥΡΓΙΑ SUPPLIER & PRODUCT
-        Supplier s1 = new Supplier("SUP01", "PapCorp", "Athens", "2101234567", "info@papcorp.com", true);
-        Product p1 = new Product(1, "Printer", "Office", 5, 150.0, 2, s1);*/
+        // REMOVES AN ORDER FROM THE LIST
+		orderList.removeOrderFromList(e3,1);
 
-       /*Testing Order Item
-       OrderItem item1 = new OrderItem(p1, 3);
-
-       System.out.println("Order Item");
-       System.out.println("Όνομα προϊόντος: " + item1.getPurchaseProductName());
-       System.out.println("Τιμή αγοράς: " + item1.getProductPurchasePrice() + " €");
-       System.out.println("Ποσότητα: " + item1.getQuantity());
-       System.out.println("Γραμμή συνόλου: " + item1.getPurchaseOrderLineTotal() + " €");
-       System.out.println("toString(): " + item1);
-
-       //Προσθήκη σε ProductList
-       ArrayList<OrderItem> items = new ArrayList<>();
-       items.add(item1);
-
-       //Δημηουργία ORDER
-       Order order1 = new Order(1001, s1, items, Order.PaymentMethod.cash);
-       order1.setSupplier(s1);
-       order1.totalOrderValue();
-
-       OrderList orderList = new OrderList();
-       orderList.addOrderToList(order1);
-
-
-       System.out.println("\n=== All Orders ===");
-       orderList.printAllOrders();
-
-       // Ενημέρωση τρόπου πληρωμής
-       orderList.updateOrder(1001, Order.PaymentMethod.mobilePay);
-
-       // Συνολικό κόστος Παραγγελιών
-       System.out.println("\nTotal value of all orders: " + orderList.totalOrderListValue() + " €");
-
-       //Διαγραφή Παραγγελίας
-       orderList.removeOrderFromList(1001);
-      System.out.println("\n=== Final Order List ===");
-      orderList.printAllOrders();  */
-
-
-		//TESTING SALES
-/*
-		Customer c1 = new Customer("Alex", "asasq","14351","male",25); //CREATE CUSTOMERS
-		c1.addPoints(100); //ADD LOYALTY POINTS
-		Supplier supplier = new Supplier(32,"324","3214","2311","23",true); //CREATE NEW SUPPLIER
-		Product p1 = new Product(14,"NS", "1r4",12.23,21.32,5000,supplier,5);
-		ArrayList<SaleItem> items = new ArrayList<>();
-		SaleItem si1 = new SaleItem(p1,125);
-		items.add(si1);
-		SalesList sL1 = new SalesList();
-		Sales s1 = new Sales(123,items,PaymentMethod.DEBIT_CARD,c1);
-		sL1.addSaleToList(s1);
-
-		System.out.println(s1.toString());
-		sL1.printAllSales();
 */
+
+		//USE CASE 7 , 7.1 , 8
+		//REPORTS
+/*
+		FinancialReport overall = new FinancialReport(salesList, orderList, userList);
+		overall.generateReport(e3);
+*/
+
+		// ----------------------------------------------------------------- //
 
 	}
 }

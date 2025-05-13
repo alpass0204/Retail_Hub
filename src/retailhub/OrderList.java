@@ -13,7 +13,7 @@ public class OrderList {
 
 	private static final SecurityLayer viewOrder = SecurityLayer.layer1;
 	private static final SecurityLayer manageOrder = SecurityLayer.layer2;
-	private ArrayList<Order> orderlist; // List of all orders
+	private final ArrayList<Order> orderlist; // List of all orders
 
 	// CONSTRUCTOR OrderList
 
@@ -140,5 +140,28 @@ public class OrderList {
 			total += order.totalOrderValue();
 		}
 		return total;
+	}
+
+	/**
+	 * searches order by its orderId
+	 * @param performerUser
+	 * @param orderId
+	 * @return
+	 * @throws SecurityException
+	 */
+	public Order searchOrder(User performerUser, int orderId) throws SecurityException {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageOrder)){
+			throw new IllegalArgumentException("Forbidden.");
+		}
+		for (Order order : orderlist) {
+			if (order.getOrderId() == orderId) {
+				order.getOrderId();
+				System.out.println("Order with ID " + orderId + " has been searched.");
+				return order;
+			}
+		}
+
+		System.out.println("No order found with ID " + orderId + ".");
+		return null;
 	}
 }

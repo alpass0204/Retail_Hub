@@ -4,17 +4,16 @@ import java.util.ArrayList;
 
 public class Supplier {
 
-	private int taxId;
+	private final int taxId;
 	private String brandName;
 	private String address;
 	private String phone;
 	private String email;
 	private boolean isActive;
-	private ArrayList<Product> products;
+	private final ArrayList<Product> products;
 
 	/**
 	 * Constructor για Suppliers
-	 * @param taxId
 	 * @param brandName
 	 * @param address
 	 * @param phone
@@ -25,7 +24,8 @@ public class Supplier {
 			throw new IllegalArgumentException("Brand-Name cant be NULL");
 		}
 		if(taxId == 0){
-			throw new IllegalArgumentException("Tax-Id cant be NULL");
+
+			throw new IllegalArgumentException("Tax id can't be empty.");
 		}
 		if(phone.length() < 10 ){
 			throw new IllegalArgumentException("Invalid phone number length");

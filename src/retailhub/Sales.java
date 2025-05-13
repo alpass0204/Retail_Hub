@@ -9,16 +9,20 @@ import java.util.ArrayList;
  */
 
 public class Sales {
-	private int salesId; // Unique salesID
-	private LocalDate date = LocalDate.now(); // Date of sale
-	private LocalTime time = LocalTime.now(); // Time of sale
+
+	// FIELDS
+
+	private final int salesId; // Unique salesID
+	private final LocalDate date = LocalDate.now(); // Date of sale
+	private final LocalTime time = LocalTime.now(); // Time of sale
 	private double totalamount; // Total amount of sale
 	private ArrayList<SaleItem> items; //the list of sold products per sale
 	private PaymentMethod paymentMethod; // Method of payment used
-	private Customer customer; // customer who made the purchase
+	private final Customer customer; // customer who made the purchase
 	//private double discountApplied = 0.0;
+	private static final SecurityLayer manageSales = SecurityLayer.layer2;
 
-	//Payment methods available
+
 
 	public enum PaymentMethod {
 		CASH,
@@ -36,23 +40,28 @@ public class Sales {
 	 * @param customer Customer making the purchase
 	 */
 
-	public Sales(int salesId, ArrayList<SaleItem> items, PaymentMethod paymentMethod, Customer customer) {
-		
-		this.salesId = salesId;
-		this.items = new ArrayList<SaleItem>(items);
-		this.paymentMethod = paymentMethod;
-		this.customer = customer;
-		sumTotal(); //Calculate total before discounts
+	public Sales(int salesId,
+				 ArrayList<SaleItem> items,
+				 PaymentMethod paymentMethod,
+				 Customer customer) {
 
-		//loyalty points
+		if (salesId == 0)
+			throw new IllegalArgumentException("Invalid SALES-ID");
+		if (paymentMethod == null)
+			throw new IllegalArgumentException("Payment Method can't be null");
+		if (customer     == null)
+			throw new IllegalArgumentException("Customer can't be null");
 
-		if (customer != null) {
-			double discount = customer.redeemAllPoints(); //redeem to receive the discount from points
-			customer.addPoints(((int) totalamount) / 5); // add point to customer (1 per 5 euro)			customer.printLoyaltyPoints(); // print customer's points
-			this.totalamount -= discount; // apply discount to total
-		}
+		this.salesId      = salesId;
+		this.items        = new ArrayList<>(items);
+		this.paymentMethod= paymentMethod;
+		this.customer     = customer;
 
+		sumTotal();
 
+		double discount    = customer.redeemAllPoints();
+		this.totalamount  -= discount;
+		customer.addPoints((int)(this.totalamount) / 5);
 	}
 
 	//GETTERS
@@ -103,25 +112,53 @@ public class Sales {
 
 	//add sold product and call method sumtotal in order to add the amount in the totalamount
 
-	public void addItem(SaleItem i) {	
+	public void addItem(User performerUser,SaleItem i)throws SecurityException {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
+			throw new SecurityException("Forbidden."); // credentials check
+		}
+		if(i ==  null){
+			throw new SecurityException("Item cant be null."); // check of items validation
+		}
+		Product p =i.getProduct();
+		int qty = i.getQuantity();
+		if(p.getStock() < qty){
+			throw new IllegalStateException("Insufficient stock for product.");
+
+		}
 		items.add(i);
 		sumTotal();
-		i.getProduct().decreaseStock(i.getQuantity()); //decrease stock when we make a sale
-		i.getProduct().notificationForLowStock();
+		p.decreaseStock(qty); //decrease stock when we make a sale
+		p.notificationForLowStock();
 	}
 
 	/**
 	 * Removes an item from the sale if it exists, updates total
 	 * @param item The SaleItem to remove
 	 */
+	public void removeItem(User performerUser,SaleItem item) {  //The if statement ensures t
+																// hat sumTotal() is only called if the  SaleItem was actually removed
+															   //from the item's collection.
+	    if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
+			throw new SecurityException("Forbidden."); // credentials check
+		}
+		if(item == null){
+			throw new SecurityException("Item cant be null."); // check of items validation
+		}
 
-	public void removeItem(SaleItem item) {  //The if statement ensures that sumTotal() is only called if the  SaleItem was actually removed from the items collection.
-	    if (items.remove(item)) {
+		if (items.remove(item)) {
 	        sumTotal();
 	    }
 	}
+
+	public void printSale(){
+		System.out.println("Sales ID: " + salesId);
+	}
 	
-	public String receipt() {
+	public void receipt(User performerUser) {
+
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
+			throw new SecurityException("Forbidden"); // credentials check
+		}
 
 	    // At first we have the header
 
@@ -140,28 +177,41 @@ public class Sales {
 	    
 	    // 3) Payment method and total amount
 
-	    receipt += 
+	    receipt +=
 	          "Payment: " + paymentMethod + "\n"
 	        + "-----------------\n"
 	        + "TOTAL  : " + totalamount + "\n";
-	    
-	    return receipt;
+
+		System.out.println(receipt);
+
 	}
 
-	//Summary of sale
 
+	/**
+	 * Sales Summary
+	 * @return
+	 */
 	public String toString() {
-		return "Sale{" +
-	               "idSale='" + salesId + '\'' +
-	               ", date=" + date +	               
-	               ", products=" + items +
-	               ", paymentMethod='" + paymentMethod + '\'' +
-	               ", total=" + totalamount +
+		return "Sale: " +
+	               "idSale ='" + salesId + '\'' +
+	               ", date =" + date +
+	               ", products =" + items +
+	               ", paymentMethod ='" + paymentMethod + '\'' +
+	               ", total =" + totalamount +
 	               '}';
 	}
-	// The returnItem method
 
-	public void returnItem(SaleItem item) {
+	/**
+	 * Removes SalesItem from a single Sale.
+	 * @param performerUser
+	 * @param item
+	 * @throws SecurityException
+	 */
+	public void returnItem(User performerUser,SaleItem item)throws SecurityException {
+		if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSales)){
+			throw new SecurityException("Forbidden."); // credentials check
+		}
+
 		if (items.contains(item)) {
 			items.remove(item); // Remove the item from the sale
 			totalamount -= item.getLineTotal(); // Subtract the item's price from the total
