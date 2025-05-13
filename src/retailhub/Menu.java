@@ -45,7 +45,7 @@ public class Menu {
                     break;
                 case 5:
                     System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
-                    //salesMenu( loggedInUser,  salesList, in);
+                    //SalesMenu( loggedInUser,  salesList, in);
                     break;
                 case 6:
                     System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
@@ -175,6 +175,7 @@ public class Menu {
                     System.out.println("====List all customers====");
 
                     customerList.printList(performingUser);
+                    break;
 
                 case 0:
                     System.out.println("Exiting to Main Menu");
@@ -200,10 +201,11 @@ public class Menu {
             System.out.println("2. Search a product");
             System.out.println("3. Update a product");
             System.out.println("4. Delete a product");
+            System.out.println("5. List all products");
             System.out.println("0. Menu");
 
             while (!in.hasNextInt()) {
-                System.out.println("Invalid input. Please enter a number between 0 and 4");
+                System.out.println("Invalid input. Please enter a number between 0 and 5");
                 in.next();
             }
 
@@ -231,6 +233,7 @@ public class Menu {
                     Product product = new Product(name, category, purchasePrice, sellPrice, stock, s, notificationStock);
                     productList.addProduct(product);
                     break;
+
                 case 2:
                     System.out.println("====Search a product====");
                     System.out.println("Please enter product's ID:");
@@ -290,6 +293,15 @@ public class Menu {
                     }
                     break;
 
+                case 5:
+                    System.out.println("====List all products====");
+                    productList.printList(performingUser);
+                    break;
+
+                case 0:
+                    System.out.println("Exiting to Main Menu");
+                    break;
+
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
@@ -318,6 +330,12 @@ public class Menu {
 
             switch (choice) {
                 case 1:
+
+                    System.out.println("====Create a new sale====");
+
+
+
+                    Sales sales = new Sales()
 
             }
         }

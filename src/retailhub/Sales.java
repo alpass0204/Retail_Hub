@@ -58,10 +58,12 @@ public class Sales {
 		this.customer     = customer;
 
 		sumTotal();
+		// Εφαρμόζουμε τη λογική πόντων από LoyaltyPoints
 
-		double discount    = customer.redeemAllPoints();
-		this.totalamount  -= discount;
-		customer.addPoints((int)(this.totalamount) / 5);
+		// Αποθηκεύουμε την πώληση στο ιστορικό του πελάτη
+		customer.addSale(this);
+
+
 	}
 
 	//GETTERS
@@ -82,6 +84,10 @@ public class Sales {
 		return paymentMethod;
 	}
 
+	public Customer getCustomer() {return this.customer;}
+
+
+
 	//SETTERS
 
 	public void setPaymentMethod(PaymentMethod paymentMethod) {
@@ -91,6 +97,8 @@ public class Sales {
 	public double getTotalamount() {
 		return totalamount;
 	}
+
+	public void setTotalamount(double totalamount) { this.totalamount = totalamount; }
 
 	public ArrayList<SaleItem> getItemsSold() {
 		return items;

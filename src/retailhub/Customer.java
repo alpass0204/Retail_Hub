@@ -18,7 +18,7 @@ public class Customer {
 	private String gender; // Customers gender
 	private int age; // Customers age
 	private int loyaltyPoints; // The variable that stores the loyalty points
-	private ArrayList<Sales> salesOfCustomer;
+	private ArrayList<Sales> salesHistory = new ArrayList<>();
 
 
 	// CONSTRUCTORS
@@ -190,39 +190,14 @@ public class Customer {
 		  }
 		  System.out.println("Loyalty points: " + loyaltyPoints+ "\n");
 	  }
-
-	/**
-	 * add loyalty points to the customer
-	 * @param newPoints
-	 */
-	public void addPoints(int newPoints) {
-		  this.loyaltyPoints += newPoints;
-		  System.out.println("Add: " + newPoints + " to customer's loyalty profile.");
-		  System.out.println("Loyalty points: " + loyaltyPoints);
-	  }
-
-	/**
-	 * Redeems loyalty points and provides discount
-	 * For every 100 points, customer gets 5 euro discount
-	 */
-	  public double redeemAllPoints() {
-		  int redeemableSets = this.loyaltyPoints / 100; // for every 100point that customer has
-		  if (redeemableSets > 0) {
-			  int pointsToRemove = redeemableSets * 100;
-			  double discount = redeemableSets * 5.0;
-			  this.loyaltyPoints -= pointsToRemove;
-			  System.out.println("Customer redeem points: " + pointsToRemove +
-					  " real discount: " + discount + "€.");
-			  return discount;
-		  }
-		  else {
-			  System.out.println("Required at least 100 points for discount.");
-			  return 0.0;
-		  }
-	  }
-
-	//prints current loyalty points of customer
-	public void printLoyaltyPoints() {
-		System.out.println("Ο πελάτης έχει " + loyaltyPoints + " πόντους.");
+	public void addSale(Sales sale) {
+		if (sale != null) {
+			salesHistory.add(sale);
+		}
 	}
-}
+	public ArrayList<Sales> getSalesHistory() {return new ArrayList<>(salesHistory);}
+
+	public void addPoints(int earnedPoints) {
+		this.loyaltyPoints += earnedPoints;
+	}
+	}

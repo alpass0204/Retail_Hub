@@ -52,7 +52,7 @@ public class Main {
 		userList.addUserToList(e3, e3);
 
 
-
+		/*
 		User logInUser = null;
 		while (logInUser == null) {
 			System.out.println("Please enter your username:");
@@ -65,12 +65,12 @@ public class Main {
 
 			}
 		}
+		*/
+		//Menu menu = new Menu();
+		//menu.runMenu(logInUser, customerList, productList, supplierList, in);
 
-		Menu menu = new Menu();
-		menu.runMenu(logInUser, customerList, productList, supplierList, in);
-
-		in.close();
-		System.out.println("Application terminated.");
+		//in.close();
+		//System.out.println("Application terminated.");
 
 
 
@@ -144,7 +144,7 @@ public class Main {
 
 
 		//productList.searchProducts(e2,)
-/*
+
 
 		//USE CASE 4
 		//MANAGEMENT OF SALES
@@ -154,7 +154,7 @@ public class Main {
 		//CREATION OF PRODUCTS NEEDED FOR SALES
 		supplierList.createSupplier(e3,784523948,"WHOLESALE SUPPLIER","210 1234568",
 				"Leoforos poseidonos 180", "generalmanagement@wholesale.com");
-		Supplier s = supplierList.getSupplierByVat(e3,784523948);
+		//Supplier s = supplierList.getSupplierByVat(e3,784523948);
 		Product p1 =  new Product( "PC monitor", "Electronics",25.0,21,10,s,0);
 		Product p2 = new Product("Mac Lipstick", "Beauty",45.2,13, 3, s,1);
 		Product p3 = new Product("Headphones", "Electronics",289,350,23 ,s, 1);
@@ -167,37 +167,44 @@ public class Main {
 		//ADDITION OF SALE ITEM AND QUANTITY
 
 		SaleItem sItems1 = new SaleItem(e3,p1,2);
-		SaleItem sItems2 = new SaleItem(e3,p3,1);
+		SaleItem sItems2 = new SaleItem(e3,p3,2);
 		ArrayList<SaleItem> items = new ArrayList<>();
 
 
 		//INITIALIZATION OF SALE
-		Sales s1 = new Sales(123, items,PaymentMethod.CASH,cust);
+		Sales s1 = new Sales( items,PaymentMethod.CASH,cust);
 		s1.addItem(e2,sItems2);
 		s1.addItem(e2,sItems1);
 
+ 		System.out.println(s1.toString());
 
-		//System.out.println(s1.toString());
+		LoyaltyPoints.processLoyalty(s1);
 
-		//VIEW  Sales List
-		salesList.addSaleToList(e3,s1);
-		//salesList.printAllSales(e3);
+		System.out.println(s1.toString());
 
-		//UPDATE SALE
-		salesList.updateSale(e3,123,PaymentMethod.CREDIT_CARD );
 
-		//SEARH SALE
-		salesList.searchSale(e3,123);
-
-		//RECEIPT OF SALE
-		s1.receipt(e3);
-
-		//REMOVE SALE
-		salesList.removeSaleFromTheList(e1,123);
 
 		//VIEW  Sales List
 		//salesList.addSaleToList(e3,s1);
-		salesList.printAllSales(e3);
+		//salesList.printAllSales(e3);
+		//LOYALTY POINTS
+		//LoyaltyPoints.processLoyalty(s1);
+
+		//UPDATE SALE
+		//salesList.updateSale(e3,123,PaymentMethod.CREDIT_CARD );
+
+		//SEARH SALE
+		//salesList.searchSale(e3,123);
+
+		//RECEIPT OF SALE
+		//s1.receipt(e3);
+
+		//REMOVE SALE
+		//salesList.removeSaleFromTheList(e1,123);
+
+		//VIEW  Sales List
+		//salesList.addSaleToList(e3,s1);
+		//salesList.printAllSales(e3);
 
 
 
@@ -209,26 +216,26 @@ public class Main {
 
 
 		//CREATE CUSTOMER AND ADDITION TO THE LIST
-		Customer c1 = customerList.createCustomer(e3,"Ilias","mazarakis@msn.com", "1234567890","+",58);
-		Customer c2 = customerList.createCustomer(e2, "MAria Papadopoulou", "maraki@yahoo.gr", "6969699696", "female", 27 );
-		Customer c3 = customerList.createCustomer(e3, "Sakis Ampatzoglou", "sk@yahoo.gr", "6969659696", "female", 27 );
-		Customer c4 = customerList.createCustomer(e3, "areti Papadopoulou", "areti@yahoo.gr", "6969799696", "female", 27 );
+		//Customer c1 = customerList.createCustomer(e3,"Ilias","mazarakis@msn.com", "1234567890","+",58);
+		//Customer c2 = customerList.createCustomer(e2, "MAria Papadopoulou", "maraki@yahoo.gr", "6969699696", "female", 27 );
+		//Customer c3 = customerList.createCustomer(e3, "Sakis Ampatzoglou", "sk@yahoo.gr", "6969659696", "female", 27 );
+		//Customer c4 = customerList.createCustomer(e3, "areti Papadopoulou", "areti@yahoo.gr", "6969799696", "female", 27 );
 		//customerList.addCustomerToList(e3, c4);
 
 		//PRINT CUSTOMERLIST
 		//customerList.printList(e3);
 
 		//SEARH AND UPDATE CUSTOMER
-		customerList.updateCustomer(e3,"george","mazarakis@msn.com","1234567890","+",58,0 );
+		//customerList.updateCustomer(e3,"george","mazarakis@msn.com","1234567890","+",58,0 );
 		//System.out.println(customerList.getCustomerByEmail(e3, "marewqreraki@yahoo.gr").getName());
-		customerList.printList(e3);
+		//customerList.printList(e3);
 
 		//SEARCH AND REMOVE CUSTOMER
-		Customer customerToRemove = customerList.getCustomerByPhone(e3,"1234567890");
-		customerList.removeCustomer(e3,customerToRemove);
+		//Customer customerToRemove = customerList.getCustomerByPhone(e3,"1234567890");
+		//customerList.removeCustomer(e3,customerToRemove);
 
 		//PRINT CUSTOMERLIST
-		customerList.printList(e3);
+		//customerList.printList(e3);
 
 
 
@@ -238,24 +245,24 @@ public class Main {
 		//MANAGEMENT OF SUPPLIERS AND ORDERS
 
 		//CREATE SUPPLIER AND ADD TO THE LIST
-		 Supplier s1 = supplierList.createSupplier(e3,784523948,
-				 "WHOLESALE SUPPLIER","210 1234568",
-				"Leoforos poseidonos 180", "generalmanagement@wholesale.com");
+		// Supplier s1 = supplierList.createSupplier(e3,784523948,
+				// "WHOLESALE SUPPLIER","210 1234568",
+				//"Leoforos poseidonos 180", "generalmanagement@wholesale.com");
 
 		//supplierList.addSupplier(s1,e3);
-		supplierList.printList(e3);
+		//supplierList.printList(e3);
 
 		//SEARCH SUPPLIER
-		supplierList.getSupplierByVat(e3,784523948);
+		//supplierList.getSupplierByVat(e3,784523948);
 
 		//UPDATE SUPPLIER
-		supplierList.updateSupplier(e3,784523948,"wholesale","0123789456",
-				"SYggrou 12", "barethika@uom.gr");
-		supplierList.vatExists(e3, 784523948);
+		//supplierList.updateSupplier(e3,784523948,"wholesale","0123789456",
+				//"SYggrou 12", "barethika@uom.gr");
+		//supplierList.vatExists(e3, 784523948);
 
 		//REMOVE SUPPLIER
-		supplierList.removeSupplierFromList(e3,784523948);
-		supplierList.printList(e3);
+		//supplierList.removeSupplierFromList(e3,784523948);
+		//supplierList.printList(e3);
 
 
 
