@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Sales {
 
 	// FIELDS
-
+	private static int id = 1;
 	private final int salesId; // Unique salesID
 	private final LocalDate date = LocalDate.now(); // Date of sale
 	private final LocalTime time = LocalTime.now(); // Time of sale
@@ -34,25 +34,20 @@ public class Sales {
 
 	/**
 	 * CONSTRUCTOR FOR CREATING A SALE TRANSACTION
-	 * @param salesId Unique ID of the sale
-	 * @param items List of sale items
 	 * @param paymentMethod Payment method
 	 * @param customer Customer making the purchase
 	 */
 
-	public Sales(int salesId,
-				 ArrayList<SaleItem> items,
+	public Sales(
 				 PaymentMethod paymentMethod,
 				 Customer customer) {
 
-		if (salesId == 0)
-			throw new IllegalArgumentException("Invalid SALES-ID");
-		if (paymentMethod == null)
+				if (paymentMethod == null)
 			throw new IllegalArgumentException("Payment Method can't be null");
 		if (customer     == null)
 			throw new IllegalArgumentException("Customer can't be null");
 
-		this.salesId      = salesId;
+		this.salesId      = id++;
 		this.items        = new ArrayList<>(items);
 		this.paymentMethod= paymentMethod;
 		this.customer     = customer;

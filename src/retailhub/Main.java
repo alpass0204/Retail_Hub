@@ -172,7 +172,7 @@ public class Main {
 
 
 		//INITIALIZATION OF SALE
-		Sales s1 = new Sales( items,PaymentMethod.CASH,cust);
+		Sales s1 = new Sales( PaymentMethod.CASH,cust);
 		s1.addItem(e2,sItems2);
 		s1.addItem(e2,sItems1);
 

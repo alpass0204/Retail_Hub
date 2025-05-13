@@ -308,7 +308,7 @@ public class Menu {
         } while (choice != 0);
     }
 
-    public void SalesMenu(User performingUser, SalesList salesList, ProductList productList, Scanner in) {
+    public void SalesMenu(User performingUser, SalesList salesList, ProductList productList, CustomerList customerList, Scanner in) {
         int choice;
 
         do {
@@ -332,10 +332,31 @@ public class Menu {
                 case 1:
 
                     System.out.println("====Create a new sale====");
+                    System.out.println("Please select customer by email or phone number:");
+                    Customer customerOfSale = null;
+                    String input = in.nextLine();
+
+
+                    if (input.contains("@")) {
+                        customerOfSale = customerList.getCustomerByEmail(performingUser, input);
+                    } else {
+                        customerOfSale = customerList.getCustomerByPhone(performingUser, input);
+                    }
+
+                    Sales sales = new Sales(Sales.PaymentMethod.TRANSFER,customerOfSale);
+
+                    System.out.println("Please select product by ID:");
+                    int ProductId = in.nextInt();
+                    Product productToSearch = productList.searchProducts(performingUser, input);
+                    if (productToSearch != null) {
+                       productToSearch.printProduct();
+                    } else {
+                        System.out.println("Product not found.");
+                    }
 
 
 
-                    Sales sales = new Sales()
+                    SaleItem saleItem = new SaleItem(performingUser,)
 
             }
         }
