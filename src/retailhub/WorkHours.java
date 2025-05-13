@@ -24,8 +24,8 @@ public class WorkHours {
     //constructor
     public WorkHours() {
         this.date = LocalDate.now();
-        this.arrivalTime = LocalTime.now();
-        this.departureTime = LocalTime.now();
+        this.arrivalTime = arrivalTime;
+        this.departureTime = departureTime;
 
     }
     //getters/setters

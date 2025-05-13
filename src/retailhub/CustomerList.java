@@ -195,10 +195,9 @@ public class CustomerList {
 	 * @param phone         New phone
 	 * @param gender        New gender
 	 * @param age           New age
-	 * @param loyaltyPoints New loyalty points
 	 * @return TRUE if customer is found and updated, FALSE otherwise
 	 */
-	public boolean updateCustomer(User performingUser, String name, String email, String phone, String gender, int age, int loyaltyPoints) {
+	public boolean updateCustomer(User performingUser, String name, String email, String phone, String gender, int age) {
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { // credentials check
 			throw new SecurityException("Forbidden.");
 		}
@@ -208,7 +207,7 @@ public class CustomerList {
 				c.setPhone(phone);
 				c.setEmail(email);
 				c.setAge(age);
-				c.setLoyaltyPoints(loyaltyPoints);
+
 				return true;
 			}
 		}
