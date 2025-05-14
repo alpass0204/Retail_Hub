@@ -126,7 +126,7 @@ public class CustomerList {
 			throw new SecurityException("Forbidden");
 		}
 
-		if(email.trim().isEmpty() || performingUser.equals(null)){
+		if(email.trim().isEmpty() || performingUser == null ){
 			throw new SecurityException("Please enter a valid email or Performing User.");
 		}
 
@@ -174,7 +174,7 @@ public class CustomerList {
 	/**
 	 * Removes a customer from the list using their email address
 	 *
-	 * @param Customer
+	 * @param customer
 	 */
 
 	public void removeCustomer(User performingUser, Customer customer) throws SecurityException {
@@ -197,24 +197,32 @@ public class CustomerList {
 	 * @param age           New age
 	 * @return TRUE if customer is found and updated, FALSE otherwise
 	 */
-	public boolean updateCustomer(User performingUser, String name, String email, String phone, String gender, int age) {
+	public boolean updateCustomer(User performingUser,String emailToFindAndUpdate, String name, String email, String phone, String gender, int age) {
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { // credentials check
 			throw new SecurityException("Forbidden.");
 		}
+		Customer customerToUpdate = null;
 		for (Customer c : customers) {
-			if (getCustomerByEmail(performingUser, email.trim().toLowerCase()).equals(email.trim().toLowerCase())) {
-				c.setName(name);
-				c.setPhone(phone);
-				c.setEmail(email);
-				c.setAge(age);
-
+			if (c.getEmail().trim().equalsIgnoreCase(emailToFindAndUpdate.trim())) {
+				customerToUpdate = c;
+				break;
+			}
+		}
+			if (customerToUpdate != null) {
+				customerToUpdate.setName(name);
+				customerToUpdate.setPhone(phone);
+				customerToUpdate.setEmail(email);
+				customerToUpdate.setAge(age);
+				customerToUpdate.setGender(gender);
+				System.out.println("Customer with email "+ emailToFindAndUpdate + " has been updated successfully.");
 				return true;
+			} else {
+
+				System.out.println("This customer does not exist. Please enter a valid E-mail!");
+				return false;
 			}
 		}
 
-		System.out.println("This customer does not exist. Please enter a valid E-mail!");
-		return false;
-	}
 
 
 	// Prints all customers in the list
@@ -224,6 +232,7 @@ public class CustomerList {
 			throw new SecurityException("Forbidden.");}
 			for (Customer c : customers) {
 				c.printCustomer();
+				System.out.println("=====================");
 			}
 		}
 	}

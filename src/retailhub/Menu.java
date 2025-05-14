@@ -24,6 +24,7 @@ public class Menu {
             System.out.println("6. Orders");
             System.out.println("7. Reports");
             System.out.println("0. Exit");
+            System.out.println("Please choose from 0 to 7:");
 
 
             choice = in.nextInt();
@@ -36,30 +37,44 @@ public class Menu {
                     productMenu(loggedInUser, productList, supplierList, in);
                     break;
                 case 3:
+                    System.out.println("===================");
                     System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
+                    System.out.println("===================");
                     //supplierMenu( loggedInUser,  supplierList, in);
                     break;
                 case 4:
+                    System.out.println("===================");
                     System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
+                    System.out.println("===================");
                     //employeeMenu( loggedInUser,  userList, in);
                     break;
                 case 5:
+                    System.out.println("===================");
                     System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
+                    System.out.println("===================");
                     //SalesMenu( loggedInUser,  salesList, in);
                     break;
                 case 6:
+                    System.out.println("===================");
                     System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
+                    System.out.println("===================");
                     //orderMenu( loggedInUser,  orderList, in);
                     break;
                 case 7:
+                    System.out.println("===================");
                     System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
+                    System.out.println("===================");
                     //reportsMenu( loggedInUser, in);
                     break;
                 case 0:
+                    System.out.println("===================");
                     System.out.println("Exiting application...");
+                    System.out.println("===================");
                     break;
                 default:
+                    System.out.println("===================");
                     System.out.println("Invalid choice. Please try again.");
+                    System.out.println("===================");
             }
         }
         while (choice != 0);
@@ -67,7 +82,6 @@ public class Menu {
 
 
     public void customerMenu(User performingUser, CustomerList customerList, Scanner in) {
-
 
         int choice;
         do {
@@ -127,7 +141,9 @@ public class Menu {
                     }
                     break;
                 case 3:
-                    System.out.println("====Update a customer");
+                    System.out.println("====Update a customer===");
+                    System.out.println("Email of the customer you want to update: ");
+                    String emailToUpdate = in.nextLine();
                     System.out.println("Name: ");
                     String updatedName = in.nextLine();
                     System.out.println("Email: ");
@@ -138,14 +154,20 @@ public class Menu {
                     String updatedGender = in.nextLine();
                     System.out.println("Age: ");
                     int updatedAge = in.nextInt();
-
-                    boolean isUpdated = customerList.updateCustomer(performingUser, updatedName, updatedEmail, updatedPhone, updatedGender, updatedAge);
+                    Customer custToUpdate = customerList.getCustomerByEmail(performingUser,emailToUpdate);
+                    boolean isUpdated =false;
+                    isUpdated =customerList.updateCustomer(performingUser, emailToUpdate, updatedName, updatedEmail, updatedPhone, updatedGender, updatedAge);
+                    if(!isUpdated){
+                        System.out.println("Customer not found. Please try again.");
+                        break;
+                    }
                     if (isUpdated) {
                         System.out.println("Customer updated successfully.");
-                    } else {
-                        System.out.println("Customer not found. Please try again.");
+                        break;
                     }
-                    break;
+
+
+
                 case 4:
                     System.out.println("====Search for customer to remove====");
                     System.out.println("Please enter phone or email.");
@@ -160,8 +182,8 @@ public class Menu {
                     if (customerToRemove != null) {
                         System.out.println("Are you sure you want to remove this customer? (yes/no) ");
                         if (in.nextLine().equalsIgnoreCase("yes")) {
-                            System.out.println("Customer removed.");
                             customerList.removeCustomer(performingUser, customerToRemove);
+                            System.out.println("Customer removed.");
                         } else {
                             System.out.println("Deletion cancelled.");
 
@@ -252,6 +274,8 @@ public class Menu {
                     System.out.println("Please enter product's ID:");
                     int inputToUpdate = in.nextInt();
                     Product productToUpdate = productList.searchProducts(performingUser, inputToUpdate);
+                    productToUpdate.printProduct();
+                    in.nextLine();
                     if (productToUpdate != null) {
                         System.out.println("Name: ");
                         String updatedName = in.nextLine();
@@ -268,6 +292,7 @@ public class Menu {
                         System.out.println("Stock: ");
                         int updatedStock = in.nextInt();
                         productToUpdate.setStock(updatedStock);
+                        System.out.println("==Customer updated successfully.==");
                     } else {
                         System.out.println("Product not found.");
                     }
@@ -307,7 +332,9 @@ public class Menu {
             }
         } while (choice != 0);
     }
+}
 
+/*
     public void SalesMenu(User performingUser, SalesList salesList, ProductList productList, CustomerList customerList, Scanner in) {
         int choice;
 
@@ -363,4 +390,4 @@ public class Menu {
         while (choice != 0);
 
     }
-}
+**/

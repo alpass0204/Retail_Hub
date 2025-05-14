@@ -11,7 +11,7 @@ public class Customer {
 	// FIELDS
 
 	private static int id = 1; // Customers Int which for every customer adds 1
-	private int customerId; // The variable that stores the static id
+	private final int customerId; // The variable that stores the static id
 	private String name;  // Customers name
 	private String email; // Customers email
 	private String phone; // Customers phone
@@ -78,9 +78,9 @@ public class Customer {
         return customerId;
     }
 	
-	public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
+	//public void setCustomerId(int customerId) {
+       // this.customerId = customerId;
+   // }
 
 	// METHODS FOR NAME
 

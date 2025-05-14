@@ -77,8 +77,8 @@ public class ProductList {
         // Search for the product in the list
         for (Product product : products) {
             if (product.getProductId() == id) {
-                product.printProduct();
-                System.out.println("Product with ID " + product.getProductId() + " has been found.");
+                //product.printProduct();
+                //System.out.println("Product with ID " + product.getProductId() + " has been found.");
                 return product;
             }
         }

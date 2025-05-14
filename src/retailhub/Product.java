@@ -7,8 +7,9 @@ package retailhub;
 
 public class Product{
     // Product's ID
+
     private static int id = 1;
-    private static int productId;
+    private final int productId;
     // Product's Name
     private String name;
     // Product's Categories
@@ -106,9 +107,9 @@ public class Product{
      * Method for modifying product_id.
      * @param productId
      */
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
+   // public void setProductId(int productId) {
+      //  this.productId = productId;
+   // }
 
     /**
      * Method for returning product name.

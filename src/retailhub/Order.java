@@ -15,7 +15,7 @@ public class Order {
 
 	private ArrayList<OrderItem> items; // List of items included in the order
 	private static int id = 1;
-	private int orderId; // Unique order ID
+	private final int orderId; // Unique order ID
 	private LocalDate date = LocalDate.now(); // Order Date
 	private final LocalTime time = LocalTime.now(); // Order Time
 	private PaymentMethod paymentMethod; // Payment method used for the order
@@ -105,10 +105,11 @@ public class Order {
 	public int getOrderId() {
 		return orderId;
 	}
-
+/*
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
+*/
 
 	//METHODS FOR DATE & TIME
 
