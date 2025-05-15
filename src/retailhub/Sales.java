@@ -48,7 +48,7 @@ public class Sales {
 			throw new IllegalArgumentException("Customer can't be null");
 
 		this.salesId      = id++;
-		this.items        = new ArrayList<>(items);
+		this.items         = new ArrayList<SaleItem>();
 		this.paymentMethod= paymentMethod;
 		this.customer     = customer;
 
@@ -56,7 +56,6 @@ public class Sales {
 		// Εφαρμόζουμε τη λογική πόντων από LoyaltyPoints
 
 		// Αποθηκεύουμε την πώληση στο ιστορικό του πελάτη
-		customer.addSale(this);
 
 
 	}
@@ -155,6 +154,7 @@ public class Sales {
 
 	public void printSale(){
 		System.out.println("Sales ID: " + salesId);
+
 	}
 	
 	public void receipt(User performerUser) {
@@ -198,7 +198,7 @@ public class Sales {
 		return "Sale: " +
 	               "idSale ='" + salesId + '\'' +
 	               ", date =" + date +
-	               ", products =" + items +
+	               ", products =" + items.toString() +
 	               ", paymentMethod ='" + paymentMethod + '\'' +
 	               ", total =" + totalamount +
 	               '}';

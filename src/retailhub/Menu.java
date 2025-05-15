@@ -10,7 +10,7 @@ public class Menu {
     private Authentication auth;
 
     public void runMenu(User loggedInUser, CustomerList customerList, ProductList productList,
-                        SupplierList supplierList, Scanner in) {
+                        SupplierList supplierList,SalesList saleList, Scanner in) {
 
         int choice;
         do {
@@ -24,6 +24,7 @@ public class Menu {
             System.out.println("6. Orders");
             System.out.println("7. Reports");
             System.out.println("0. Exit");
+            System.out.println("================");
 
 
             choice = in.nextInt();
@@ -44,8 +45,8 @@ public class Menu {
                     //employeeMenu( loggedInUser,  userList, in);
                     break;
                 case 5:
-                    System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
-                    //SalesMenu( loggedInUser,  salesList, in);
+                    //System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
+                    SalesMenu( loggedInUser, saleList, productList, customerList,in);
                     break;
                 case 6:
                     System.out.println("UNDER CONSTRUCTION. PLEASE TRY AGAIN LATER. ");
@@ -79,6 +80,7 @@ public class Menu {
             System.out.println("4. Delete a customer");
             System.out.println("5. List all customers");
             System.out.println("0. Menu");
+            System.out.println("================");
 
             while (!in.hasNextInt()) {
                 System.out.println("Invalid input. Please enter a number between 0 and 5");
@@ -125,7 +127,9 @@ public class Menu {
                     }
                     break;
                 case 3:
-                    System.out.println("====Update a customer");
+                    System.out.println("====Update a customer===");
+                    System.out.println("Email of the customer you want to update: ");
+                    String emailToUpdate = in.nextLine();
                     System.out.println("Name: ");
                     String updatedName = in.nextLine();
                     System.out.println("Email: ");
@@ -137,13 +141,20 @@ public class Menu {
                     System.out.println("Age: ");
                     int updatedAge = in.nextInt();
 
-                    boolean isUpdated = customerList.updateCustomer(performingUser,updatedEmail,updatedName,updatedEmail,updatedPhone,updatedGender,updatedAge);
+                    Customer custToUpdate = customerList.getCustomerByEmail(performingUser,emailToUpdate);
+                    boolean isUpdated =false;
+                    isUpdated =customerList.updateCustomer(performingUser, emailToUpdate, updatedName, updatedEmail, updatedPhone, updatedGender, updatedAge);
+                    if(!isUpdated){
+                        System.out.println("Customer not found. Please try again.");
+                        break;
+                    }
+
                     if (isUpdated) {
                         System.out.println("Customer updated successfully.");
-                    } else {
-                        System.out.println("Customer not found. Please try again.");
+                        break;
                     }
-                    break;
+
+
                 case 4:
                     System.out.println("====Search for customer to remove====");
                     System.out.println("Please enter phone or email.");
@@ -201,6 +212,7 @@ public class Menu {
             System.out.println("4. Delete a product");
             System.out.println("5. List all products");
             System.out.println("0. Menu");
+            System.out.println("================");
 
             while (!in.hasNextInt()) {
                 System.out.println("Invalid input. Please enter a number between 0 and 5");
@@ -230,6 +242,7 @@ public class Menu {
                     int notificationStock = in.nextInt();
                     Product product = new Product(name, category, purchasePrice, sellPrice, stock, s, notificationStock);
                     productList.addProduct(product);
+                    System.out.println("Product added successfully.");
                     break;
 
                 case 2:
@@ -237,6 +250,7 @@ public class Menu {
                     System.out.println("Please enter product's ID:");
                     int input = in.nextInt();
                     Product productToSearch = productList.searchProducts(performingUser, input);
+
                     if (productToSearch != null) {
                         System.out.println("Product found.");
                         productToSearch.printProduct();
@@ -247,28 +261,60 @@ public class Menu {
 
                 case 3:
                     System.out.println("====Update a product====");
+
                     System.out.println("Please enter product's ID:");
+
                     int inputToUpdate = in.nextInt();
+
                     Product productToUpdate = productList.searchProducts(performingUser, inputToUpdate);
+
+
+                    productToUpdate.printProduct();
+
+
+                    in.nextLine();
+
                     if (productToUpdate != null) {
+
                         System.out.println("Name: ");
+
                         String updatedName = in.nextLine();
+
                         productToUpdate.setName(updatedName);
+
                         System.out.println("Category: ");
+
                         String updatedCategory = in.nextLine();
+
                         productToUpdate.setCategory(updatedCategory);
+
                         System.out.println("Purchase Price: ");
+
                         double updatedPurchasePrice = in.nextDouble();
+
                         productToUpdate.setPurchasePrice(updatedPurchasePrice);
+
                         System.out.println("Sell Price: ");
+
                         double updatedSellPrice = in.nextDouble();
+
                         productToUpdate.setSellPrice(updatedSellPrice);
+
                         System.out.println("Stock: ");
+
                         int updatedStock = in.nextInt();
+
                         productToUpdate.setStock(updatedStock);
+
+
+                        System.out.println("==Product updated successfully.==");
+
                     } else {
+
                         System.out.println("Product not found.");
+
                     }
+
                     break;
 
                 case 4:
@@ -310,12 +356,14 @@ public class Menu {
         int choice;
 
         do {
+            System.out.println("====Sales Menu====");
             System.out.println("1. New Sale ");
             System.out.println("2. Search Sale ");
             System.out.println("3. Update sale");
             System.out.println("4. Remove sale");
             System.out.println("5. Print all sales");
             System.out.println("0. Menu");
+            System.out.println("================");
 
 
             while (!in.hasNextInt()) {
@@ -427,9 +475,14 @@ public class Menu {
                             addProduct = false;
                         }
                     }
+                    customerOfSale.addSale(sale);
+                    System.out.println("Total  "+String.valueOf(sale.getTotalamount()) + " €");
+
+
                     LoyaltyPoints.processLoyalty(sale);
                     salesList.addSaleToList(performingUser,sale);
-                    System.out.println("Sale created successfully!");
+                    System.out.println("Sale created successfully!\n Total amount after discount :  "+String.valueOf(sale.getTotalamount()) + " €");
+                    //System.out.println("");
                     break;
 
                 case 2:
@@ -442,6 +495,7 @@ public class Menu {
                     if (saleToSearch != null) {
                         System.out.println("Sale found.");
                         saleToSearch.printSale();
+                        saleToSearch.toString();
                     }
                     else {
                         System.out.println("Sale not found.");
