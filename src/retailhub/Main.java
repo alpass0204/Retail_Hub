@@ -55,27 +55,26 @@ public class Main {
 		userList.addUserToList(e3, e3);
 		userList.addUserToList(sysadmin,sysadmin);
 
+
+		/*
 		User logInUser = null;
 		while (logInUser == null) {
 			System.out.println("Please enter your username:");
 			String username = in.nextLine();
+			Authentication.login(username,userList);
 
-			logInUser = Authentication.login(username, userList); // <--- Call the modified method
 
 			if (logInUser == null) {
-				System.out.println("Login failed. Please try again.");
+				System.out.println("Invalid username or password. Please try again.");
+
 			}
 		}
+		*/
+		//Menu menu = new Menu();
+		//menu.runMenu(logInUser, customerList, productList, supplierList, in);
 
-
-		Menu menu= new Menu();
-		menu.runMenu(logInUser,customerList,productList,supplierList,in);
-		in.close();
-		System.out.println("Application terminated.");
-
-
-	}
-}
+		//in.close();
+		//System.out.println("Application terminated.");
 
 
 
