@@ -222,13 +222,13 @@ public class Product{
     public String toString() {
         return "Product: " +
                 "productId =" + productId +
-                ", \nname ='" + name  +
+                ", \nname = " + name  +
                 ", \ncategory ='" + category  +
-                ", \npurchasePrice =" + purchasePrice +
-                ", \nsellPrice =" + sellPrice +
-                ", \nstock =" + stock +
-                ", \nsupplier =" + supplier +
-                ", \nnotificationStock =" + notificationStock +
+                ", \npurchasePrice = " + purchasePrice +
+                ", \nsellPrice = " + sellPrice +
+                ", \nstock = " + stock +
+                ", \nsupplier = " + supplier.getBrandName() +
+                ", \nnotificationStock = " + notificationStock +
                 ' ';
     }
 }

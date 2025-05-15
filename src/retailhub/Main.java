@@ -48,6 +48,7 @@ public class Main {
 		customerList.createCustomer(e3, "BACCARA BAR", "baccara@gmail.com", "2310231020", "Male", 45);
 
 
+
 		//ADDITION TO USERLIST
 		userList.addUserToList(e3, e1);
 		userList.addUserToList(e3, e2);
@@ -68,14 +69,25 @@ public class Main {
 			}
 
 
-		}
-		Menu menu = new Menu();
-		menu.runMenu(logInUser, customerList, productList, supplierList,salesList, in);
+			Menu menu = new Menu();
+			menu.runMenu(logInUser, customerList, productList, supplierList, salesList, in);
+			in.close();
+			System.out.println("Application terminated.");
 
-		in.close();
-		System.out.println("Application terminated.");
-	}
-}
+
+		}
+
+
+/**
+ User logInUser = null;
+ String username = scanner.nextLine
+ Authentication.login()
+
+ Menu menu = new Menu();
+ menu.runMenu(userList, customerList, orderList, productList, salesList, supplierList);
+ **/
+
+	}}
 
 
 

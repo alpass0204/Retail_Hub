@@ -482,7 +482,7 @@ public class Menu {
                     LoyaltyPoints.processLoyalty(sale);
                     salesList.addSaleToList(performingUser,sale);
                     System.out.println("Sale created successfully!\n Total amount after discount :  "+String.valueOf(sale.getTotalamount()) + " €");
-                    //System.out.println("");
+                    sale.receipt(performingUser);
                     break;
 
                 case 2:
@@ -493,9 +493,8 @@ public class Menu {
 
                     Sales saleToSearch = salesList.searchSale(performingUser,saleIdToSearch);
                     if (saleToSearch != null) {
-                        System.out.println("Sale found.");
-                        saleToSearch.printSale();
-                        saleToSearch.toString();
+                        //System.out.println("Sale found.");
+                        System.out.println(saleToSearch.toString());
                     }
                     else {
                         System.out.println("Sale not found.");

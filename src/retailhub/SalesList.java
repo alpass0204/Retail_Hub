@@ -32,23 +32,7 @@ public class SalesList {
         if(sale == null){
             throw new SecurityException("Sale cant be null."); // check of sale validation
         }
-
-        boolean productStock = true; // raised a flag
-        for (SaleItem item : sale.getItemsSold()) {
-            Product p = item.getProduct();
-            int soldQuantity = item.getQuantity();
-            if (p.getStock() < soldQuantity) {
-                System.out.println("Insufficient Stock for product: "+ p.getProductId() +
-                        " Name: " + p.getName()+"\nRequired: " + soldQuantity+
-                        "\n Available: " + p.getStock() + "\nSale aborted.");
-                productStock = false;
-                break;
-            }
-        }
-        if (productStock) {
-            System.out.println("Sale added successfully.");
-            sales.add(sale);
-        }
+        sales.add(sale);
     }
 
     // Prints all sales in the list
