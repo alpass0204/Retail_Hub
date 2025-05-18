@@ -78,7 +78,7 @@ public class Menu {
             System.out.println("2. Search a customer");
             System.out.println("3. Update a customer");
             System.out.println("4. Delete a customer");
-            System.out.println("5. List all customers");
+            System.out.println("5. List of all customers");
             System.out.println("0. Menu");
             System.out.println("================");
 
@@ -578,4 +578,6 @@ public class Menu {
         while (choice != 0);
 
     }
+
+
 }

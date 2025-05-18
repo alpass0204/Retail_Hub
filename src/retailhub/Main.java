@@ -54,7 +54,7 @@ public class Main {
 		userList.addUserToList(e3, e2);
 		userList.addUserToList(e3, e3);
 		userList.addUserToList(sysadmin, sysadmin);
-
+/**
 		User logInUser = null;
 		while (logInUser == null) {
 			System.out.println("Please enter your username:");
@@ -76,6 +76,9 @@ public class Main {
 
 
 		}
+		**/
+
+		new MainMenu(customerList,e3);
 
 
 /**

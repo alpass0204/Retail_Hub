@@ -29,14 +29,14 @@ public class CustomerList {
 	 * Returns the list of customers
 	 */
 
-	public ArrayList<Customer> getAllCustomers(User performingUser) throws SecurityException{
+	public ArrayList<Customer> getAllCustomers(User performingUser) throws SecurityException {
 		// check for invalid user type
-		if (performingUser.equals(null)){
+		if (performingUser.equals(null)) {
 			throw new SecurityException("Performing user can't be NULL.");
 		}
 		// check for permisions
-		if(!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)){
-			throw new SecurityException("You "+performingUser+" Forbidden.");
+		if (!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)) {
+			throw new SecurityException("You " + performingUser + " Forbidden.");
 		}
 		return new ArrayList<>(customers); // returns a copy
 	}
@@ -46,17 +46,17 @@ public class CustomerList {
 	 */
 	public void addCustomerToList(User performingUser, Customer c) throws SecurityException {
 		// check for invalid user type
-		if(performingUser == null){
+		if (performingUser == null) {
 			throw new SecurityException("Performing user can't be NULL.");
 		}
-		if(c == null){
+		if (c == null) {
 			throw new SecurityException("Customer cant be NULL.");
 		}
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) {
 			throw new SecurityException("You do not have the required permission to perform this operation");
 		}
 		customers.add(c);
-		System.out.println("Customer: "+c+" has been added by "+performingUser);
+		System.out.println("Customer: " + c + " has been added by " + performingUser);
 	}
 
 	/**
@@ -70,16 +70,16 @@ public class CustomerList {
 	 */
 
 	public Customer createCustomer(User performingUser, String name, String email, String phone, String gender, int age) throws SecurityException {
-		if(performingUser == null){ // First check: If performing User = null
+		if (performingUser == null) { // First check: If performing User = null
 			throw new SecurityException("Performing user can't be NULL.");
 		}
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { //checks if user have the
-			throw new SecurityException("Forbidden."); 				   // credentials.
+			throw new SecurityException("Forbidden.");                   // credentials.
 		}
-		if(name.trim().isEmpty() || email.trim().isEmpty() && phone.trim().isEmpty()){
+		if (name.trim().isEmpty() || email.trim().isEmpty() && phone.trim().isEmpty()) {
 			throw new SecurityException("E-mail and Phone cant be NULL");
 		}
-		if(phone.length() < 10 ){
+		if (phone.length() < 10) {
 			throw new IllegalArgumentException("Invalid phone number length");
 		}
 
@@ -91,12 +91,12 @@ public class CustomerList {
 		 */
 		for (Customer allreadyCustomer : customers) {
 			if (allreadyCustomer.getEmail() != null && allreadyCustomer.getEmail().toLowerCase().trim().equals(email.toLowerCase().trim())) {
-				System.out.println("Error. This email is being already is use : "+email+" . E-mail must be unique.");
+				System.out.println("Error. This email is being already is use : " + email + " . E-mail must be unique.");
 				foundAndAdded = true; // Duplicated user found and skipped
 				break;
 			}
 			if (allreadyCustomer.getPhone() != null && allreadyCustomer.getPhone().toLowerCase().trim().equals(phone)) {
-				System.out.println("Error. This phone is being already is use : "+email+" . Phone must be unique.");
+				System.out.println("Error. This phone is being already is use : " + email + " . Phone must be unique.");
 				foundAndAdded = true; // Duplicated user found and skipped
 				break;
 			}
@@ -126,7 +126,7 @@ public class CustomerList {
 			throw new SecurityException("Forbidden");
 		}
 
-		if(email.trim().isEmpty() || performingUser == null ){
+		if (email.trim().isEmpty() || performingUser == null) {
 			throw new SecurityException("Please enter a valid email or Performing User.");
 		}
 
@@ -138,7 +138,7 @@ public class CustomerList {
 			}
 
 		}
-		System.out.println("Customer with email "+email+" not found.");
+		System.out.println("Customer with email " + email + " not found.");
 		return null;
 
 	}
@@ -156,7 +156,7 @@ public class CustomerList {
 			throw new SecurityException("Forbidden");
 		}
 
-		if(phone.trim().isEmpty() || performingUser.equals(null)){
+		if (phone.trim().isEmpty() || performingUser.equals(null)) {
 			throw new SecurityException("Please enter a valid phone or Performing User.");
 		}
 
@@ -167,7 +167,7 @@ public class CustomerList {
 			}
 		}
 
-		System.out.println("Customer with phone "+phone+" not found.");
+		System.out.println("Customer with phone " + phone + " not found.");
 		return null;
 	}
 
@@ -190,14 +190,14 @@ public class CustomerList {
 	/**
 	 * Updates the customer info using their email as q unique identifier
 	 *
-	 * @param name          New name
-	 * @param email         used to identify the customer
-	 * @param phone         New phone
-	 * @param gender        New gender
-	 * @param age           New age
+	 * @param name   New name
+	 * @param email  used to identify the customer
+	 * @param phone  New phone
+	 * @param gender New gender
+	 * @param age    New age
 	 * @return TRUE if customer is found and updated, FALSE otherwise
 	 */
-	public boolean updateCustomer(User performingUser,String emailToFindAndUpdate, String name, String email, String phone, String gender, int age) {
+	public boolean updateCustomer(User performingUser, String emailToFindAndUpdate, String name, String email, String phone, String gender, int age) {
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(manageCustomer)) { // credentials check
 			throw new SecurityException("Forbidden.");
 		}
@@ -208,35 +208,46 @@ public class CustomerList {
 				break;
 			}
 		}
-			if (customerToUpdate != null) {
-				customerToUpdate.setName(name);
-				customerToUpdate.setPhone(phone);
-				customerToUpdate.setEmail(email);
-				customerToUpdate.setAge(age);
-				customerToUpdate.setGender(gender);
-				System.out.println("Customer with email "+ emailToFindAndUpdate + " has been updated successfully.");
-				return true;
-			} else {
+		if (customerToUpdate != null) {
+			customerToUpdate.setName(name);
+			customerToUpdate.setPhone(phone);
+			customerToUpdate.setEmail(email);
+			customerToUpdate.setAge(age);
+			customerToUpdate.setGender(gender);
+			System.out.println("Customer with email " + emailToFindAndUpdate + " has been updated successfully.");
+			return true;
+		} else {
 
-				System.out.println("This customer does not exist. Please enter a valid E-mail!");
-				return false;
-			}
+			System.out.println("This customer does not exist. Please enter a valid E-mail!");
+			return false;
 		}
-
+	}
 
 
 	// Prints all customers in the list
 
 	public void printList(User performingUser) {
 		if (!performingUser.getSecurityLevel().hasRequiredLevel(viewCustomer)) {
-			throw new SecurityException("Forbidden.");}
-			for (Customer c : customers) {
-				c.printCustomer();
-				System.out.println("=====================");
-			}
+			throw new SecurityException("Forbidden.");
+		}
+		for (Customer c : customers) {
+			c.printCustomer();
+			System.out.println("=====================");
 		}
 	}
 
+	@Override
+	public String toString() {
+		if (customers.isEmpty()) {
+			return "No customers found.";
+		}
+		String s = "";
+		for (Customer c : customers) {
+			s += c.getName() + " (" + c.getEmail() + ", " + c.getPhone() + ")\n";
+		}
+		return s;
+	}
+}
 
 
 
