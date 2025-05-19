@@ -7,9 +7,38 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
+		// Δημιουργία ενός sysadmin χρήστη για να μπορεί να προσθέτει άλλους χρήστες
+		Employee sysadmin = new Employee(
+				"admin", "1234", SecurityLayer.layer4,
+				"Admin", "User", 0.0,
+				"admin@email.com", "Admin Address", Role.sysadmin
 
 
-		Scanner in = new Scanner(System.in);
+		);
+		User e3 = new Employee("ilias", "maz", SecurityLayer.layer3,
+				"jane", "doe", 3000.13, "uom@2323.gr",
+				"toumpa", Role.accountant);
+
+
+		// Δημιουργία λιστών
+		UserList users = new UserList();
+		CustomerList cl = new CustomerList();
+		ProductList pl = new ProductList();
+		SupplierList sl = new SupplierList();
+		SalesList sal = new SalesList();
+
+		// Προσθήκη του sysadmin στον userList
+		users.addUserToList(sysadmin, sysadmin);  // Χρησιμοποιεί τον εαυτό του για να "προσθέσει τον εαυτό του"
+		users.addUserToList(e3, e3);
+
+
+
+		// Άνοιγμα του μενού απευθείας
+
+
+		new AuthenticationGUI(users, cl, pl, sl, sal);
+
+	/*	Scanner in = new Scanner(System.in);
 		UserList userList = new UserList();
 		CustomerList customerList = new CustomerList();
 		OrderList orderList = new OrderList();
@@ -78,7 +107,7 @@ public class Main {
 		}
 		**/
 
-		new MainMenu(customerList,e3);
+
 
 
 /**
@@ -90,8 +119,11 @@ public class Main {
  menu.runMenu(userList, customerList, orderList, productList, salesList, supplierList);
  **/
 
-	}}
 
+
+
+	}
+}
 
 
 
