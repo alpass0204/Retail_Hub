@@ -200,4 +200,20 @@ public class Customer {
 	public void addPoints(int earnedPoints) {
 		this.loyaltyPoints += earnedPoints;
 	}
+
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"customerId=" + customerId +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", phone='" + phone + '\'' +
+				", gender='" + gender + '\'' +
+				", age=" + age +
+				", loyaltyPoints=" + loyaltyPoints +
+				", salesHistory=" + salesHistory +
+				'}';
 	}
+}
+
+

@@ -9,7 +9,7 @@ public class CustomerMenu extends JFrame {
 
         this.setTitle("Customers Menu");
         this.setSize(400,400);
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLayout(new GridLayout(6,1,10,10));
 
@@ -43,6 +43,7 @@ public class CustomerMenu extends JFrame {
                 Customer c = null;
                 if(input.contains("@")){
                      c = customerList.getCustomerByEmail(performingUser,input);
+                     JOptionPane.showMessageDialog(null,"Customer: " +c.toString());
                 } else {
                      c = customerList.getCustomerByPhone(performingUser,input);
                 }

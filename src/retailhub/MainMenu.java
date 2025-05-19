@@ -19,6 +19,7 @@ public class MainMenu extends JFrame {
 
         customersButton.addActionListener(e -> {
             new CustomerMenu(customerList,loggedInUser);
+            this.dispose();
         });
 
         this.add(customersButton);
