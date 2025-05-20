@@ -54,7 +54,7 @@ public class SupplierList {
 								  String brandName,
 								  String phone, String address,
 								  String email) throws SecurityException {
-		if(performingUser.equals(null)) { // First check: If performing User = null
+		if(performingUser ==null) { // First check: If performing User = null
 			throw new SecurityException("Performing user can't be NULL");
 		}
 		if(!performingUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
@@ -111,28 +111,32 @@ public class SupplierList {
 	 * @param email
 	 * @return
 	 */
-	public boolean updateSupplier(User performerUser,int taxId,
+	public Supplier updateSupplier(User performerUser,int oldTaxId, int newTaxId,
 								  String brandName, String phone,
 								  String address, String email) {
 
 		// 1) CHECK FOR CREDENTIALS TO UPDATE
 	   if(!performerUser.getSecurityLevel().hasRequiredLevel(manageSupplier)){
 		   System.err.println("Forbidden");
-		   return false; // exits the operation
+		   return null; // exits the operation
 	   }
 
-
 	    for (Supplier s : suppliers) {
-	        if (s.getTaxId() == (taxId)) { // checks and update supplier by taxId
-	            s.setBrandName(brandName);
+			System.out.println("Checking supplier with taxId: " + s.getTaxId());
+	        if (s.getTaxId() == (oldTaxId)) { // checks and update supplier by taxId
+				s.setTaxId(newTaxId);
+				s.setBrandName(brandName);
 	            s.setPhone(phone);
 	            s.setAddress(address);
 	            s.setEmail(email);
-				return true;
+				return s;
 	        }
 	    }
-	    System.out.println("This supplier does not exist. Please enter a valid VAT!");
-		return false; //exits the operation
+
+		System.out.println("This supplier does not exist. Please enter a valid VAT!");
+		return null;
+
+
 	}
 
 
@@ -193,6 +197,13 @@ public class SupplierList {
 	    }
 	    System.out.println("Supplier not found");
 	    return null;
+	}
+
+	@Override
+	public String toString() {
+		return "SupplierList{" +
+				"suppliers=" + suppliers +
+				'}';
 	}
 }
 

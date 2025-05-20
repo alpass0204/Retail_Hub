@@ -206,6 +206,20 @@ public class UserList {
         System.out.println("Total Salary Expenses: €" + sal);
         return sal;
     }
+
+    public Employee createUser(User performingUser, String username, String password,  SecurityLayer initialLayer,
+                           String name, String lastName, double salary, String email,
+                           String address, Role role){
+
+        if (!performingUser.getSecurityLevel().hasRequiredLevel(basicManageUser)){
+            throw new SecurityException("You are not authorised to add new users!");
+        }
+
+        Employee employee = new Employee(username, password, initialLayer,name,lastName,salary,email,address,role);
+        userList.add(employee);
+        return employee;
+
+    }
 }
 
 

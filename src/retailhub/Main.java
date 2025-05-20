@@ -107,6 +107,10 @@ public class Main {
 		}
 		**/
 
+		//SuppliersMenu sm1 = new SuppliersMenu(sl,e3);
+
+
+
 
 
 
@@ -118,6 +122,11 @@ public class Main {
  Menu menu = new Menu();
  menu.runMenu(userList, customerList, orderList, productList, salesList, supplierList);
  **/
+
+
+
+
+
 
 
 

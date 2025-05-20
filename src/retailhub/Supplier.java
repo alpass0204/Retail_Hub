@@ -143,5 +143,16 @@ public class Supplier {
 				phone+" Status:"+isActive);
 	}
 
-
+	@Override
+	public String toString() {
+		return "Supplier{" +
+				"taxId=" + taxId +
+				", brandName='" + brandName + '\'' +
+				", address='" + address + '\'' +
+				", phone='" + phone + '\'' +
+				", email='" + email + '\'' +
+				", isActive=" + isActive +
+				", products=" + products +
+				'}';
+	}
 }

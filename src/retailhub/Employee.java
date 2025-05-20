@@ -102,6 +102,7 @@ public class Employee extends User {
         if(salary < 0){
             throw new IllegalArgumentException("Salary cant be Negative.");
         }
+        this.salary=salary;
     }
 
     //METHODS FOR EMAIL

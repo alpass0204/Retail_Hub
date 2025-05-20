@@ -7,6 +7,7 @@ public class MainMenu extends JFrame {
 
     JButton customersButton = new JButton("Customers");
     JButton productsButton = new JButton("Products");
+    JButton suppliersButton = new JButton("Suppliers");
 
     public MainMenu(CustomerList customerList, ProductList productList, SupplierList supplierList, User loggedInUser) {
         this.setTitle("Retail Hub - Main Menu");
@@ -17,9 +18,11 @@ public class MainMenu extends JFrame {
 
         customersButton.addActionListener(e -> new CustomerMenu(customerList, loggedInUser));
         productsButton.addActionListener(e -> new ProductMenu(productList, supplierList, loggedInUser));
+        suppliersButton.addActionListener(e->new SuppliersMenu(supplierList,loggedInUser));
 
         this.add(customersButton);
         this.add(productsButton);
+        this.add(suppliersButton);
         this.setVisible(true);
     }
 }
