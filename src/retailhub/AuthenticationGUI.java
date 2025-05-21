@@ -65,7 +65,7 @@ public class AuthenticationGUI extends JFrame {
                 dispose(); // Κλείνει το login window
 
                 // Άνοιγμα του MainMenu με ΟΛΕΣ τις λίστες
-                new MainMenu(customerList, productList, supplierList, user);
+                new MainMenu(customerList, productList, supplierList, user, userList);
 
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid username or password.",

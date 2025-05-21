@@ -42,15 +42,16 @@ public class UserList {
      * @param usernameToSearch
      * @return Users Information through printUser() method
      */
-    public void searchUser(String usernameToSearch) {
+    public User searchUser(String usernameToSearch) {
         for (User user : userList) { // Απλή επανάληψη στη λίστα
             if (user.getUsername().equals(usernameToSearch)) {
                 System.out.println("User found:");
                 user.printUser();
-                return;
+                return user;
             }
         }
         System.out.println("User not found: " + usernameToSearch);
+        return null;
     }
 
 
@@ -219,6 +220,18 @@ public class UserList {
         userList.add(employee);
         return employee;
 
+    }
+
+    public String getAllUsersString(User performingUser) throws SecurityException {
+        if (!performingUser.getSecurityLevel().hasRequiredLevel(viewUser)) {
+            throw new SecurityException("Forbidden");
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (User user : userList) {
+            sb.append(user.toString()).append("\n\n");
+        }
+        return sb.toString();
     }
 }
 

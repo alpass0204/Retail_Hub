@@ -167,5 +167,18 @@ public class Employee extends User {
         System.out.println("----------------------");
     }
 
+    @Override
+    public String toString() {
+        return "--- Employee Details ---" +
+                "\nFull Name: " + this.name + " " + this.lastName +
+                "\nUser ID: " + this.userId +
+                "\nUsername: " + this.getUsername() +
+                "\nRole: " + this.role +
+                "\nEmail: " + this.email +
+                "\nAddress: " + this.address +
+                "\nSalary: " + this.salary +
+                "\nSecurity Layer: " + this.getSecurityLevel() +
+                "\n------------------------";
+    }
 
 }

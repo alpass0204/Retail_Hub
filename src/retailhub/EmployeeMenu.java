@@ -25,11 +25,12 @@ public class EmployeeMenu extends JFrame {
                 String name = JOptionPane.showInputDialog("Name:");
                 String lastName = JOptionPane.showInputDialog("Lastname:");
                 String email = JOptionPane.showInputDialog("Email:");
-                String phone = JOptionPane.showInputDialog("Phone:");
                 String address = JOptionPane.showInputDialog("Address");
                 String username = JOptionPane.showInputDialog("Username:");
                 String password = JOptionPane.showInputDialog("Password:");
-                String role = JOptionPane.showInputDialog("Role:");
+                Role role = (Role) JOptionPane.showInputDialog(this, "Select role for the new user: ", "Role Selection",
+                        JOptionPane.QUESTION_MESSAGE, null, Role.values(), Role.analyst
+                );
                 SecurityLayer initialLayer = (SecurityLayer) JOptionPane.showInputDialog(
                         this,
                         "Select security layer :",
@@ -44,10 +45,134 @@ public class EmployeeMenu extends JFrame {
                 String salaryStr = JOptionPane.showInputDialog("Salary:");
                 double salary = Double.parseDouble(salaryStr);
 
-                UserList.createUser(performingUser, username, password, initialLayer, name, lastName, salary, email, address, role);
+                userList.createUser(performingUser, username, password, initialLayer, name, lastName, salary, email, address, role);
 
 
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
             }
         });
+
+        searchButton.addActionListener(e-> {
+            try {
+                String username = JOptionPane.showInputDialog("Enter the username of the employee you want to search: ");
+                if (username == null) {
+                    return;
+                }
+                User user = userList.searchUser(username);
+                if (user == null) {
+                    JOptionPane.showMessageDialog(null, "User not found");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,user.toString());
+                }
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        updateButton.addActionListener(e-> {
+            try {
+                String username = JOptionPane.showInputDialog("Enter the username of the employee you want to update: ");
+                if (username == null) {
+                    return;
+                }
+                User user = userList.searchUser(username);
+                if (user == null) {
+                    JOptionPane.showMessageDialog(null, "User not found");
+                    return;
+                }
+
+                if (!(user instanceof Employee)) {
+                    JOptionPane.showMessageDialog(null, "This user is not an employee.");
+                    return;
+                }
+                Employee employee = (Employee) user;
+
+                String updateName =  JOptionPane.showInputDialog("Name:");
+                String updateLastName = JOptionPane.showInputDialog("Last name:");
+                String updateEmail = JOptionPane.showInputDialog("Email:");
+                String updateAddress = JOptionPane.showInputDialog("Address:");
+                String updateUsername = JOptionPane.showInputDialog("Username:");
+                String updatePassword = JOptionPane.showInputDialog("Password:");
+                Role newRole = (Role) JOptionPane.showInputDialog(
+                        this, "Select role:", "Role Selection", JOptionPane.QUESTION_MESSAGE, null, Role.values(), Role.analyst
+                );
+                SecurityLayer newLayer = (SecurityLayer) JOptionPane.showInputDialog(
+                        this,
+                        "Select security layer:",
+                        "Security Layer Selection",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        SecurityLayer.values(),
+                        SecurityLayer.layer1
+                );
+                String salaryStr = JOptionPane.showInputDialog("Salary:");
+                double salary = Double.parseDouble(salaryStr);
+
+                employee.setName(updateName);
+                employee.setLastName(updateLastName);
+                employee.setEmail(updateEmail);
+                employee.setAddress(updateAddress);
+                employee.setUsername(updateUsername);
+                employee.setPassword(updatePassword);
+                employee.setRole(newRole);
+                employee.setSalary(salary);
+
+                JOptionPane.showMessageDialog(null, employee.toString());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        deleteButton.addActionListener(e-> {
+            try {
+                String username =  JOptionPane.showInputDialog("Enter username of the employee you want to delete: ");
+                if (username == null) {
+                    return;
+                }
+                User user = userList.searchUser(username);
+                if (user == null) {
+                    JOptionPane.showMessageDialog(null, "User not found");
+                    return;
+                }
+
+                int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete employee " + username + "?",
+                        "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    userList.removeUser(performingUser,  username);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Failed to delete user.");
+                }
+            }
+            catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,"Error:"+ex.getMessage());
+            }
+        });
+
+        listButton.addActionListener(e-> {
+            try{
+                int yesNo = JOptionPane.showConfirmDialog(null,"Print all employees?","Employees List",JOptionPane.YES_NO_CANCEL_OPTION);
+                if(yesNo == JOptionPane.YES_OPTION){
+                    JOptionPane.showMessageDialog(null,"Employees: "+userList.getAllUsersString(performingUser));
+                }
+            }
+            catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+            }
+            });
+        closeButton.addActionListener(e-> dispose());
+
+        this.add(createButton);
+        this.add(searchButton);
+        this.add(updateButton);
+        this.add(deleteButton);
+        this.add(listButton);
+        this.add(closeButton);
+
+        this.setVisible(true);
+
     }
 }
