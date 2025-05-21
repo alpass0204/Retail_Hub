@@ -154,15 +154,28 @@ public class SalesMenu extends JFrame {
                JOptionPane.showMessageDialog(this, "Invalid ID. Please enter a valid number.");
            }
         });
-        
+        listButton.addActionListener(e -> {
+            try {
+                int yesNo = JOptionPane.showConfirmDialog(
+                        null,
+                        "Print all sales?",
+                        "Sales List",
+                        JOptionPane.YES_NO_CANCEL_OPTION
+                );
+                if (yesNo == JOptionPane.YES_OPTION) {
+                    StringBuilder sb = new StringBuilder("Sales:\n");
+                    for (Sales sale : salesList.getAllSales()) {
+                        sb.append(sale.toString()).append("\n------------------\n");
+                    }
+                    JOptionPane.showMessageDialog(null, sb.toString());
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+            }
+        });
 
 
-
-
-
-
-
-
+        closeButton.addActionListener(e -> dispose());
 
         this.add(createButton);
         this.add(searchButton);

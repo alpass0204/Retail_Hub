@@ -158,4 +158,7 @@ public class SalesList {
         System.out.println("Total revenue: " + revenue);
         return revenue;
     }
+    public ArrayList<Sales> getAllSales() {
+        return this.sales;
+    }
 }
