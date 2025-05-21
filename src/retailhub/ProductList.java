@@ -168,4 +168,7 @@ public class ProductList {
             System.out.println("The product has been added Successfully.");
 
         }
+    public ArrayList<Product> getAllProducts() {
+        return products;
+    }
     }
