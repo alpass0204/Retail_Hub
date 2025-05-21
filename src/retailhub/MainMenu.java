@@ -9,8 +9,9 @@ public class MainMenu extends JFrame {
     JButton productsButton = new JButton("Products");
     JButton suppliersButton = new JButton("Suppliers");
     JButton employeesButton = new JButton("Employees");
+    JButton salesButton = new JButton("Sales");
 
-    public MainMenu(CustomerList customerList, ProductList productList, SupplierList supplierList, User loggedInUser, UserList userList) {
+    public MainMenu(CustomerList customerList, ProductList productList, SupplierList supplierList, User loggedInUser, UserList userList, SalesList salesList) {
         this.setTitle("Retail Hub - Main Menu");
         this.setSize(350, 300);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,11 +22,14 @@ public class MainMenu extends JFrame {
         productsButton.addActionListener(e -> new ProductMenu(productList, supplierList, loggedInUser));
         suppliersButton.addActionListener(e->new SuppliersMenu(supplierList,loggedInUser));
         employeesButton.addActionListener(e->new EmployeeMenu(userList, loggedInUser));
+        salesButton.addActionListener(e->new SalesMenu(salesList,customerList,productList,loggedInUser));
+
 
         this.add(customersButton);
         this.add(productsButton);
         this.add(suppliersButton);
         this.add(employeesButton);
+        this.add(salesButton);
         this.setVisible(true);
     }
 }

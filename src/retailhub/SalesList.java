@@ -79,7 +79,7 @@ public class SalesList {
      * @param newPaymentMethod Payment method to set
      */
 
-    public void updateSale(User performerUser, int salesId, Sales.PaymentMethod newPaymentMethod) throws SecurityException {
+    public Sales updateSale(User performerUser, int salesId, Sales.PaymentMethod newPaymentMethod) throws SecurityException {
         if (!performerUser.getSecurityLevel().hasRequiredLevel(viewSalesList))
             throw new SecurityException("Forbidden.");
         {
@@ -91,12 +91,13 @@ public class SalesList {
                     System.out.println("New payment method: " + newPaymentMethod.toString());
                     sale.setPaymentMethod(newPaymentMethod);
                     System.out.println("Sale with ID " + salesId + " has been updated.");
-                    return;  // Exit the method after updating the sale
+                    return sale;  // Exit the method after updating the sale
                 }
             }
 
             // If no sale is found with the given sales_id
             System.out.println("No sale found with ID " + salesId + ".");
+            return null;
         }
     }
 

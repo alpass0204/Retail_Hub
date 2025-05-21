@@ -14,6 +14,7 @@ public class AuthenticationGUI extends JFrame {
     private final CustomerList customerList;
     private final ProductList productList;
     private final SupplierList supplierList;
+    private final SalesList salesList;
 
     public AuthenticationGUI(UserList userList,
                              CustomerList customerList,
@@ -24,6 +25,7 @@ public class AuthenticationGUI extends JFrame {
         this.customerList = customerList;
         this.productList = productList;
         this.supplierList = supplierList;
+        this.salesList = salesList;
 
         setTitle("Retail Hub - Login");
         setSize(350, 200);
@@ -65,7 +67,7 @@ public class AuthenticationGUI extends JFrame {
                 dispose(); // Κλείνει το login window
 
                 // Άνοιγμα του MainMenu με ΟΛΕΣ τις λίστες
-                new MainMenu(customerList, productList, supplierList, user, userList);
+                new MainMenu(customerList, productList, supplierList, user, userList,salesList);
 
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid username or password.",

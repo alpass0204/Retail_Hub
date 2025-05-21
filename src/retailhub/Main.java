@@ -38,7 +38,7 @@ public class Main {
 
 		new AuthenticationGUI(users, cl, pl, sl, sal);
 
-	/*	Scanner in = new Scanner(System.in);
+		Scanner in = new Scanner(System.in);
 		UserList userList = new UserList();
 		CustomerList customerList = new CustomerList();
 		OrderList orderList = new OrderList();
@@ -50,18 +50,18 @@ public class Main {
 		// Authentication class testing.
 		// User loging in with 3 attempts, method finds user and types password
 
-		User e3 = new Employee("ilias", "maz", SecurityLayer.layer3,
-				"jane", "doe", 3000.13, "uom@2323.gr",
-				"toumpa", Role.accountant);                                    //CREATION OF MANAGE EMPLOYEE
+	//	User e3 = new Employee("ilias", "maz", SecurityLayer.layer3,
+		//		"jane", "doe", 3000.13, "uom@2323.gr",
+		//		"toumpa", Role.accountant);                                    //CREATION OF MANAGE EMPLOYEE
 		Employee e1 = new Employee("kwstas", "willie", SecurityLayer.layer1,
 				"jane", "doe", 3000.13, "uom@2323.gr",
 				"toumpa", Role.salesPerson);                                 //CREATION OF LAYER1 EMPLOYEE
 		Employee e2 = new Employee("Harry", "qwerty", SecurityLayer.layer2,
 				"Harris", "Karam", 967.5, "xarkar@uom.gr",
 				"473 BROADWAY", Role.accountant);                        //CREATION OF  ACCOUNTANT
-		User sysadmin = new Employee("sudo", "wqfvdsf", SecurityLayer.layer4,
-				"Administrator", "ADMIN", 0.0,
-				"A@A.com", "", Role.sysadmin);                            //CREATION OF LAYER4 SYSADMIN
+		//User sysadmin = new Employee("sudo", "wqfvdsf", SecurityLayer.layer4,
+		//		"Administrator", "ADMIN", 0.0,
+		//		"A@A.com", "", Role.sysadmin);                            //CREATION OF LAYER4 SYSADMIN
 
 		//CREATION OF SUPPLIER
 		Supplier s = supplierList.createSupplier(e3, 12345, "avon", "210 1234568",

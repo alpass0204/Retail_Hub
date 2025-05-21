@@ -69,8 +69,6 @@ public class SuppliersMenu extends JFrame {
                 String updatedEmail = JOptionPane.showInputDialog("New email:");
 
 
-                //Supplier supplierToUpdate = supplierList.getSupplierByVat(performingUser,taxSupplierId);
-
                 Supplier supplierToUpdate = supplierList.updateSupplier(performingUser, taxSupplierId, updatedTaxId, updatedName, updatedPhone, updatedAddress, updatedEmail);
                 if (supplierToUpdate != null) {
                     JOptionPane.showMessageDialog(null, "Supplier updated successfully!");
